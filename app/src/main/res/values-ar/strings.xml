@@ -202,4 +202,19 @@
     <string name="phoneNumber3">رقم الجوال آخر (إختيارى)</string>
     <string name="maidsNation">جنسية الخادمات</string>
     <string name="otherServices">خدمات أخرى</string>
+
+    <string name="verificationCodeError">من فضلك قم بادخال رقم الهاتف والضغط على الزر إرسال.</string>
+    <string name="invalidverificationCode">رمز التحقق الذي تم إدخاله غير صحيح.</string>
+    <string name="validverificationCode">رمز التحقق الذي تم إدخاله صحيح.</string>
+
+    <string name="verificationCodeTitle">تأكيد رمز التفعيل</string>
+    <string name="verificationCodeBody">أدخل رمز التفعيل المستلم</string>
+    <string name="verify">تحقق</string>
+    <string name="send">إرسال</string>
+
+    <string name="smsQota">لقد استخدمت الحد الاقصى من الرسائل المجانية من فضلك تواصل مع مسؤل النظام.</string>
+    <string name="innvalidCredential">فشل إعتماد التطبيق مع ال Firebase : </string>
+
+
+
 </resources>
