@@ -152,7 +152,7 @@
     <string name="failed_addedd_comment">Error when add comment !!</string>
     <string name="noComments">No comments in this office !!</string>
 
-    <string name="add_other_ser">Add Other services</string>
+    <string name="add_other_ser">Add Other services (op.)</string>
     <string name="otherSer">Other Services :</string>
     <string name="chooseOtherSer">Choose Other Services</string>
 
@@ -194,10 +194,11 @@
     <string name="city">City</string>
     <string name="address">Address</string>
     <string name="descrip">Description</string>
+    <string name="officeLogo">Capture Office Logo (op.)</string>
     <string name="officeName">Office name</string>
     <string name="phoneNumber3">Third phone number (op.)</string>
-    <string name="maidsNation">Maid\'s nationality</string>
-    <string name="otherServices">Other services</string>
+    <string name="maidsNation">Add Maid\'s nationality</string>
+    <string name="otherServices">Add other services</string>
 
 
 </resources>

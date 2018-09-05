@@ -74,7 +74,6 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
     private HashMap<String, String> cities_hashMap;
     private HashMap<String, String> nationalities_hashMap;
     private Button finish_btn;
-    private String selectedImage;
     private AlertDialog progressDialog;
     private String langToLoad;
     private SharedPreferences languagepref;
@@ -272,8 +271,8 @@ private String captureImgUri;
                 captureImgUri = FetchPath.getPath(this, photoUri);
             }
 
-            this.selectedImage = String.valueOf(paramIntent.getData());
-            Picasso.with(this).load(this.selectedImage).transform(new CircleTransform()).into(this.captureImg);
+
+            Picasso.with(this).load(String.valueOf(paramIntent.getData())).transform(new CircleTransform()).into(this.captureImg);
         }
     }
 

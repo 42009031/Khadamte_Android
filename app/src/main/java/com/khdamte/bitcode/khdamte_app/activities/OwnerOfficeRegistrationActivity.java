@@ -1,17 +1,31 @@
 package com.khdamte.bitcode.khdamte_app.activities;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -20,11 +34,14 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
+import com.khdamte.bitcode.khdamte_app.adapter.FetchPath;
 import com.khdamte.bitcode.khdamte_app.adapter.Flags_Adapter;
 import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
 import com.khdamte.bitcode.khdamte_app.models.Flags_Model;
 import com.khdamte.bitcode.khdamte_app.models.UserRegistrationModel;
+import com.khdamte.bitcode.khdamte_app.ui.CircleTransform;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,10 +63,12 @@ import static com.khdamte.bitcode.khdamte_app.web_service.retrofit.KhadamtyApi.R
 public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
 
     private ImageView back_btn;
-    private TextView title_toolbar, officeNameHint, descriptionHint, phone1Hint, phone2Hint, phone3Hint, nationalityHint, otherServicesHint, otherServicesTv;
+    private TextView title_toolbar, officeNameHint, descriptionHint, phone1Hint, phone2Hint, phone3Hint, nationalityHint, otherServicesHint, otherServicesTv, officeLogoHint;
     private EditText officeNameEt, descriptionEt, phone1Et, phone2Et, phone3Et;
+    private ImageView officeLogo;
     private Spinner nationalitySpinner, otherServicesSpinner;
     private RecyclerView flagsRecycleview;
+    private Button registration_btn;
     private Flags_Adapter myAdapter;
     private AlertDialog progressDialog;
 
@@ -58,7 +77,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
     private ArrayList<Flags_Model> flags_models;
     private ArrayList<Flags_Model> nationality_list;
     private Set<String> nat_selected_hashSet;
-    private String postOtherSer, selected_national, langToLoad ;
+    private String postOtherSer, selected_national, langToLoad, captureImgUri ;
 
     private SharedPreferences languagepref;
     private UserRegistrationModel userData;
@@ -76,7 +95,57 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
         } else {
             Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_error_connection), Toast.LENGTH_LONG).show();
         }
-        
+
+        registration_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                captureImgUri
+                String officeName = officeNameEt.getText().toString();
+                String officeDesc = descriptionEt.getText().toString();
+                String phone1 = phone1Et.getText().toString();
+                String phone2 = phone2Et.getText().toString();
+                String phone3 = phone3Et.getText().toString();
+                StringBuffer nationBuffer = new StringBuffer();
+                String maid_nationalities = "";
+                if (nat_selected_hashSet.size() != 0) {
+                    for (String ids : nat_selected_hashSet) {
+                        nationBuffer.append(ids);
+                        nationBuffer.append(",");
+                    }
+                    maid_nationalities = String.valueOf(nationBuffer);
+                    maid_nationalities = maid_nationalities.substring(0, maid_nationalities.length() - 1);
+                }
+//                postOtherSer
+                if(!TextUtils.isEmpty(officeName) &&
+                !TextUtils.isEmpty(officeDesc) &&
+                !TextUtils.isEmpty(phone1) &&
+                !TextUtils.isEmpty(phone2) &&
+                !TextUtils.isEmpty(maid_nationalities)){
+
+                }else{
+                    Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_type_alldata), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        officeLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!checkPermission()) {
+                    Intent localIntent = new Intent("android.intent.action.PICK", MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(localIntent, 5);
+                } else {
+                    if (checkPermission()) {
+                        requestPermissionAndContinue();
+                    } else {
+                        Intent localIntent = new Intent("android.intent.action.PICK", MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(localIntent, 5);
+                    }
+                }
+
+            }
+        });
+
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +161,9 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
         back_btn = (ImageView) findViewById(R.id.back_btn);
         title_toolbar = (TextView) findViewById(R.id.title_toolbar);
 
+        officeLogo = (ImageView) findViewById(R.id.officeLogo);
+        officeLogoHint = (TextView) findViewById(R.id.officeLogoHint);
+       
         officeNameHint = (TextView) findViewById(R.id.officeNameHint);
         officeNameEt = (EditText) findViewById(R.id.officeNameEt);
 
@@ -116,9 +188,12 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
         otherServicesSpinner = (Spinner) findViewById(R.id.otherServicesSpinner);
         otherServicesTv = (TextView) findViewById(R.id.otherServicesTv);
 
+        registration_btn = (Button) findViewById(R.id.registration_btn);
+
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
         title_toolbar.setTypeface(MainActivity.lightFace);
+        officeLogoHint.setTypeface(MainActivity.lightFace);
         officeNameHint.setTypeface(MainActivity.lightFace);
         officeNameEt.setTypeface(MainActivity.lightFace);
         descriptionHint.setTypeface(MainActivity.lightFace);
@@ -132,6 +207,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
         nationalityHint.setTypeface(MainActivity.lightFace);
         otherServicesHint.setTypeface(MainActivity.lightFace);
         otherServicesTv.setTypeface(MainActivity.lightFace);
+        registration_btn.setTypeface(MainActivity.lightFace);
 
         languagepref = getSharedPreferences("language", MODE_PRIVATE);
         langToLoad = languagepref.getString("languageToLoad", null);
@@ -139,13 +215,13 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
 
 
         ArrayList<String> nation_arrayList = new ArrayList<String>();
-        nation_arrayList.add(getResources().getString(R.string.nationality_maids));
+        nation_arrayList.add(getResources().getString(R.string.maidsNation));
         final ArrayAdapter<String> nation_ArrayAdapter = new SpinnerAdapter(this, R.layout.spinner_item, nation_arrayList);
         nation_ArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         nationalitySpinner.setAdapter(nation_ArrayAdapter);
 
         ArrayList<String> servicesArrayList = new ArrayList<String>();
-        servicesArrayList.add(getResources().getString(R.string.chooseOtherSer));
+        servicesArrayList.add(getResources().getString(R.string.otherServices));
         final ArrayAdapter<String> otherServicesArrayAdapter = new SpinnerAdapter(OwnerOfficeRegistrationActivity.this, R.layout.spinner_item, servicesArrayList);
         otherServicesArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         otherServicesSpinner.setAdapter(otherServicesArrayAdapter);
@@ -167,6 +243,79 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
     private void showDialog() {
         progressDialog.show();
     }
+
+    private boolean checkPermission() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                ;
+    }
+
+    private void requestPermissionAndContinue() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this,  Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    && ActivityCompat.shouldShowRequestPermissionRationale(this,  Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+                alertBuilder.setCancelable(true);
+                alertBuilder.setTitle("Runtime Permission");
+                alertBuilder.setMessage("Allow KHADAMTE to access photos and media on your device ?");
+                alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions(OwnerOfficeRegistrationActivity.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                ,  Manifest.permission.READ_EXTERNAL_STORAGE},  123);
+                    }
+                });
+                AlertDialog alert = alertBuilder.create();
+                alert.show();
+                Log.e("", "permission denied, show dialog");
+            } else {
+                ActivityCompat.requestPermissions(OwnerOfficeRegistrationActivity.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE}, 123);
+            }
+        } else {
+            Intent localIntent = new Intent("android.intent.action.PICK", MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(localIntent, 5);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == 123) {
+            if (permissions.length > 0 && grantResults.length > 0) {
+
+                boolean flag = true;
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    Intent localIntent = new Intent("android.intent.action.PICK", MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(localIntent, 5);
+                } else {
+                    finish();
+                }
+
+            } else {
+                finish();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    public void onActivityResult(int paramInt1, int paramInt2, Intent paramIntent) {
+        super.onActivityResult(paramInt1, paramInt2, paramIntent);
+        if ((paramInt1 == 5) && (paramInt2 == -1) && (paramIntent != null)) {
+            Uri photoUri = paramIntent.getData();
+            if (photoUri != null) {
+                captureImgUri = FetchPath.getPath(this, photoUri);
+            }
+            Picasso.with(this).load( String.valueOf(paramIntent.getData())).transform(new CircleTransform()).into(this.officeLogo);
+        }
+    }
     
     // API
     private void GetAllNationalities() {
@@ -174,7 +323,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
         nat_name_hashMap = new HashMap<String, ArrayList<Flags_Model>>();
         nat_id_hashMap = new HashMap<String, ArrayList<Flags_Model>>();
         final ArrayList<String> flags_arrayList = new ArrayList<>();
-        flags_arrayList.add(getResources().getString(R.string.nationality_maids));
+        flags_arrayList.add(getResources().getString(R.string.maidsNation));
 
         retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
         Call<JsonObject> connection = KHADAMTY_API.getNationalities();
