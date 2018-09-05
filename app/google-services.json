@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "605098357363",
+    "firebase_url": "https://khdamteapp.firebaseio.com",
+    "project_id": "khdamteapp",
+    "storage_bucket": "khdamteapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605098357363:android:d52ec83304db9d40",
+        "android_client_info": {
+          "package_name": "com.khdamte.bitcode.khdamte_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605098357363-1ef15ljvf4sr6qse0nl7fkosjc0pj907.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.khdamte.bitcode.khdamte_app",
+            "certificate_hash": "74318345d1e5788eb1bb0b500982407b447be297"
+          }
+        },
+        {
+          "client_id": "605098357363-umakmud6hutlljtbgtmloleipkdqog33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8go3sBhVnt4XUyb49ZqK_7AxweJV_8q0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605098357363-umakmud6hutlljtbgtmloleipkdqog33.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,205 @@
+<resources>
+    <string name="app_name">خدامتي</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_page">الصفحة الرئيسية</string>
+    <string name="do_you_have_account">هل لديك حساب سابقا ؟</string>
+    <string name="register_now">سجل الأن</string>
+    <string name="firstname_hint">أدخل الاسم الأول</string>
+    <string name="phone_number1">أدخل رقم الجوال</string>
+    <string name="phone_number2">أدخل رقم جوال أخر</string>
+    <string name="phone_number3">أدخل رقم جوال أخر (إختياري)</string>
+    <string name="phone_number4">أدخل رقم التليفون الرابع</string>
+    <string name="emial_address">أدخل عنوان البريد الإلكترونى</string>
+    <string name="password_hint">أدخل رقم المرور</string>
+    <string name="confirm_password">تاكيد رقم المرور</string>
+    <string name="register">تسجيل مكتب</string>
+    <string name="register_user">تسجيل</string>
+    <string name="company_name">أدخل اسم المكتب</string>
+    <string name="address_hint">أدخل العنوان</string>
+    <string name="comp_lic">جلب صورة ترخيص المكتب</string>
+    <string name="comp_img">جلب صورة المكتب</string>
+    <string name="conf_msg2">تم إرسال طلب التسجيل بنجاح</string>
+    <string name="desc_hint">أدخل وصف للمكتب</string>
+    <string name="login_btn">دخول</string>
+    <string name="lastname_hint">أدخل الاسم الأخير</string>
+    <string name="forget_password">نسيت كلمة المرور</string>
+    <string name="next">تخطي</string>
+    <string name="nextReg">التالي</string>
+    <string name="choose_address">إختر العنوان</string>
+    <string-array name="nav_after_login">
+        <item>المكاتب</item>
+        <item>مكتبى</item>
+        <item>المفضلة</item>
+        <item>عن التطبيق</item>
+        <item>مشاركة التطبيق</item>
+        <item>تسجيل الخروج</item>
+    </string-array>
+
+    <string-array name="nav_after_login_user">
+        <item>المكاتب</item>
+        <item>أضف خادمة</item>
+        <item>المفضلة</item>
+        <item>عن التطبيق</item>
+        <item>مشاركة التطبيق</item>
+        <item>تسجيل الخروج</item>
+    </string-array>
+
+    <string-array name="nav_before_login">
+        <item>تسجيل الدخول</item>
+        <item>المكاتب</item>
+        <item>المفضلة</item>
+        <item>عن التطبيق</item>
+        <item>مشاركة التطبيق</item>
+    </string-array>
+    <string name="nationality_maids">إختر جنسيات الخادمات</string>
+    <string name="logout_title">تاكيد تسجيل الخروج</string>
+    <string name="logout_body">هل تريد تسجيل الخروج الان ؟</string>
+    <string name="logout_yes">نعم</string>
+    <string name="logout_no">لا</string>
+    <string name="update">تعديل</string>
+    <string name="add">إضافة</string>
+    <string name="choose_company">إختر اسم المكتب</string>
+    <string name="rate_title" >تقييم المكتب</string>
+    <string name="save">حفظ التقييم</string>
+    <string name="cancel">إلغاء</string>
+    <string name="close_ads">إغلاق الإعلان</string>
+    <string name="show_offices">مشاهدة المكاتب</string>
+    <string name="choose_country">إختر الدولة</string>
+    <string name="choose_city">إختر المدينة</string>
+    <string name="offices">مكاتب</string>
+    <string name="services">خدمات</string>
+    <string name="maids">أشخاص</string>
+    <string name="nationalities">جنسيات الخادمات : </string>
+    <string name="about_details">خدامتى تطبيق صمم لحصر مكاتب"\n"تقديم عاملات المنزل"\n"لخدمة الأسرة</string>
+    <string name="contact_title">للتواصل مع الإدارة</string>
+    <string name="phone">هاتف :</string>
+    <string name="email">البريد الإلكترونى :</string>
+    <string name="about_app">عن التطبيق</string>
+    <string name="ser_office">مكاتب الخدمات</string>
+    <string name="maid_office">مكاتب الخادمات</string>
+    <string name="favourite_office">المكاتب المفضلة</string>
+    <string name="add_office">إضافة المكتب</string>
+    <string name="update_office">تعديل المكتب</string>
+    <string name="chooseOtherSer">أضف خدمات أخرى</string>
+
+
+    <string name="toast_error_connection">لا يوجد إتصال بالإنترنت !!</string>
+    <string name="toast_call_permission">لم يتم السماح باستخدم الإتصال !!</string>
+    <string name="toast_no_ads_info">لا يوجد بيانات للإعلان !!</string>
+    <string name="toast_res_msg">هناك خطا فى الاتصال بالسيرفر !!</string>
+    <string name="toast_no_office">لا يوجد مكاتب !!</string>
+    <string name="toast_apped_office">هذا المكتب منتظر موافقة الادارة !!</string>
+    <string name="toast_rate_error">خطا فى إرسال التقييم إلى السيرفر !!</string>
+    <string name="toast_rate_success">تم إرسال التقييم بنجاح</string>
+    <string name="toast_on_fav_off">لا يوجد مكاتب مفضلة !!</string>
+    <string name="toast_server_error">هناك خطا فى الاتصال بالسيرفر !!</string>
+    <string name="toast_invalid_email">هناك خطا فى البريد الإلكترونى !!</string>
+    <string name="toast_check_eail"> تم إرسال رسالة الي بريدك الإلكترونى (Spam) من فضلك قم بالتحقق منها</string>
+    <string name="toast_invalid_email_pass">هناك خطا فى البريد الإلكترونى او كلمة المرور !!</string>
+    <string name="toast_pending_account">حسابكم معلق حتى موافقة الادارة !!</string>
+    <string name="toast_type_email">من فضلك قم بإدخال بريدك الإلكترونى !!</string>
+    <string name="toast_type_email_pass">من فضلك قم بإدخال بريدك الإلكترونى و كلمة المرور !!</string>
+    <string name="toast_no_ads_found">لا يوجد إعلانات !!</string>
+    <string name="toast_reg_failed">لم تتم عملية التسجيل بنجاح !!</string>
+    <string name="toast_con_pass">من فضلك تأكد من تأكيد كلمة المرور مرة أخرى !!</string>
+    <string name="toast_type_alldata">من فضلك قم بإدخال جميع البيانات !!</string>
+    <string name="toast_email_correct">من فضلك قم بإدخال البريد الإلكترونى !!</string>
+    <string name="toast_no_off_incity">لا يوجد مكاتب فى هذة المدينة !!</string>
+    <string name="toast_no_maids_incity">لا يوجد خادمات فى هذة المدينة !!</string>
+    <string name="toast_empty_coun_city">من فضلك قم بإختيار الدولة او المدينة !!</string>
+    <string name="toast_no_city">لا يوجد مدن فى هذة الدولة !!</string>
+    <string name="toast_no_countries">لا يوجد دول !!</string>
+    <string name="toast_no_nationality">لا يوجد جنسيات للخادمات !!</string>
+    <string name="toast_off_not_reg">لم يتم تسجيل المكتب !!</string>
+    <string name="toast_off_reg">تم تسجيل المكتب بنجاح</string>
+    <string name="toast_off_not_upd">لم يتم تعديل المكتب !!</string>
+    <string name="toast_off_upd">تم تعديل المكتب بنجاح</string>
+    <string name="toast_append_office">هذا المكتب منتظر موافقة الادارة !!</string>
+    <string name="toast_login_first">من فضلك قم بتسجيل الدخول أولاً !!</string>
+    <string name="desc_of_office">وصف المكتب :</string>
+    <string name="det_email">البريد الإلكترونى : </string>
+    <string name="det_address">العنوان : </string>
+    <string name="phone1">الهاتف 1 : </string>
+    <string name="phone2">الهاتف 2 : </string>
+    <string name="phone3">الهاتف 3 : </string>
+    <string name="rates">تقييم</string>
+    <string name="app_ad_id">ca-app-pub-4849301776109849~8373321804</string>
+    <string name="bannar_ad_id">ca-app-pub-4849301776109849/1105205876</string>
+    <string name="interstitial_ad_id">ca-app-pub-4849301776109849/1872537184</string>
+    <string name="share_app">مشاركة التطبيق</string>
+
+    <string name="call_dialog_title">تأكيد الإتصال :</string>
+    <string name="call_dialog_body">هل تريد الإتصال على </string>
+    <string name="or">أو</string>
+
+    <string name="add_commect">أضف تعليق</string>
+    <string name="comment_dialog">إضافة تعليق :</string>
+    <string name="comments">التعليقات</string>
+    <string name="search_dialog">نافذة البحث :</string>
+    <string name="search">بحــث</string>
+
+    <string name="filter_by_review">ترتيب بأعلى تقييم</string>
+    <string name="toast_noReview_4Services_offices">لا يوجد تقييمات لمكاتب الخدمات !!</string>
+
+    <string name="filter_title">نافذة الترتيب :</string>
+    <string name="alphabetical">ترتيب أبجدى</string>
+    <string name="most_rate">ترتيب بأعلى تقييم</string>
+
+    <string name="toast_type_office_name_or_nation_id">من فضلك أدخل اسم المكتب أو جنسية الخادمات !!</string>
+    <string name="toast_type_office_name">من فضلك أدخل اسم المكتب !!</string>
+    <string name="willSearchByOfficeName">من فضلك إبحث باسم المكتب أو بجنسية الخادمات !!</string>
+
+    <string name="comment_added_success">تم إضافة التعليق بنجاح</string>
+    <string name="failed_addedd_comment">لم يتم إضافة التعليق !!</string>
+    <string name="noComments">لا يوجد تعليقات فى هذا المكتب !!</string>
+
+    <string name="add_other_ser">إضافة خدمات أخرى</string>
+    <string name="otherSer">خدمات أخرى :</string>
+
+    <string name="addImage">أضف صورة الخادمة</string>
+    <string name="maidName">أدخل اسم الخادمة</string>
+    <string name="maidsDescription">أدخل وصف الخادمة</string>
+    <string name="maidsPrice">أدخل سعر الخادمة</string>
+    <string name="maidsAge">أدخل عمر الخادمة</string>
+    <string name="maidsNationality">أدخل جنسية الخادمة</string>
+    <string name="maidsReligion">أدخل ديانة الخادمة</string>
+    <string name="finish">رفع بيانات الخادمة</string>
+    <string name="maidsRegisterTitle">تسجيل بيانات الخادمة</string>
+
+    <string name="registerMaidSuccess">تم تسجيل بيانات الخادمة بنجاح</string>
+    <string name="registerMaidPermission">عفوا, لقد تخطيت العدد المسموح بة لتسجيل بيانات خادمتك فى الشهر برجاء مراجعة مسؤل النظام لتسجيل بيانات الخادمة </string>
+
+    <string name="description">الوصف :</string>
+    <string name="price">السعر :</string>
+    <string name="age">العمر :</string>
+    <string name="nationality">الجنسية :</string>
+    <string name="religion">الديانة :</string>
+    <string name="owner">اسم المالك :</string>
+
+
+
+
+    <string name="userRole">دور المستخدم : </string>
+    <string name="office">مكتب</string>
+    <string name="person">شخصي</string>
+    <string name="firstName">الاسم الأول</string>
+    <string name="lastName">الاسم الأخير</string>
+    <string name="emailAddress">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="confirmPassword">تكرار كلمة المرور</string>
+    <string name="phoneNumber">رقم الجوال</string>
+    <string name="phoneNumber2">رقم جوال آخر</string>
+    <string name="gender">الجنس</string>
+    <string name="male">ذكر</string>
+    <string name="female">أنثى</string>
+    <string name="country">الدولة</string>
+    <string name="city">المدينة</string>
+    <string name="address">العنوان</string>
+    <string name="descrip">الوصف</string>
+    <string name="officeName">اسم المكتب</string>
+    <string name="phoneNumber3">رقم الجوال آخر (إختيارى)</string>
+    <string name="maidsNation">جنسية الخادمات</string>
+    <string name="otherServices">خدمات أخرى</string>
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layoutDirection="ltr"
+    android:layout_height="wrap_content"
+    android:background="@null">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/total_day_no_bg"
+            android:padding="5dp"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <RatingBar
+                android:id="@+id/rate_office_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:theme="@style/ratingbardialog"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+
+                <Button
+                    android:id="@+id/cancel_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="@string/cancel"
+                    android:textColor="#4d4d4d"
+                    android:textAllCaps="false"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:textSize="18sp"/>
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    />
+
+                <Button
+                    android:id="@+id/rate_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="@string/save"
+                    android:textColor="#4d4d4d"
+                    android:textAllCaps="false"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/rate_title_bg"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:text="@string/rate_title"
+            android:textColor="#000"
+            android:gravity="center"
+            android:lineSpacingExtra="6dp"
+            android:layout_gravity="center|top"
+            android:textSize="14sp"
+            android:background="@drawable/total_days_bg"/>
+    </FrameLayout>
+
+
+</RelativeLayout>

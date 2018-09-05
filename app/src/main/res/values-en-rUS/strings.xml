@@ -1,0 +1,201 @@
+<resources>
+    <string name="app_name">khdamty</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_page">Main Page</string>
+    <string name="do_you_have_account">Do you have an account ?</string>
+    <string name="register_now">Sign Up</string>
+    <string name="firstname_hint">Enter first name</string>
+    <string name="phone_number1">Enter phone number </string>
+    <string name="phone_number2">Enter another phone number</string>
+    <string name="phone_number3">Enter another phone number (op.)</string>
+    <string name="phone_number4">Enter fourth number</string>
+    <string name="emial_address">Enter E-Mail address</string>
+    <string name="password_hint">Enter password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="register">Register Office</string>
+    <string name="register_user">Register</string>
+    <string name="company_name">Enter office name</string>
+    <string name="address_hint">Enter address</string>
+    <string name="comp_lic">Copy of office licenses</string>
+    <string name="comp_img">Copy of office image</string>
+    <string name="conf_msg2">Registration request send to admin success</string>
+    <string name="login_btn">Login</string>
+    <string name="lastname_hint">Enter lastname</string>
+    <string name="forget_password">Forget password</string>
+    <string name="desc_hint">Enter description</string>
+    <string name="next">Skip</string>
+    <string name="nextReg">Next</string>
+    <string-array name="nav_after_login">
+        <item>Offices</item>
+        <item>My Office</item>
+        <item>Favourite</item>
+        <item>About App</item>
+        <item>Share App</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="nav_after_login_user">
+        <item>Offices</item>
+        <item>Add Maid</item>
+        <item>Favourite</item>
+        <item>About App</item>
+        <item>Share App</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="nav_before_login">
+        <item>Login</item>
+        <item>Offices</item>
+        <item>Favourite</item>
+        <item>About App</item>
+        <item>Share App</item>
+    </string-array>
+    <string name="nationality_maids">Choose nationality of maids</string>
+    <string name="logout_title">Confirm Logout</string>
+    <string name="logout_body">Are you sure you want to logout now ?</string>
+    <string name="logout_yes">YES</string>
+    <string name="logout_no">NO</string>
+    <string name="update">Update</string>
+    <string name="add">Add Office</string>
+    <string name="choose_company">Choose the office name</string>
+    <string name="rate_title">Rate Office</string>
+    <string name="save">Rate Now</string>
+    <string name="cancel">Cancel</string>
+    <string name="close_ads">Close</string>
+    <string name="show_offices">Show Offices</string>
+    <string name="choose_country">Choose Country</string>
+    <string name="choose_city">Choose City</string>
+    <string name="offices">Offices</string>
+    <string name="services">Services</string>
+    <string name="maids">Persons</string>
+    <string name="nationalities">Nationalities of Maids :</string>
+    <string name="about_details">Khdamte App designed to confine the offices"\n"to provide home workers (Maids)"\n"to serve the family</string>
+    <string name="contact_title">Contact with Administration</string>
+    <string name="phone">Phone :</string>
+    <string name="email">E-mail :</string>
+    <string name="about_app">About App</string>
+    <string name="ser_office">Services Offices</string>
+    <string name="maid_office">Maids Offices</string>
+    <string name="favourite_office">Favourite Offices</string>
+    <string name="add_office">Add Office</string>
+    <string name="update_office">Update Office</string>
+    <string name="chooseOtherSer">Choose Other Services</string>
+
+    <string name="toast_error_connection">No Internet connection !!</string>
+    <string name="toast_call_permission">Call Permission Not Granted !!</string>
+    <string name="toast_no_ads_info">No Ads Info !!</string>
+    <string name="toast_res_msg">Error in response message !!</string>
+    <string name="toast_no_office">No office Exist !!</string>
+    <string name="toast_apped_office">The office Appended until admin approve !!</string>
+    <string name="toast_rate_error">Error to post rate !!</string>
+    <string name="toast_rate_success">Rate posted Success</string>
+    <string name="toast_on_fav_off">No Favourite Offices exist !!</string>
+    <string name="toast_server_error">Error in server connection !!</string>
+    <string name="toast_invalid_email">Invalid E-Mail address !!</string>
+    <string name="toast_check_eail">Please check your E-Mail address (Spam) to retrieve the password</string>
+    <string name="toast_invalid_email_pass">Invalid E-Mail address or password !!</string>
+    <string name="toast_pending_account">Your account is pending approval from the administrator !!</string>
+    <string name="toast_type_email">Please type your email address !!</string>
+    <string name="toast_type_email_pass">Please type your email address and password !!</string>
+    <string name="toast_no_ads_found">There are no ads !!</string>
+    <string name="toast_reg_failed">Registration failed !!</string>
+    <string name="toast_con_pass">Please confirm password correct !!</string>
+    <string name="toast_type_alldata">Please type all data !!</string>
+    <string name="toast_email_correct">Please enter E-mail correct !!</string>
+    <string name="toast_no_off_incity">No offices Exist in this city !!</string>
+    <string name="toast_no_maids_incity">No Maids Exist in this city !!</string>
+    <string name="toast_empty_coun_city">Please choose the country or city !!</string>
+    <string name="toast_no_city">No Ciities exist in this country !!</string>
+    <string name="toast_no_countries">No countries exist !!</string>
+    <string name="toast_no_nationality">No Nationalities Exist !!</string>
+    <string name="toast_off_not_reg">The office was not registered !!</string>
+    <string name="toast_off_reg">Office successfully registered</string>
+    <string name="toast_off_not_upd">The office was not updated !!</string>
+    <string name="toast_off_upd">Office successfully updated</string>
+    <string name="toast_append_office">The office appended until admin approve</string>
+    <string name="toast_login_first">Please Login first !!</string>
+    <string name="desc_of_office">Description of the office :</string>
+    <string name="det_email">E-Mail : </string>
+    <string name="det_address">Address : </string>
+    <string name="phone1">Phone 1 : </string>
+    <string name="phone2">Phone 2 : </string>
+    <string name="phone3">Phone 3 : </string>
+    <string name="rates">Rates</string>
+    <string name="app_ad_id">ca-app-pub-4849301776109849~8373321804</string>
+    <string name="bannar_ad_id">ca-app-pub-4849301776109849/1105205876</string>
+    <string name="interstitial_ad_id">ca-app-pub-4849301776109849/1872537184</string>
+    <string name="share_app">Share App</string>
+
+    <string name="call_dialog_title">Confirm Contact Dialog :</string>
+    <string name="call_dialog_body">Are you sure you want to CALL to </string>
+    <string name="or">OR</string>
+
+    <string name="add_commect">Add comment</string>
+    <string name="comment_dialog">Comment Dialog :</string>
+    <string name="comments">The Comments</string>
+    <string name="search_dialog">Search Dialog :</string>
+    <string name="search">Search</string>
+
+    <string name="filter_by_review">Order the highest rating</string>
+    <string name="toast_noReview_4Services_offices">No rating 4 services offices !!</string>
+
+    <string name="filter_title">Filter Dialog :</string>
+    <string name="alphabetical">Sort Alphabetical</string>
+    <string name="most_rate">Sort by Rate</string>
+    <string name="toast_type_office_name_or_nation_id">Please Type Office Name or nationality of maids !!</string>
+    <string name="toast_type_office_name">Please Type Office Name !!</string>
+    <string name="willSearchByOfficeName">Please search by Office Name or nationality of maids !!</string>
+
+    <string name="comment_added_success">Comment was added success</string>
+    <string name="failed_addedd_comment">Error when add comment !!</string>
+    <string name="noComments">No comments in this office !!</string>
+
+    <string name="add_other_ser">Add Other services</string>
+    <string name="otherSer">Other Services :</string>
+
+
+    <string name="addImage">Add maid\'s image</string>
+    <string name="maidName">Type maid\'s name</string>
+    <string name="maidsDescription">Type maid\'s Description</string>
+    <string name="maidsPrice">Type maid\'s price</string>
+    <string name="maidsAge">Type maid\'s age</string>
+    <string name="maidsNationality">Type maid\'s nationality</string>
+    <string name="maidsReligion">Type maid\'s religion</string>
+    <string name="finish">Upload Maid\'s Data</string>
+    <string name="maidsRegisterTitle">Register maid\'s data</string>
+
+    <string name="registerMaidSuccess">Your maid registered successfully</string>
+    <string name="registerMaidPermission">Sorry, you have exceeded the number allowed to register your maid data per month.
+        Please check with your system administrator to register your maid data </string>
+
+    <string name="description">The Description :</string>
+    <string name="price">Price :</string>
+    <string name="age">Age :</string>
+    <string name="nationality">Nationality :</string>
+    <string name="religion">Religion :</string>
+    <string name="owner">Owner Name :</string>
+
+    <string name="userRole">User role : </string>
+    <string name="office">Office</string>
+    <string name="person">Person</string>
+    <string name="firstName">First name</string>
+    <string name="lastName">Last name</string>
+    <string name="emailAddress">Email address</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="phoneNumber2">Second phone number</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="address">Address</string>
+    <string name="descrip">Description</string>
+    <string name="officeName">Office name</string>
+    <string name="phoneNumber3">Third phone number (op.)</string>
+    <string name="maidsNation">Maid\'s nationality</string>
+    <string name="otherServices">Other services</string>
+</resources>

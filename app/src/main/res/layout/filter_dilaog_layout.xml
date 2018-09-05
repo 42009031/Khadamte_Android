@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#80000000">
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#000"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:src="@drawable/filter_icon" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/filter_title"
+            android:textColor="#fff"
+            android:textSize="19sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/alphab_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/alphabetical"
+            android:textAllCaps="false"
+            android:textColor="#cc0000"
+            android:background="#fff"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/or_tv"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="@string/or"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            android:textSize="13sp" />
+
+
+        <Button
+            android:id="@+id/review_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/most_rate"
+            android:textAllCaps="false"
+            android:textColor="#cc0000"
+            android:background="#fff"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

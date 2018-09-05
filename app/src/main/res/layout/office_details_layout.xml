@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <LinearLayout
+        android:id="@+id/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/layout_bg"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/views_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/icon_view" />
+
+            <TextView
+                android:id="@+id/views_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#000"
+                android:textSize="11sp" />
+
+        </FrameLayout>
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@android:color/darker_gray" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/call_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/icon_call" />
+
+            <TextView
+                android:id="@+id/call_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="0"
+                android:paddingLeft="15dp"
+                android:paddingBottom="8dp"
+                android:textColor="#000"
+                android:textSize="11sp" />
+
+        </FrameLayout>
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <ImageView
+            android:id="@+id/fav_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:src="@drawable/icon_fav" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/comment_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_comment_gray" />
+
+            <TextView
+                android:id="@+id/comment_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="0"
+                android:paddingRight="30dp"
+                android:textColor="#000"
+                android:textSize="11sp" />
+
+        </FrameLayout>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/like_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_like_gray" />
+
+            <TextView
+                android:id="@+id/like_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="0"
+                android:paddingRight="30dp"
+                android:textColor="#000"
+                android:textSize="11sp" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#cc0000"
+        android:layoutDirection="ltr">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/office_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="19sp" />
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footer_layout"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/desc_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/desc_of_office"
+                android:textColor="#cc0000"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/desc_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desc_title_tv"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/nation_maids_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desc_tv"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/nationalities"
+                android:textColor="#cc0000"
+                android:textSize="17sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/maids_natio_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nation_maids_title_tv"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+
+            <TextView
+                android:id="@+id/otherServ_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/maids_natio_rv"
+                android:text="@string/otherSer"
+                android:textColor="#cc0000"
+                android:visibility="gone"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/otherSer_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/otherServ_title_tv"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:gravity="center"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:id="@+id/rate_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/otherSer_tv"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:stepSize="0.5"
+                    android:theme="@style/rateOfficeDetails" />
+
+                <TextView
+                    android:id="@+id/rate_count_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rate_layout"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/address_img"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/address" />
+
+                <TextView
+                    android:id="@+id/address_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/det_address"
+                    android:textColor="#000000"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/adrs_val_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="#e65c00"
+
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/address_layout"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="#cccccc" />
+
+            <LinearLayout
+                android:id="@+id/email_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/address_layout"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/mail" />
+
+                <TextView
+                    android:id="@+id/email_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/det_email"
+                    android:textColor="#000000"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/email_val_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="#e65c00"
+
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/email_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/email_layout"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="#cccccc" />
+
+            <ListView
+                android:id="@+id/phones_lv"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/email_view"
+                tools:listitem="@layout/phones_office_row_layout" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.khdamte.bitcode.khdamte_app.activities.Offices_Activity">
+
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#cc0000">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/title_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/main_page"
+            android:textColor="#ffffff"
+            android:textSize="19sp" />
+
+        <ImageView
+            android:id="@+id/filter_btn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:padding="13dp"
+            android:src="@drawable/filter_icon" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/offices_btn"
+            style="@style/Widget.AppCompat.ButtonBar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:text="@string/offices"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#fff" />
+
+        <Button
+            android:id="@+id/services_btn"
+            style="@style/Widget.AppCompat.ButtonBar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="#000"
+            android:text="@string/services"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#fff" />
+
+        <Button
+            android:id="@+id/maids_btn"
+            style="@style/Widget.AppCompat.ButtonBar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="#000"
+            android:text="@string/maids"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/offices_frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header_layout"
+        android:background="#e6e6e6" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/search_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        android:src="@drawable/search_icon"
+        app:backgroundTint="@android:color/holo_orange_dark"
+        app:fabSize="normal" />
+
+</RelativeLayout>
