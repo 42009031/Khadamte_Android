@@ -121,7 +121,7 @@ public class UserRegistationActivity extends AppCompatActivity {
                 String email_str = email.getText().toString();
                 String countryKey = countryKeyEt.getText().toString();
                 String phone_str = countryKey + phone1.getText().toString();
-
+                String country_id = country_hashMap.get(countrySpinner.getSelectedItem().toString());
                 String selectedStateName = citySpinner.getSelectedItem().toString();
                 String stateId = "";
                 if (!TextUtils.isEmpty(selectedStateName)) {
@@ -182,6 +182,7 @@ public class UserRegistationActivity extends AppCompatActivity {
                                     phone_str,
                                     userGender,
                                     stateId,
+                                    country_id,
                                     address_str));
                             ownerIntent.putExtras(b);
                             startActivity(ownerIntent);
