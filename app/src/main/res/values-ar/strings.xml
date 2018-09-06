@@ -155,7 +155,7 @@
     <string name="failed_addedd_comment">لم يتم إضافة التعليق !!</string>
     <string name="noComments">لا يوجد تعليقات فى هذا المكتب !!</string>
 
-    <string name="add_other_ser">إضافة خدمات أخرى (إختياري)</string>
+    <string name="add_other_ser">إضافة خدمات أخرى</string>
     <string name="otherSer">خدمات أخرى :</string>
 
     <string name="addImage">أضف صورة الخادمة</string>
@@ -198,9 +198,8 @@
     <string name="city">المدينة</string>
     <string name="address">العنوان</string>
     <string name="descrip">الوصف</string>
-    <string name="officeLogo">أضف شعار المكتب (إختياي)</string>
     <string name="officeName">اسم المكتب</string>
     <string name="phoneNumber3">رقم الجوال آخر (إختيارى)</string>
-    <string name="maidsNation">أضف جنسية الخادمات</string>
-    <string name="otherServices">أضف خدمات أخرى</string>
+    <string name="maidsNation">جنسية الخادمات</string>
+    <string name="otherServices">خدمات أخرى</string>
 </resources>

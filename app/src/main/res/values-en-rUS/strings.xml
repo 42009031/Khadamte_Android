@@ -152,7 +152,7 @@
     <string name="failed_addedd_comment">Error when add comment !!</string>
     <string name="noComments">No comments in this office !!</string>
 
-    <string name="add_other_ser">Add Other services (op.)</string>
+    <string name="add_other_ser">Add Other services</string>
     <string name="otherSer">Other Services :</string>
 
 
@@ -194,9 +194,20 @@
     <string name="city">City</string>
     <string name="address">Address</string>
     <string name="descrip">Description</string>
-    <string name="officeLogo">Capture Office Logo (op.)</string>
     <string name="officeName">Office name</string>
     <string name="phoneNumber3">Third phone number (op.)</string>
-    <string name="maidsNation">Add Maid\'s nationality</string>
-    <string name="otherServices">Add other services</string>
+    <string name="maidsNation">Maid\'s nationality</string>
+    <string name="otherServices">Other services</string>
+
+    <string name="verificationCodeError">Please type phone number and click to send button.</string>
+    <string name="invalidverificationCode">The verification code entered was invalid.</string>
+    <string name="validverificationCode">Valid verification code entered .</string>
+
+    <string name="verificationCodeTitle">Verification Code</string>
+    <string name="verificationCodeBody">Enter received verification code</string>
+    <string name="verify">Verify</string>
+    <string name="send">Send</string>
+
+    <string name="smsQota">SMS Quota exceeded.</string>
+    <string name="innvalidCredential">Invalid credential : </string>
 </resources>
