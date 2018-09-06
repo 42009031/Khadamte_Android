@@ -173,7 +173,16 @@ public class UserRegistationActivity extends AppCompatActivity {
 
                             Intent ownerIntent = new Intent(UserRegistationActivity.this, OwnerOfficeRegistrationActivity.class);
                             Bundle b = new Bundle();
-                            b.putParcelable("UserData", new UserRegistrationModel(userRole, firstname_str, lastname_str, email_str, password_str, phone_str, userGender, stateId, address_str));
+                            b.putParcelable("UserData", new UserRegistrationModel(userRole = userRole.equalsIgnoreCase("person") ? "user": "owner" ,
+                                    "userID",
+                                    firstname_str,
+                                    lastname_str,
+                                    email_str,
+                                    password_str,
+                                    phone_str,
+                                    userGender,
+                                    stateId,
+                                    address_str));
                             ownerIntent.putExtras(b);
                             startActivity(ownerIntent);
                         } else {
@@ -392,7 +401,7 @@ public class UserRegistationActivity extends AppCompatActivity {
         userObj.addProperty("pwd", pwd);
         userObj.addProperty("phone1", phone);
         userObj.addProperty("address", address);
-        userObj.addProperty("userRole", role);
+        userObj.addProperty("userRole", role =  role.equalsIgnoreCase("person") ? "user": "owner" );
         userObj.addProperty("StateMasterId", stateId);
         userObj.addProperty("GenderId", gender = gender.equalsIgnoreCase("male") ? "1": "2" );
 

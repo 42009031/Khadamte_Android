@@ -10,10 +10,11 @@ import android.os.Parcelable;
 public class UserRegistrationModel implements Parcelable {
 
 
-    private String role, fName, lName, email, pwd, phone, gender, state, address;
+    private String role, userId, fName, lName, email, pwd, phone, gender, state, countryId, address;
 
-    public UserRegistrationModel(String role, String fName, String lName, String email, String pwd, String phone, String gender, String state, String address) {
+    public UserRegistrationModel(String role, String userId, String fName, String lName, String email, String pwd, String phone, String gender, String state, String countryId, String address) {
         this.role = role;
+        this.userId = userId;
         this.fName = fName;
         this.lName = lName;
         this.email = email;
@@ -21,11 +22,13 @@ public class UserRegistrationModel implements Parcelable {
         this.phone = phone;
         this.gender = gender;
         this.state = state;
+        this.countryId = countryId ;
         this.address = address;
     }
 
     protected UserRegistrationModel(Parcel in) {
         role = in.readString();
+        userId = in.readString();
         fName = in.readString();
         lName = in.readString();
         email = in.readString();
@@ -33,12 +36,14 @@ public class UserRegistrationModel implements Parcelable {
         phone = in.readString();
         gender = in.readString();
         state = in.readString();
+        countryId = in.readString();
         address = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(role);
+        dest.writeString(userId);
         dest.writeString(fName);
         dest.writeString(lName);
         dest.writeString(email);
@@ -46,6 +51,7 @@ public class UserRegistrationModel implements Parcelable {
         dest.writeString(phone);
         dest.writeString(gender);
         dest.writeString(state);
+        dest.writeString(countryId);
         dest.writeString(address);
     }
 
@@ -72,6 +78,14 @@ public class UserRegistrationModel implements Parcelable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getfName() {
@@ -128,6 +142,14 @@ public class UserRegistrationModel implements Parcelable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
     }
 
     public String getAddress() {
