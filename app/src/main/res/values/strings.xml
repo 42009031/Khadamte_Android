@@ -25,7 +25,7 @@
     <string name="login_btn">Login</string>
     <string name="lastname_hint">Enter lastname</string>
     <string name="forget_password">Forget password</string>
-    <string name="next">Skip</string>
+    <string name="next">Skip Ads</string>
     <string name="nextReg">Next</string>
     <string name="choose_address">Select Address</string>
     <string-array name="nav_after_login">
@@ -96,6 +96,7 @@
     <string name="toast_rate_success">Rate posted Success</string>
     <string name="toast_on_fav_off">No Favourite Offices exist !!</string>
     <string name="toast_server_error">Error in server connection !!</string>
+    <string name="toast_user_exist">This user has been saved before by this user phone number or by E-mail</string>
     <string name="toast_invalid_email">Invalid E-ail address !!</string>
     <string name="toast_check_eail">Please check your E-mail address (Spam) to retrieve the password</string>
     <string name="toast_invalid_email_pass">Invalid E-Mail address or password !!</string>
@@ -170,9 +171,11 @@
     <string name="registerMaidPermission">Sorry, you have exceeded the number allowed to register your maid data per month.
         Please check with your system administrator to register your maid data </string>
 
-    <string name="description">The Description :</string>
+    <string name="description">Description :</string>
     <string name="price">Price :</string>
     <string name="age">Age :</string>
+    <string name="contactWay">Contact ways :</string>
+    <string name="addContactWays">Add contact ways</string>
     <string name="nationality">Nationality :</string>
     <string name="religion">Religion :</string>
     <string name="owner">Owner Name :</string>
@@ -210,5 +213,13 @@
 
     <string name="smsQota">SMS Quota exceeded.</string>
     <string name="innvalidCredential">Invalid credential : </string>
+
+    <string name="registerNewUser">Register new user</string>
+    <string name="insert">Add Maid</string>
+    <string name="delete">Delete Maid</string>
+
+    <string name="name">Name :</string>
+<string name="myOffice">My Office</string>
+
 
 </resources>

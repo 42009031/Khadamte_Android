@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/5damty_App.iml" filepath="$PROJECT_DIR$/5damty_App.iml" />
-      <module fileurl="file://E:\projects\android source code\5damty_App\Khadamte_Android.iml" filepath="E:\projects\android source code\5damty_App\Khadamte_Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

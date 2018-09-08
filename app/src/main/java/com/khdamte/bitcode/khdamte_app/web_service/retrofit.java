@@ -72,6 +72,11 @@ public class retrofit {
         @POST("User/PostRegister")
         Call<JsonObject> postRegistration(@Body JsonObject userData);
 
+        @POST("office/AddOfficePhoto/{office_id}")
+        @Multipart
+        Call<ResponseBody> AddOfficePhoto(@Path("office_id") String office_id,
+                                        @Part MultipartBody.Part photo);
+
         @POST("User/PostLogged")
         Call<JsonObject> postLogin(@Body JsonObject loginData);
 

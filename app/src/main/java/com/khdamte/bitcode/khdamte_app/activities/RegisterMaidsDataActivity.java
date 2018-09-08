@@ -77,7 +77,8 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
     private AlertDialog progressDialog;
     private String langToLoad;
     private SharedPreferences languagepref;
-private String captureImgUri;
+    private String captureImgUri;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,10 +143,10 @@ private String captureImgUri;
                         !religion.isEmpty() &&
                         !currentMonth.isEmpty() &&
                         !stateId.isEmpty() &&
-                        !nationId.isEmpty() ) {
+                        !nationId.isEmpty()) {
 
-                    postOffice(user_id, name, desc, age, nationId, stateId, religion, captureImgUri, price, currentMonth );
-                }else{
+                    postMaid(user_id, name, desc, age, nationId, stateId, religion, captureImgUri, price, currentMonth);
+                } else {
                     Toast.makeText(RegisterMaidsDataActivity.this, getString(R.string.toast_type_alldata), Toast.LENGTH_SHORT).show();
                 }
 
@@ -202,10 +203,10 @@ private String captureImgUri;
 
     private void requestPermissionAndContinue() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this,  Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    && ActivityCompat.shouldShowRequestPermissionRationale(this,  Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
                 alertBuilder.setCancelable(true);
                 alertBuilder.setTitle("Runtime Permission");
@@ -213,15 +214,15 @@ private String captureImgUri;
                 alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                     public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(RegisterMaidsDataActivity.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                ,  Manifest.permission.READ_EXTERNAL_STORAGE},  123);
+                        ActivityCompat.requestPermissions(RegisterMaidsDataActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                , Manifest.permission.READ_EXTERNAL_STORAGE}, 123);
                     }
                 });
                 AlertDialog alert = alertBuilder.create();
                 alert.show();
                 Log.e("", "permission denied, show dialog");
             } else {
-                ActivityCompat.requestPermissions(RegisterMaidsDataActivity.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                ActivityCompat.requestPermissions(RegisterMaidsDataActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE}, 123);
             }
         } else {
@@ -270,8 +271,6 @@ private String captureImgUri;
             if (photoUri != null) {
                 captureImgUri = FetchPath.getPath(this, photoUri);
             }
-
-
             Picasso.with(this).load(String.valueOf(paramIntent.getData())).transform(new CircleTransform()).into(this.captureImg);
         }
     }
@@ -484,8 +483,8 @@ private String captureImgUri;
         });
     }
 
-    private void postOffice(String user_id, String name, String descrip, String age, String nationalityId, String stateId,
-                            String religion, String imageUri, String price, String currentMonth) {
+    private void postMaid(String user_id, String name, String descrip, String age, String nationalityId, String stateId,
+                          String religion, String imageUri, String price, String currentMonth) {
 
         showDialog();
 
@@ -521,7 +520,7 @@ private String captureImgUri;
                 dismissDialog();
                 String result = "";
 
-                if(response.body() != null){
+                if (response.body() != null) {
                     result = response.body().toString();
                     if (!result.equals("")) {
                         try {
@@ -529,7 +528,7 @@ private String captureImgUri;
                             String Status = adsObj.getString("Status");
                             if (Status.equals("true")) {
                                 Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.registerMaidSuccess), Toast.LENGTH_LONG).show();
-                            onBackPressed();
+                                onBackPressed();
                             } else
                                 Toast.makeText(RegisterMaidsDataActivity.this, Status, Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
@@ -541,13 +540,13 @@ private String captureImgUri;
                     } else {
                         Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_server_error), Toast.LENGTH_LONG).show();
                     }
-                }else if(response.errorBody() != null){
+                } else if (response.errorBody() != null) {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         String errorMsg = jObjError.getString("Message");
                         if (errorMsg.equals("You can't save advertise this month")) {
                             Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.registerMaidPermission), Toast.LENGTH_LONG).show();
-                        }else{
+                        } else {
                             Toast.makeText(RegisterMaidsDataActivity.this, errorMsg, Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {

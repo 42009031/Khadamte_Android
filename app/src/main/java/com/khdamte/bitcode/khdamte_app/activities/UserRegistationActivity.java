@@ -140,18 +140,18 @@ public class UserRegistationActivity extends AppCompatActivity {
                             !TextUtils.isEmpty(address_str)) {
                         if (password_str.equals(confirm_password_str)) {
 
-                            if(isAvalidPhoneNumber){
-                                postUserPerson(userRole,
-                                        firstname_str,
-                                        lastname_str,
-                                        password_str,
-                                        phone_str,
-                                        userGender,
-                                        stateId,
-                                        address_str);
-                            }else{
-                                Toast.makeText(UserRegistationActivity.this, getString(R.string.verificationCodeError), Toast.LENGTH_LONG).show();
-                            }
+//                            if(isAvalidPhoneNumber){
+                            postUserPerson(userRole,
+                                    firstname_str,
+                                    lastname_str,
+                                    password_str,
+                                    phone_str,
+                                    userGender,
+                                    stateId,
+                                    address_str);
+//                            }else{
+//                                Toast.makeText(UserRegistationActivity.this, getString(R.string.verificationCodeError), Toast.LENGTH_LONG).show();
+//                            }
 
 
                         } else {
@@ -173,8 +173,7 @@ public class UserRegistationActivity extends AppCompatActivity {
 
                             Intent ownerIntent = new Intent(UserRegistationActivity.this, OwnerOfficeRegistrationActivity.class);
                             Bundle b = new Bundle();
-                            b.putParcelable("UserData", new UserRegistrationModel(userRole = userRole.equalsIgnoreCase("person") ? "user": "owner" ,
-                                    "userID",
+                            b.putParcelable("UserData", new UserRegistrationModel(userRole = userRole.equalsIgnoreCase("person") ? "user" : "owner",
                                     firstname_str,
                                     lastname_str,
                                     email_str,
@@ -193,8 +192,6 @@ public class UserRegistationActivity extends AppCompatActivity {
                         Toast.makeText(UserRegistationActivity.this, getResources().getString(R.string.toast_type_alldata), Toast.LENGTH_LONG).show();
                     }
                 }
-
-
             }
         });
 
@@ -232,14 +229,20 @@ public class UserRegistationActivity extends AppCompatActivity {
         verifyPhoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNumber = countryKeyEt.getText().toString() + phone1.getText().toString();
-                setUpVerificatonCallbacks();
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        phoneNumber,        // Phone number to verify
-                        60,                 // Timeout duration
-                        TimeUnit.SECONDS,   // Unit of timeout
-                        UserRegistationActivity.this,               // Activity (for callback binding)
-                        verificationCallbacks);
+                if (!TextUtils.isEmpty(countryKeyEt.getText().toString()) &&
+                        !TextUtils.isEmpty(phone1.getText().toString())) {
+                    String phoneNumber = countryKeyEt.getText().toString() + phone1.getText().toString();
+                    setUpVerificatonCallbacks();
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                            phoneNumber,        // Phone number to verify
+                            60,                 // Timeout duration
+                            TimeUnit.SECONDS,   // Unit of timeout
+                            UserRegistationActivity.this,               // Activity (for callback binding)
+                            verificationCallbacks);
+                } else {
+                    Toast.makeText(UserRegistationActivity.this, "Please type correct phone number", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -251,7 +254,6 @@ public class UserRegistationActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
-
 
     // API
     private void GetAllCountries() {
@@ -388,8 +390,8 @@ public class UserRegistationActivity extends AppCompatActivity {
     }
 
     private void postUserPerson(String role,
-                                String fname,
-                                String lname,
+                                final String fname,
+                                final String lname,
                                 String pwd,
                                 String phone,
                                 String gender,
@@ -402,9 +404,9 @@ public class UserRegistationActivity extends AppCompatActivity {
         userObj.addProperty("pwd", pwd);
         userObj.addProperty("phone1", phone);
         userObj.addProperty("address", address);
-        userObj.addProperty("userRole", role =  role.equalsIgnoreCase("person") ? "user": "owner" );
+        userObj.addProperty("userRole", role = role.equalsIgnoreCase("person") ? "user" : "owner");
         userObj.addProperty("StateMasterId", stateId);
-        userObj.addProperty("GenderId", gender = gender.equalsIgnoreCase("male") ? "1": "2" );
+        userObj.addProperty("GenderId", gender = gender.equalsIgnoreCase("male") ? "1" : "2");
 
         showDialog();
         retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
@@ -418,11 +420,24 @@ public class UserRegistationActivity extends AppCompatActivity {
                 if (!result.equals("")) {
                     try {
                         JSONObject adsObj = new JSONObject(result);
-                        boolean success = adsObj.getBoolean("Success");
-                        if (success) {
-                            startActivity(new Intent(UserRegistationActivity.this, ConfirmRegistration.class));
+                        if (adsObj.toString().contains("Success")) {
+                            boolean success = adsObj.getBoolean("Success");
+                            String userId = adsObj.getString("id");
+                            if (success) {
+                                SharedPreferences sharedpreferences = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                editor.putString("id", userId);
+                                editor.putString("userRole", "user");
+                                editor.apply();
+                                Toast.makeText(UserRegistationActivity.this, "Welcome " + fname + " " + lname, Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(UserRegistationActivity.this, MainActivity.class));
+                            } else {
+                                Toast.makeText(UserRegistationActivity.this, getResources().getString(R.string.toast_reg_failed), Toast.LENGTH_LONG).show();
+                            }
+                        } else if (adsObj.toString().contains("This user has been saved before")) {
+                            Toast.makeText(UserRegistationActivity.this, getResources().getString(R.string.toast_user_exist), Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(UserRegistationActivity.this, getResources().getString(R.string.toast_reg_failed), Toast.LENGTH_LONG).show();
+                            Toast.makeText(UserRegistationActivity.this, adsObj.toString(), Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -439,7 +454,6 @@ public class UserRegistationActivity extends AppCompatActivity {
                 dismissDialog();
             }
         });
-
     }
 
 
@@ -467,6 +481,8 @@ public class UserRegistationActivity extends AppCompatActivity {
         countryKeyEt = (EditText) findViewById(R.id.countryKeyEt);
         phone1 = (EditText) findViewById(R.id.phone1_editText);
         verifyPhoneBtn = (Button) findViewById(R.id.verifyPhoneBtn);
+        genderView = findViewById(R.id.genderView);
+        genderLayout = (LinearLayout) findViewById(R.id.genderLayout);
         genderTitle = (TextView) findViewById(R.id.genderTitle);
         genderRadioGroup = (RadioGroup) findViewById(R.id.genderRadioGroup);
         maleRadioBtn = (RadioButton) findViewById(R.id.maleRadioBtn);
@@ -502,8 +518,7 @@ public class UserRegistationActivity extends AppCompatActivity {
         phoneHint.setTypeface(MainActivity.lightFace);
         countryKeyEt.setTypeface(MainActivity.lightFace);
         phone1.setTypeface(MainActivity.lightFace);
-        genderView = findViewById(R.id.genderView);
-        genderLayout = (LinearLayout) findViewById(R.id.genderLayout);
+        genderTitle.setTypeface(MainActivity.lightFace);
         maleRadioBtn.setTypeface(MainActivity.lightFace);
         femaleRadioBtn.setTypeface(MainActivity.lightFace);
         countryHint.setTypeface(MainActivity.lightFace);

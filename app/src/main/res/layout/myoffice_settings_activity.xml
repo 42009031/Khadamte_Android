@@ -7,8 +7,7 @@
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#cc0000"
-        android:layoutDirection="ltr">
+        android:background="#cc0000">
 
         <ImageView
             android:id="@+id/back_btn"
@@ -21,88 +20,27 @@
             android:id="@+id/title_toolbar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
-            android:text="@string/favourite_office"
+            android:gravity="center"
+            android:text="@string/myOffice"
             android:textColor="#ffffff"
             android:textSize="19sp" />
 
         <View
             android:layout_width="50dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layoutDirection="ltr"
-        android:layout_below="@+id/main_toolbar"
-        android:orientation="horizontal">
-
-        <FrameLayout
-            android:id="@+id/update_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#4d4d4d">
-
-            <ImageView
-                android:id="@+id/update_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/edit_white"
-                android:layout_gravity="center|left"
-                android:layout_marginLeft="10dp"/>
-
-            <Button
-                android:id="@+id/update_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:text="@string/update"
-                android:textSize="19sp"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:paddingLeft="40dp"/>
-
-        </FrameLayout>
-
-
-        <FrameLayout
-            android:id="@+id/add_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#ffffff">
-
-            <ImageView
-                android:id="@+id/add_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/add_black"
-                android:layout_gravity="center|left"
-                android:layout_marginLeft="8dp"/>
-
-            <Button
-                android:id="@+id/add_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:text="@string/add"
-                android:textSize="19sp"
-                android:textColor="#000000"
-                android:textAllCaps="false"
-                android:paddingLeft="40dp"/>
-
-        </FrameLayout>
-    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/myoffice_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_below="@+id/main_toolbar"
+       />
+
+
+
 
 </RelativeLayout>

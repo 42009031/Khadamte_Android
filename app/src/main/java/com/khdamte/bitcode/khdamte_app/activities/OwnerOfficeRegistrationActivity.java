@@ -32,6 +32,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.adapter.FetchPath;
@@ -47,6 +48,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -54,13 +57,17 @@ import java.util.Map;
 import java.util.Set;
 
 import dmax.dialog.SpotsDialog;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.khdamte.bitcode.khdamte_app.web_service.retrofit.KhadamtyApi.RETROFIT;
 
-public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
+public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
 
     private ImageView back_btn;
     private TextView title_toolbar, officeNameHint, descriptionHint, phone1Hint, phone2Hint, phone3Hint, nationalityHint, otherServicesHint, otherServicesTv, officeLogoHint;
@@ -77,7 +84,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
     private ArrayList<Flags_Model> flags_models;
     private ArrayList<Flags_Model> nationality_list;
     private Set<String> nat_selected_hashSet;
-    private String postOtherSer, selected_national, langToLoad, captureImgUri ;
+    private String postOtherSer = "", selected_national = "", langToLoad, captureImgUri = "";
 
     private SharedPreferences languagepref;
     private UserRegistrationModel userData;
@@ -116,15 +123,14 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
                     maid_nationalities = maid_nationalities.substring(0, maid_nationalities.length() - 1);
                 }
 
-                if(!TextUtils.isEmpty(officeName) &&
-                !TextUtils.isEmpty(officeDesc) &&
-                !TextUtils.isEmpty(phone1) &&
-                !TextUtils.isEmpty(phone2) &&
-                !TextUtils.isEmpty(maid_nationalities)){
+                if (!TextUtils.isEmpty(officeName) &&
+                        !TextUtils.isEmpty(officeDesc) &&
+                        !TextUtils.isEmpty(phone1) &&
+                        !TextUtils.isEmpty(phone2) &&
+                        !TextUtils.isEmpty(maid_nationalities)) {
 
                     if (isNetworkAvailable()) {
-                        postOffice(userData.getUserId(),
-                                officeName,
+                        postOffice(officeName,
                                 phone1,
                                 phone2,
                                 phone3,
@@ -139,7 +145,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
                         Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_error_connection), Toast.LENGTH_LONG).show();
                     }
 
-                }else{
+                } else {
                     Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_type_alldata), Toast.LENGTH_LONG).show();
                 }
             }
@@ -174,13 +180,13 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
     private void init() {
 
         userData = getIntent().getParcelableExtra("UserData");
-        
+
         back_btn = (ImageView) findViewById(R.id.back_btn);
         title_toolbar = (TextView) findViewById(R.id.title_toolbar);
 
         officeLogo = (ImageView) findViewById(R.id.officeLogo);
         officeLogoHint = (TextView) findViewById(R.id.officeLogoHint);
-       
+
         officeNameHint = (TextView) findViewById(R.id.officeNameHint);
         officeNameEt = (EditText) findViewById(R.id.officeNameEt);
 
@@ -249,7 +255,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
         super.onBackPressed();
         finish();
     }
-    
+
     // helper methods 
     private void dismissDialog() {
         if (progressDialog.isShowing()) {
@@ -269,10 +275,10 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
 
     private void requestPermissionAndContinue() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this,  Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    && ActivityCompat.shouldShowRequestPermissionRationale(this,  Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
                 alertBuilder.setCancelable(true);
                 alertBuilder.setTitle("Runtime Permission");
@@ -280,15 +286,15 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
                 alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                     public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(OwnerOfficeRegistrationActivity.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                ,  Manifest.permission.READ_EXTERNAL_STORAGE},  123);
+                        ActivityCompat.requestPermissions(OwnerOfficeRegistrationActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                , Manifest.permission.READ_EXTERNAL_STORAGE}, 123);
                     }
                 });
                 AlertDialog alert = alertBuilder.create();
                 alert.show();
                 Log.e("", "permission denied, show dialog");
             } else {
-                ActivityCompat.requestPermissions(OwnerOfficeRegistrationActivity.this, new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                ActivityCompat.requestPermissions(OwnerOfficeRegistrationActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE}, 123);
             }
         } else {
@@ -296,6 +302,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
             startActivityForResult(localIntent, 5);
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
@@ -330,10 +337,10 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
             if (photoUri != null) {
                 captureImgUri = FetchPath.getPath(this, photoUri);
             }
-            Picasso.with(this).load( String.valueOf(paramIntent.getData())).transform(new CircleTransform()).into(this.officeLogo);
+            Picasso.with(this).load(String.valueOf(paramIntent.getData())).transform(new CircleTransform()).into(this.officeLogo);
         }
     }
-    
+
     // API
     private void GetAllNationalities() {
         showDialog();
@@ -483,12 +490,12 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
                                         final StringBuilder otherSerId = new StringBuilder();
                                         String selectedItemText = (String) parent.getItemAtPosition(position);
                                         other_services_Set.add(selectedItemText);
-                                        for(String keys: other_services_Set){
-                                            otherSerName.append(keys+", ");
-                                            otherSerId.append(nameOfServicesMap.get(keys)+",");
-                                            otherServicesTv.setText(otherSerName.substring(0, otherSerName.length()-2));
+                                        for (String keys : other_services_Set) {
+                                            otherSerName.append(keys + ", ");
+                                            otherSerId.append(nameOfServicesMap.get(keys) + ",");
+                                            otherServicesTv.setText(otherSerName.substring(0, otherSerName.length() - 2));
                                         }
-                                        postOtherSer = String.valueOf(otherSerId.substring(0, otherSerId.length()-1));
+                                        postOtherSer = String.valueOf(otherSerId.substring(0, otherSerId.length() - 1));
                                     }
                                 }
 
@@ -498,7 +505,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
                                 }
                             });
                         } else {
-                            Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_no_nationality), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_no_nationality), Toast.LENGTH_LONG).show();
                         }
 
                     } catch (JSONException e) {
@@ -524,26 +531,74 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    private void postOffice(String user_id, String name, String mob1, String mob2, String mob3, String city_id,
-                            String address, String desc, String email, String country_id, String nationalities, String otherServices) {
+    private void postOffice(String officeName, String officeMob1, String officeMob2, String officeMob3, String city_id,
+                            String address, String officeDesc, String userEmail, String country_id, String nationalities, String otherServices) {
         showDialog();
 
+        JsonObject userObj = new JsonObject();
+        userObj.addProperty("fname", userData.getfName());
+        userObj.addProperty("lname", userData.getlName());
+        userObj.addProperty("pwd", userData.getPwd());
+        userObj.addProperty("phone1", userData.getPhone());
+        userObj.addProperty("email", userEmail);
+        userObj.addProperty("address", userData.getAddress());
+        userObj.addProperty("userRole", userData.getRole());
+        userObj.addProperty("StateMasterId", userData.getState());
+
         JsonObject officeObj = new JsonObject();
-        officeObj.addProperty("userid", user_id);
-        officeObj.addProperty("name", name);
-        officeObj.addProperty("mob1", mob1);
-        officeObj.addProperty("mob2", mob2);
-        officeObj.addProperty("mob3", mob3);
+        officeObj.addProperty("name", officeName);
+        officeObj.addProperty("mob1", officeMob1);
+        officeObj.addProperty("mob2", officeMob2);
+        officeObj.addProperty("mob3", officeMob3);
         officeObj.addProperty("cityid", city_id);
         officeObj.addProperty("address", address);
-        officeObj.addProperty("description", desc);
-        officeObj.addProperty("email", email);
+        officeObj.addProperty("description", officeDesc);
+        officeObj.addProperty("email", userEmail);
         officeObj.addProperty("countryid", country_id);
-        officeObj.addProperty("nationalities", nationalities);
-        officeObj.addProperty("OtherServices", otherServices);
+
+        JsonArray nationalitiesArray = new JsonArray();
+
+        if (nationalities.contains(",")) {
+            String[] natIds = nationalities.split(",");
+            for (String nationId : natIds) {
+                JsonObject nationObj = new JsonObject();
+                nationObj.addProperty("id", nationId);
+                nationalitiesArray.add(nationObj);
+            }
+        } else {
+            if (!TextUtils.isEmpty(nationalities)) {
+                JsonObject nationObj = new JsonObject();
+                nationObj.addProperty("id", nationalities);
+                nationalitiesArray.add(nationObj);
+            }
+        }
+
+
+        JsonArray otherServArray = new JsonArray();
+        if (otherServices.contains(",")) {
+            String[] otherServIds = otherServices.split(",");
+            for (String otherServId : otherServIds) {
+                JsonObject otherServObj = new JsonObject();
+                otherServObj.addProperty("id", otherServId);
+                otherServArray.add(otherServObj);
+            }
+        } else {
+            if (!TextUtils.isEmpty(otherServices)) {
+                JsonObject otherServObj = new JsonObject();
+                otherServObj.addProperty("id", otherServices);
+                otherServArray.add(otherServObj);
+            }
+        }
+
+        officeObj.add("nationalities", nationalitiesArray);
+        officeObj.add("OtherServices", otherServArray);
+        JsonArray officeArray = new JsonArray();
+        officeArray.add(officeObj);
+
+        userObj.add("Offices", officeArray);
 
         retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
-        Call<JsonObject> connection = KHADAMTY_API.postOffice(officeObj);
+        Call<JsonObject> connection = KHADAMTY_API.postRegistration(userObj);
         connection.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -553,11 +608,34 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
                 if (!result.equals("")) {
                     try {
                         JSONObject adsObj = new JSONObject(result);
-                        boolean success = adsObj.getBoolean("Success");
-                        if (success) {
-                            Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_off_reg), Toast.LENGTH_LONG).show();
-                        } else
-                            Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_off_not_reg), Toast.LENGTH_LONG).show();
+                        if (adsObj.toString().contains("Success")) {
+                            boolean success = adsObj.getBoolean("Success");
+                            String officeId = adsObj.getString("OfficeId");
+                            String userId = adsObj.getString("id");
+                            if (success) {
+                                if(TextUtils.isEmpty(captureImgUri)){
+                                    Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_off_reg), Toast.LENGTH_LONG).show();
+
+                                    Bundle b = new Bundle();
+                                    b.putString("fName", userData.getfName());
+                                    b.putString("lName", userData.getlName());
+                                    b.putString("useId", userId);
+                                    b.putString("officeId", officeId);
+                                    startActivity(new Intent(OwnerOfficeRegistrationActivity.this, ConfirmRegistration.class).putExtras(b));
+                                }else{
+                                    uploadOfficeImage(userId, officeId, captureImgUri);
+                                }
+
+
+                            } else {
+                                Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_off_not_reg), Toast.LENGTH_LONG).show();
+                            }
+                        } else if (adsObj.toString().contains("This user has been saved before")) {
+                            Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_user_exist), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(OwnerOfficeRegistrationActivity.this, adsObj.toString(), Toast.LENGTH_LONG).show();
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(OwnerOfficeRegistrationActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -569,6 +647,71 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_res_msg), Toast.LENGTH_LONG).show();
+                dismissDialog();
+            }
+        });
+    }
+
+
+    private void uploadOfficeImage(final String userId, final String officeId, String imageUri) {
+        showDialog();
+        File file = new File(imageUri);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), requestFile);
+
+        RequestBody name_RB = RequestBody.create(MediaType.parse("multipart/form-data"), officeNameEt.getText().toString());
+        retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
+        Call<ResponseBody> connection = KHADAMTY_API.AddOfficePhoto(officeId, body);
+
+        connection.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                dismissDialog();
+                String result = "";
+                if (response.body() != null) {
+                    result = response.body().toString();
+                    if (!result.equals("")) {
+                        try {
+                            JSONObject adsObj = new JSONObject(response.body().string());
+                            String Status = adsObj.getString("Response");
+                            if (Status.equals("Success")) {
+                                Toast.makeText(OwnerOfficeRegistrationActivity.this, "Image upload success", Toast.LENGTH_LONG).show();
+                                Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_off_reg), Toast.LENGTH_LONG).show();
+                                Bundle b = new Bundle();
+                                b.putString("fName", userData.getfName());
+                                b.putString("lName", userData.getlName());
+                                b.putString("useId", userId);
+                                b.putString("officeId", officeId);
+                                startActivity(new Intent(OwnerOfficeRegistrationActivity.this, ConfirmRegistration.class).putExtras(b));
+                            } else
+                                Toast.makeText(OwnerOfficeRegistrationActivity.this, Status, Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(OwnerOfficeRegistrationActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_server_error), Toast.LENGTH_LONG).show();
+                    }
+                } else if (response.errorBody() != null) {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        String errorMsg = jObjError.getString("Message");
+                        Toast.makeText(OwnerOfficeRegistrationActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
                 Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_res_msg), Toast.LENGTH_LONG).show();
                 dismissDialog();
             }

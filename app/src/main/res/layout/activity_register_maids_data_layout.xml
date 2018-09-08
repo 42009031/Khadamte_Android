@@ -46,7 +46,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/finish_btn"
+        android:layout_above="@+id/controllesLayout"
         android:layout_below="@+id/toolbar">
 
         <LinearLayout
@@ -60,6 +60,7 @@
             android:orientation="vertical"
             android:padding="7dp">
 
+            <!--image-->
             <ImageView
                 android:id="@+id/captureImg"
                 android:layout_width="120dp"
@@ -80,8 +81,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="2dp"
                 android:background="@android:color/darker_gray" />
+
+            <!--name-->
+            <TextView
+                android:id="@+id/maidsNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -107,20 +115,23 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray" />
 
+            <!--nationality-->
+            <TextView
+                android:id="@+id/maidsNationalityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nationality" />
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="4dp">
 
-                <EditText
-                    android:id="@+id/description_et"
+                <Spinner
+                    android:id="@+id/nationality_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:gravity="center"
-                    android:hint="@string/maidsDescription"
-                    android:inputType="text"
-                    android:textSize="17sp" />
+                    android:layout_height="wrap_content" />
             </FrameLayout>
 
             <View
@@ -129,6 +140,13 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray" />
+
+            <!--age-->
+            <TextView
+                android:id="@+id/maidsAgeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/age" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -154,6 +172,13 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray" />
 
+            <!--religion-->
+            <TextView
+                android:id="@+id/maidsReligionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/religion" />
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -177,6 +202,12 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray" />
 
+            <!--price-->
+            <TextView
+                android:id="@+id/maidsPriceTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -195,6 +226,35 @@
                     android:textSize="17sp" />
             </FrameLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <!--desc-->
+            <TextView
+                android:id="@+id/maidsDescTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <EditText
+                    android:id="@+id/description_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/maidsDescription"
+                    android:inputType="text"
+                    android:textSize="17sp" />
+            </FrameLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -202,6 +262,50 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray" />
+
+            <!-- contact way -->
+            <TextView
+                android:id="@+id/contactWayTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contactWay"
+                android:textSize="13sp" />
+
+            <Spinner
+                android:id="@+id/contactWaySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/contactWaysTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <!--country-->
+            <TextView
+                android:id="@+id/maidsCountryTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/country" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -214,12 +318,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </FrameLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray" />
+
+            <!--city-->
+            <TextView
+                android:id="@+id/maidsCityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/city" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -240,41 +352,74 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp">
-
-                <Spinner
-                    android:id="@+id/nationality_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </FrameLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/finish_btn"
-        android:layout_width="270dp"
+    <LinearLayout
+        android:id="@+id/controllesLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/register_btn"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:text="@string/finish"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:textSize="18sp" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/addBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/register_btn"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:text="@string/insert"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="5dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/updateBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/register_btn"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:text="@string/update"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="5dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/register_btn"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:text="@string/delete"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
 </RelativeLayout>

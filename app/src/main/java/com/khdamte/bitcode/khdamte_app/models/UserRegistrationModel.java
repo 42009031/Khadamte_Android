@@ -10,11 +10,10 @@ import android.os.Parcelable;
 public class UserRegistrationModel implements Parcelable {
 
 
-    private String role, userId, fName, lName, email, pwd, phone, gender, state, countryId, address;
+    private String role, fName, lName, email, pwd, phone, gender, state, countryId, address;
 
-    public UserRegistrationModel(String role, String userId, String fName, String lName, String email, String pwd, String phone, String gender, String state, String countryId, String address) {
+    public UserRegistrationModel(String role, String fName, String lName, String email, String pwd, String phone, String gender, String state, String countryId, String address) {
         this.role = role;
-        this.userId = userId;
         this.fName = fName;
         this.lName = lName;
         this.email = email;
@@ -28,7 +27,7 @@ public class UserRegistrationModel implements Parcelable {
 
     protected UserRegistrationModel(Parcel in) {
         role = in.readString();
-        userId = in.readString();
+
         fName = in.readString();
         lName = in.readString();
         email = in.readString();
@@ -43,7 +42,7 @@ public class UserRegistrationModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(role);
-        dest.writeString(userId);
+
         dest.writeString(fName);
         dest.writeString(lName);
         dest.writeString(email);
@@ -78,14 +77,6 @@ public class UserRegistrationModel implements Parcelable {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getfName() {

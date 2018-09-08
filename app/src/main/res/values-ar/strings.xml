@@ -25,7 +25,7 @@
     <string name="login_btn">دخول</string>
     <string name="lastname_hint">أدخل الاسم الأخير</string>
     <string name="forget_password">نسيت كلمة المرور</string>
-    <string name="next">تخطي</string>
+    <string name="next">تخطي الإعلانات</string>
     <string name="nextReg">التالي</string>
     <string name="choose_address">إختر العنوان</string>
     <string-array name="nav_after_login">
@@ -95,6 +95,7 @@
     <string name="toast_rate_success">تم إرسال التقييم بنجاح</string>
     <string name="toast_on_fav_off">لا يوجد مكاتب مفضلة !!</string>
     <string name="toast_server_error">هناك خطا فى الاتصال بالسيرفر !!</string>
+    <string name="toast_user_exist">رقم جوال هذا المستخدم او البريد الإلكترونى موجود بالفعل </string>
     <string name="toast_invalid_email">هناك خطا فى البريد الإلكترونى !!</string>
     <string name="toast_check_eail"> تم إرسال رسالة الي بريدك الإلكترونى (Spam) من فضلك قم بالتحقق منها</string>
     <string name="toast_invalid_email_pass">هناك خطا فى البريد الإلكترونى او كلمة المرور !!</string>
@@ -172,13 +173,13 @@
     <string name="registerMaidPermission">عفوا, لقد تخطيت العدد المسموح بة لتسجيل بيانات خادمتك فى الشهر برجاء مراجعة مسؤل النظام لتسجيل بيانات الخادمة </string>
 
     <string name="description">الوصف :</string>
+    <string name="contactWay">طرق التواصل :</string>
+    <string name="addContactWays">أضف طرق التواصل</string>
     <string name="price">السعر :</string>
     <string name="age">العمر :</string>
     <string name="nationality">الجنسية :</string>
     <string name="religion">الديانة :</string>
     <string name="owner">اسم المالك :</string>
-
-
 
 
     <string name="userRole">دور المستخدم : </string>
@@ -202,4 +203,23 @@
     <string name="phoneNumber3">رقم الجوال آخر (إختيارى)</string>
     <string name="maidsNation">جنسية الخادمات</string>
     <string name="otherServices">خدمات أخرى</string>
+
+    <string name="verificationCodeError">من فضلك تحقق من رقم الجوال.</string>
+    <string name="invalidverificationCode">رمز التحقق غير صحيح.</string>
+    <string name="validverificationCode">تم التحقق من رقم الجوال.</string>
+
+    <string name="verificationCodeTitle">رمز التحقق لرقم الجوال</string>
+    <string name="verificationCodeBody">ادخل رمز التحقق</string>
+    <string name="verify">تحقق</string>
+    <string name="send">ارسل</string>
+
+    <string name="smsQota">لقد تعديت الحد الاقصى من الرسائل برجاء الاتصال بمسؤل النظام.</string>
+    <string name="innvalidCredential">Invalid credential : </string>
+
+    <string name="registerNewUser">تسجيل مستخدم جديد</string>
+    <string name="officeLogo">التقط صورة للمكتب (إختيري.)</string>
+    <string name="insert">أضف خادمة</string>
+    <string name="delete">حذف خادمة</string>
+
+    <string name="myOffice">مكتبي</string>
 </resources>
