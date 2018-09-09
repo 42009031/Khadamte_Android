@@ -381,6 +381,7 @@
             android:textSize="18sp" />
 
         <View
+            android:id="@+id/updateView"
             android:layout_width="10dp"
             android:layout_height="5dp"
             android:visibility="gone" />
@@ -401,6 +402,7 @@
             android:visibility="gone" />
 
         <View
+            android:id="@+id/deleteView"
             android:layout_width="10dp"
             android:layout_height="5dp"
             android:visibility="gone" />

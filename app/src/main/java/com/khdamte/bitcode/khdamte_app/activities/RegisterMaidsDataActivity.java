@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.crash.FirebaseCrash;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
 
@@ -48,6 +50,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import dmax.dialog.SpotsDialog;
 import okhttp3.MediaType;
@@ -67,15 +72,23 @@ import static com.khdamte.bitcode.khdamte_app.web_service.retrofit.KhadamtyApi.R
 public class RegisterMaidsDataActivity extends AppCompatActivity {
 
     private ImageView back_btn, captureImg;
-    private TextView title_toolbar, captureImgTxt;
+
+    private TextView title_toolbar, captureImgTxt, maidsNameTv, maidsNationalityTv, maidsAgeTv, maidsReligionTv, maidsPriceTv, maidsDescTv, contactWayTv, contactWaysTv, maidsCountryTv, maidsCityTv;
+
     private EditText maidsName_et, description_et, maidsAge_et, maidsReligion_et, price_et;
-    private Spinner cityId_spinner, nationality_spinner, country_spinner;
+
+    private Spinner cityId_spinner, nationality_spinner, country_spinner, contactWaySpinner;
+
+    private Button addBtn, deleteBtn, updateBtn;
+
+    private View deleteView, updateView;
+
     private HashMap<String, String> country_hashMap;
     private HashMap<String, String> cities_hashMap;
     private HashMap<String, String> nationalities_hashMap;
-    private Button finish_btn;
+
     private AlertDialog progressDialog;
-    private String langToLoad;
+    private String langToLoad, postContactWays = "";
     private SharedPreferences languagepref;
     private String captureImgUri;
 
@@ -89,29 +102,55 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         title_toolbar = (TextView) findViewById(R.id.title_toolbar);
         captureImg = (ImageView) findViewById(R.id.captureImg);
         captureImgTxt = (TextView) findViewById(R.id.captureImgTxt);
+        maidsNameTv = (TextView) findViewById(R.id.maidsNameTv);
         maidsName_et = (EditText) findViewById(R.id.maidsName_et);
+        maidsDescTv = (TextView) findViewById(R.id.maidsDescTv);
         description_et = (EditText) findViewById(R.id.description_et);
+        maidsAgeTv = (TextView) findViewById(R.id.maidsAgeTv);
         maidsAge_et = (EditText) findViewById(R.id.maidsAge_et);
-
+        maidsReligionTv = (TextView) findViewById(R.id.maidsReligionTv);
         maidsReligion_et = (EditText) findViewById(R.id.maidsReligion_et);
+        maidsPriceTv = (TextView) findViewById(R.id.maidsPriceTv);
         price_et = (EditText) findViewById(R.id.price_et);
+        maidsCountryTv = (TextView) findViewById(R.id.maidsCountryTv);
         country_spinner = (Spinner) findViewById(R.id.country_spinner);
+        contactWaysTv = (TextView) findViewById(R.id.contactWaysTv);
+        maidsCityTv = (TextView) findViewById(R.id.maidsCityTv);
         cityId_spinner = (Spinner) findViewById(R.id.cityId_spinner);
+        maidsNationalityTv = (TextView) findViewById(R.id.maidsNationalityTv);
         nationality_spinner = (Spinner) findViewById(R.id.nationality_spinner);
-
-        finish_btn = (Button) findViewById(R.id.finish_btn);
-
-        languagepref = getSharedPreferences("language", MODE_PRIVATE);
-        langToLoad = languagepref.getString("languageToLoad", null);
+        contactWayTv = (TextView) findViewById(R.id.contactWayTv);
+        contactWaySpinner = (Spinner) findViewById(R.id.contactWaySpinner);
+        addBtn = (Button) findViewById(R.id.addBtn);
+        updateBtn = (Button) findViewById(R.id.updateBtn);
+        deleteBtn = (Button) findViewById(R.id.deleteBtn);
+        deleteView = findViewById(R.id.deleteView);
+        updateView = findViewById(R.id.updateView);
 
         title_toolbar.setTypeface(MainActivity.lightFace, Typeface.BOLD);
         captureImgTxt.setTypeface(MainActivity.lightFace);
+        maidsNameTv.setTypeface(MainActivity.lightFace);
         maidsName_et.setTypeface(MainActivity.lightFace);
+        maidsDescTv.setTypeface(MainActivity.lightFace);
         description_et.setTypeface(MainActivity.lightFace);
+        maidsAgeTv.setTypeface(MainActivity.lightFace);
         maidsAge_et.setTypeface(MainActivity.lightFace);
+        maidsReligionTv.setTypeface(MainActivity.lightFace);
         maidsReligion_et.setTypeface(MainActivity.lightFace);
+        maidsPriceTv.setTypeface(MainActivity.lightFace);
         price_et.setTypeface(MainActivity.lightFace);
-        finish_btn.setTypeface(MainActivity.lightFace);
+        maidsNationalityTv.setTypeface(MainActivity.lightFace);
+        contactWayTv.setTypeface(MainActivity.lightFace);
+        contactWaysTv.setTypeface(MainActivity.lightFace);
+        maidsCountryTv.setTypeface(MainActivity.lightFace);
+        maidsCityTv.setTypeface(MainActivity.lightFace);
+        addBtn.setTypeface(MainActivity.lightFace);
+        updateBtn.setTypeface(MainActivity.lightFace);
+        deleteBtn.setTypeface(MainActivity.lightFace);
+
+        languagepref = getSharedPreferences("language", MODE_PRIVATE);
+        langToLoad = languagepref.getString("languageToLoad", null);
+        final SharedPreferences prefs = getSharedPreferences("USER_DATA", MODE_PRIVATE);
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,11 +159,11 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
             }
         });
 
-        finish_btn.setOnClickListener(new View.OnClickListener() {
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences prefs = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+
                 String user_id = prefs.getString("id", null);
                 String name = maidsName_et.getText().toString();
                 String desc = description_et.getText().toString();
@@ -135,21 +174,64 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                 String stateId = cities_hashMap.get(cityId_spinner.getSelectedItem().toString());
                 String nationId = nationalities_hashMap.get(nationality_spinner.getSelectedItem().toString());
 
-                if (!user_id.isEmpty() &&
-                        !name.isEmpty() &&
-                        !desc.isEmpty() &&
-                        !age.isEmpty() &&
-                        !price.isEmpty() &&
-                        !religion.isEmpty() &&
-                        !currentMonth.isEmpty() &&
-                        !stateId.isEmpty() &&
-                        !nationId.isEmpty()) {
+                if (!TextUtils.isEmpty(user_id) &&
+                        !TextUtils.isEmpty(name) &&
+                        !TextUtils.isEmpty(desc) &&
+                        !TextUtils.isEmpty(age) &&
+                        !TextUtils.isEmpty(price) &&
+                        !TextUtils.isEmpty(religion) &&
+                        !TextUtils.isEmpty(currentMonth) &&
+                        !TextUtils.isEmpty(stateId) &&
+                        !TextUtils.isEmpty(postContactWays) &&
+                        !TextUtils.isEmpty(nationId)) {
 
                     postMaid(user_id, name, desc, age, nationId, stateId, religion, captureImgUri, price, currentMonth);
                 } else {
                     Toast.makeText(RegisterMaidsDataActivity.this, getString(R.string.toast_type_alldata), Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String user_id = prefs.getString("id", null);
+                String name = maidsName_et.getText().toString();
+                String desc = description_et.getText().toString();
+                String age = maidsAge_et.getText().toString();
+                String price = price_et.getText().toString();
+                String religion = maidsReligion_et.getText().toString();
+                String currentMonth = "1";
+                String stateId = cities_hashMap.get(cityId_spinner.getSelectedItem().toString());
+                String nationId = nationalities_hashMap.get(nationality_spinner.getSelectedItem().toString());
+
+                if (!TextUtils.isEmpty(user_id) &&
+                        !TextUtils.isEmpty(name) &&
+                        !TextUtils.isEmpty(desc) &&
+                        !TextUtils.isEmpty(age) &&
+                        !TextUtils.isEmpty(price) &&
+                        !TextUtils.isEmpty(religion) &&
+                        !TextUtils.isEmpty(currentMonth) &&
+                        !TextUtils.isEmpty(stateId) &&
+                        !TextUtils.isEmpty(postContactWays) &&
+                        !TextUtils.isEmpty(nationId)) {
+
+                    editMaid(user_id, name, desc, age, nationId, stateId, religion, captureImgUri, price, currentMonth);
+                } else {
+                    Toast.makeText(RegisterMaidsDataActivity.this, getString(R.string.toast_type_alldata), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String user_id = prefs.getString("id", null);
+                deleteMaid(user_id);
             }
         });
 
@@ -191,9 +273,17 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         nation_ArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         nationality_spinner.setAdapter(nation_ArrayAdapter);
 
+        ArrayList<String> contactWays_arrayList = new ArrayList<String>();
+        contactWays_arrayList.add(getResources().getString(R.string.addContactWays));
+        final ArrayAdapter<String> contactWays_arrayAdapter = new SpinnerAdapter(this, R.layout.spinner_item, contactWays_arrayList);
+        contactWays_arrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        contactWaySpinner.setAdapter(contactWays_arrayAdapter);
+
         GetAllCountries();
         GetAllNationalities();
+        GetAllContactWays();
     }
+
 
     private boolean checkPermission() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -285,6 +375,8 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
+
+    // APIs
     private void GetAllCountries() {
         showDialog();
         country_hashMap = new HashMap<String, String>();
@@ -483,6 +575,91 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         });
     }
 
+    private void GetAllContactWays() {
+        showDialog();
+        final ArrayList<String> contactWaysArray = new ArrayList<>();
+        contactWaysArray.add(getString(R.string.addContactWays));
+        final Map<String, String> contacyWaysMap = new HashMap<>();
+
+        retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
+        Call<JsonObject> connection = KHADAMTY_API.getContactsWay();
+        connection.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                String result = "";
+                dismissDialog();
+                result = response.body().toString();
+                if (!result.equals("")) {
+                    try {
+                        JSONObject obj = new JSONObject(result);
+                        JSONArray serJsonArray = obj.getJSONArray("Response");
+                        if (serJsonArray.length() != 0) {
+                            for (int i = 0; i < serJsonArray.length(); i++) {
+                                JSONObject serObj = serJsonArray.getJSONObject(i);
+                                String ser_id = serObj.getString("id");
+                                String ser_name = serObj.getString("name");
+                                if (ser_name.contains(",")) {
+                                    String[] nameArray = ser_name.split(",");
+                                    String ar = nameArray[1];
+                                    String eng = nameArray[0];
+                                    if (langToLoad.equals("العربية")) {
+                                        ser_name = ar.trim();
+                                    } else {
+                                        ser_name = eng.trim();
+                                    }
+                                }
+
+                                contacyWaysMap.put(ser_name, ser_id);
+                                contactWaysArray.add(ser_name);
+                            }
+
+                            final ArrayAdapter<String> nation_ArrayAdapter = new SpinnerAdapter(RegisterMaidsDataActivity.this, R.layout.spinner_item, contactWaysArray);
+                            nation_ArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+                            contactWaySpinner.setAdapter(nation_ArrayAdapter);
+
+                            final Set<String> other_services_Set = new HashSet<String>();
+
+                            contactWaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    if (position > 0) {
+                                        final StringBuilder otherSerName = new StringBuilder();
+                                        final StringBuilder otherSerId = new StringBuilder();
+                                        String selectedItemText = (String) parent.getItemAtPosition(position);
+                                        other_services_Set.add(selectedItemText);
+                                        for (String keys : other_services_Set) {
+                                            otherSerName.append(keys + ", ");
+                                            otherSerId.append(contacyWaysMap.get(keys) + ",");
+                                            contactWaysTv.setText(otherSerName.substring(0, otherSerName.length() - 2));
+                                        }
+                                        postContactWays = String.valueOf(otherSerId.substring(0, otherSerId.length() - 1));
+                                    }
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(RegisterMaidsDataActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_server_error), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> RegisterMaidsDataActivity, Throwable t) {
+                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_res_msg), Toast.LENGTH_LONG).show();
+                dismissDialog();
+            }
+        });
+    }
+
     private void postMaid(String user_id, String name, String descrip, String age, String nationalityId, String stateId,
                           String religion, String imageUri, String price, String currentMonth) {
 
@@ -502,6 +679,22 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         RequestBody price_RB = RequestBody.create(MediaType.parse("multipart/form-data"), price);
         RequestBody currentMonth_RB = RequestBody.create(MediaType.parse("multipart/form-data"), currentMonth);
 
+        JsonArray contactsWayArray = new JsonArray();
+        if (postContactWays.contains(",")) {
+            String[] wayIds = postContactWays.split(",");
+            for (String wayId : wayIds) {
+                JsonObject contactWaysObj = new JsonObject();
+                contactWaysObj.addProperty("id", wayId);
+                contactsWayArray.add(contactWaysObj);
+            }
+        } else {
+            if (!TextUtils.isEmpty(postContactWays)) {
+                JsonObject contactWaysObj = new JsonObject();
+                contactWaysObj.addProperty("id", postContactWays);
+                contactsWayArray.add(contactWaysObj);
+            }
+        }
+
         retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
         Call<ResponseBody> connection = KHADAMTY_API.postIndividualMaid(user_id,
                 name_RB,
@@ -512,6 +705,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                 religion_RB,
                 body,
                 price_RB,
+                contactsWayArray,
                 currentMonth_RB);
 
         connection.enqueue(new Callback<ResponseBody>() {
@@ -567,5 +761,159 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         });
     }
 
+    private void editMaid(String user_id, String name, String descrip, String age, String nationalityId, String stateId,
+                          String religion, String imageUri, String price, String currentMonth) {
 
+        showDialog();
+
+        File file = new File(imageUri);
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), requestFile);
+
+        RequestBody name_RB = RequestBody.create(MediaType.parse("multipart/form-data"), name);
+        RequestBody description_RB = RequestBody.create(MediaType.parse("multipart/form-data"), descrip);
+        RequestBody age_RB = RequestBody.create(MediaType.parse("multipart/form-data"), age);
+        RequestBody nationalityId_RB = RequestBody.create(MediaType.parse("multipart/form-data"), nationalityId);
+        RequestBody stateId_RB = RequestBody.create(MediaType.parse("multipart/form-data"), stateId);
+        RequestBody religion_RB = RequestBody.create(MediaType.parse("multipart/form-data"), religion);
+        RequestBody price_RB = RequestBody.create(MediaType.parse("multipart/form-data"), price);
+        RequestBody currentMonth_RB = RequestBody.create(MediaType.parse("multipart/form-data"), currentMonth);
+
+
+        JsonArray contactsWayArray = new JsonArray();
+        if (postContactWays.contains(",")) {
+            String[] wayIds = postContactWays.split(",");
+            for (String wayId : wayIds) {
+                JsonObject contactWaysObj = new JsonObject();
+                contactWaysObj.addProperty("id", wayId);
+                contactsWayArray.add(contactWaysObj);
+            }
+        } else {
+            if (!TextUtils.isEmpty(postContactWays)) {
+                JsonObject contactWaysObj = new JsonObject();
+                contactWaysObj.addProperty("id", postContactWays);
+                contactsWayArray.add(contactWaysObj);
+            }
+        }
+
+        retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
+        Call<ResponseBody> connection = KHADAMTY_API.editMaid(user_id,
+                name_RB,
+                description_RB,
+                age_RB,
+                nationalityId_RB,
+                stateId_RB,
+                religion_RB,
+                body,
+                price_RB,
+                contactsWayArray,
+                currentMonth_RB);
+
+        connection.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                dismissDialog();
+                String result = "";
+
+                if (response.body() != null) {
+                    result = response.body().toString();
+                    if (!result.equals("")) {
+                        try {
+                            JSONObject adsObj = new JSONObject(response.body().string());
+                            String Status = adsObj.getString("Status");
+                            if (Status.equals("true")) {
+                                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.editMaidSuccess), Toast.LENGTH_LONG).show();
+                                onBackPressed();
+                            } else
+                                Toast.makeText(RegisterMaidsDataActivity.this, Status, Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(RegisterMaidsDataActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_server_error), Toast.LENGTH_LONG).show();
+                    }
+                } else if (response.errorBody() != null) {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        String errorMsg = jObjError.getString("Message");
+                        if (errorMsg.equals("You can't save advertise this month")) {
+                            Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.registerMaidPermission), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(RegisterMaidsDataActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_res_msg), Toast.LENGTH_LONG).show();
+                dismissDialog();
+            }
+        });
+    }
+
+    private void deleteMaid(String user_id) {
+
+        showDialog();
+        retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
+        Call<ResponseBody> connection = KHADAMTY_API.deleteMade(user_id);
+
+        connection.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                dismissDialog();
+                String result = "";
+
+                if (response.body() != null) {
+                    result = response.body().toString();
+                    if (!result.equals("")) {
+                        try {
+                            JSONObject adsObj = new JSONObject(response.body().string());
+                            String Status = adsObj.getString("Status");
+                            if (Status.equals("true")) {
+                                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.deleteSuccess), Toast.LENGTH_LONG).show();
+                                onBackPressed();
+                            } else
+                                Toast.makeText(RegisterMaidsDataActivity.this, Status, Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(RegisterMaidsDataActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_server_error), Toast.LENGTH_LONG).show();
+                    }
+                } else if (response.errorBody() != null) {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        String errorMsg = jObjError.getString("Message");
+                        Toast.makeText(RegisterMaidsDataActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_res_msg), Toast.LENGTH_LONG).show();
+                dismissDialog();
+            }
+        });
+    }
 }

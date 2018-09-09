@@ -12,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -42,6 +43,9 @@ public class retrofit {
 
         @GET("OthereService/Get")
         Call<JsonObject> getOtherServices();
+
+        @GET("maid/GetContactWays")
+        Call<JsonObject> getContactsWay();
 
         @Headers({"Accept: application/json",
                 "Content-Type: application/json"})
@@ -143,6 +147,7 @@ public class retrofit {
                                               @Part("religion") RequestBody religion,
                                               @Part MultipartBody.Part photo,
                                               @Part("price") RequestBody price,
+                                              @Part("ContactWayId") JsonArray ContactWayId,
                                               @Part("currentMonth") RequestBody currentMonth);
 
         @GET("Maid/GetAllIndividualsMaid/{city_id}")
@@ -150,5 +155,25 @@ public class retrofit {
 
         @GET("Maid/GetIndividualsMaid/{maid_id}")
         Call<JsonObject> GetIndividualsMaid(@Path("maid_id") String maid_id);
+
+
+
+
+        @POST("maid/EditMade/{user_id}")
+        @Multipart
+        Call<ResponseBody> editMaid(@Path("userID") String userID,
+                                              @Part("name") RequestBody name,
+                                              @Part("descrip") RequestBody descrip,
+                                              @Part("age") RequestBody age,
+                                              @Part("nationalityId") RequestBody nationalityId,
+                                              @Part("stateId") RequestBody stateId,
+                                              @Part("religion") RequestBody religion,
+                                              @Part MultipartBody.Part photo,
+                                              @Part("price") RequestBody price,
+                                              @Part("ContactWayId") JsonArray ContactWayId,
+                                              @Part("currentMonth") RequestBody currentMonth);
+
+        @DELETE("maid/DeleteMade/{user_id}")
+        Call<ResponseBody> deleteMade(@Path("user_id") String user_id);
     }
 }

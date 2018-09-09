@@ -557,7 +557,6 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
         officeObj.addProperty("countryid", country_id);
 
         JsonArray nationalitiesArray = new JsonArray();
-
         if (nationalities.contains(",")) {
             String[] natIds = nationalities.split(",");
             for (String nationId : natIds) {
