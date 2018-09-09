@@ -222,4 +222,11 @@
     <string name="delete">حذف خادمة</string>
 
     <string name="myOffice">مكتبي</string>
+
+    <string name="deleteSuccess">تم حذف بيانات الخادمة بنجاح</string>
+    <string name="updatedSuccess">تم تعديل بيانات الخادمة بنجاح</string>
+    <string name="deleteMaidFail">حدث خطا اثناء حذف الخادمة</string>
+    <string name="updatedMaidFail">حدث خطا اثناء تعديل الخادمة</string>
+
+    <string name="chooseMaid">إختر خادمة</string>
 </resources>

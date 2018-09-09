@@ -147,7 +147,7 @@ public class retrofit {
                                               @Part("religion") RequestBody religion,
                                               @Part MultipartBody.Part photo,
                                               @Part("price") RequestBody price,
-                                              @Part("ContactWayId") JsonArray ContactWayId,
+                                              @Part("ContactWayId") RequestBody ContactWayId,
                                               @Part("currentMonth") RequestBody currentMonth);
 
         @GET("Maid/GetAllIndividualsMaid/{city_id}")
@@ -157,11 +157,9 @@ public class retrofit {
         Call<JsonObject> GetIndividualsMaid(@Path("maid_id") String maid_id);
 
 
-
-
-        @POST("maid/EditMade/{user_id}")
+        @POST("maid/EditMade/{maid_id}")
         @Multipart
-        Call<ResponseBody> editMaid(@Path("userID") String userID,
+        Call<ResponseBody> editMaid(@Path("maid_id") String maid_id,
                                               @Part("name") RequestBody name,
                                               @Part("descrip") RequestBody descrip,
                                               @Part("age") RequestBody age,
@@ -170,10 +168,13 @@ public class retrofit {
                                               @Part("religion") RequestBody religion,
                                               @Part MultipartBody.Part photo,
                                               @Part("price") RequestBody price,
-                                              @Part("ContactWayId") JsonArray ContactWayId,
+                                              @Part("ContactWayId") RequestBody ContactWayId,
                                               @Part("currentMonth") RequestBody currentMonth);
 
-        @DELETE("maid/DeleteMade/{user_id}")
-        Call<ResponseBody> deleteMade(@Path("user_id") String user_id);
+        @DELETE("maid/DeleteMade/{maid_id}")
+        Call<ResponseBody> deleteMade(@Path("maid_id") String maid_id);
+
+        @GET("maid/getusermaid/{user_id}")
+        Call<JsonObject> getUserMaid(@Path("user_id") String user_id);
     }
 }

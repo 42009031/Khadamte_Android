@@ -220,4 +220,11 @@
     <string name="delete">Delete Maid</string>
 
     <string name="myOffice">My Office</string>
+
+    <string name="deleteSuccess">The maid deleted success</string>
+    <string name="updatedSuccess">The maid updated success</string>
+    <string name="deleteMaidFail">Failed when delete maid</string>
+    <string name="updatedMaidFail">Failed when update maid</string>
+
+    <string name="chooseMaid">Choose Maid</string>
 </resources>

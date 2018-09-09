@@ -37,6 +37,7 @@ import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.adapter.FetchPath;
 import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
 
+import com.khdamte.bitcode.khdamte_app.models.MaidsDataModel;
 import com.khdamte.bitcode.khdamte_app.ui.CircleTransform;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
 import com.squareup.picasso.Picasso;
@@ -77,7 +78,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
 
     private EditText maidsName_et, description_et, maidsAge_et, maidsReligion_et, price_et;
 
-    private Spinner cityId_spinner, nationality_spinner, country_spinner, contactWaySpinner;
+    private Spinner cityId_spinner, nationality_spinner, country_spinner, contactWaySpinner, maidsSpinner;
 
     private Button addBtn, deleteBtn, updateBtn;
 
@@ -86,6 +87,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
     private HashMap<String, String> country_hashMap;
     private HashMap<String, String> cities_hashMap;
     private HashMap<String, String> nationalities_hashMap;
+    private ArrayList<MaidsDataModel> maidsArray = new ArrayList<>();
 
     private AlertDialog progressDialog;
     private String langToLoad, postContactWays = "";
@@ -100,6 +102,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         back_btn = (ImageView) findViewById(R.id.back_btn);
         progressDialog = new SpotsDialog(this, R.style.Custom);
         title_toolbar = (TextView) findViewById(R.id.title_toolbar);
+        maidsSpinner = (Spinner) findViewById(R.id.maidsSpinner);
         captureImg = (ImageView) findViewById(R.id.captureImg);
         captureImgTxt = (TextView) findViewById(R.id.captureImgTxt);
         maidsNameTv = (TextView) findViewById(R.id.maidsNameTv);
@@ -150,7 +153,10 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
 
         languagepref = getSharedPreferences("language", MODE_PRIVATE);
         langToLoad = languagepref.getString("languageToLoad", null);
+
         final SharedPreferences prefs = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        final String user_id = prefs.getString("id", null);
+
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +170,6 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String user_id = prefs.getString("id", null);
                 String name = maidsName_et.getText().toString();
                 String desc = description_et.getText().toString();
                 String age = maidsAge_et.getText().toString();
@@ -184,7 +189,6 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                         !TextUtils.isEmpty(stateId) &&
                         !TextUtils.isEmpty(postContactWays) &&
                         !TextUtils.isEmpty(nationId)) {
-
                     postMaid(user_id, name, desc, age, nationId, stateId, religion, captureImgUri, price, currentMonth);
                 } else {
                     Toast.makeText(RegisterMaidsDataActivity.this, getString(R.string.toast_type_alldata), Toast.LENGTH_SHORT).show();
@@ -197,7 +201,6 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 String user_id = prefs.getString("id", null);
                 String name = maidsName_et.getText().toString();
                 String desc = description_et.getText().toString();
@@ -219,7 +222,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                         !TextUtils.isEmpty(postContactWays) &&
                         !TextUtils.isEmpty(nationId)) {
 
-                    editMaid(user_id, name, desc, age, nationId, stateId, religion, captureImgUri, price, currentMonth);
+//                    editMaid(maidId, user_id, name, desc, age, nationId, stateId, religion, captureImgUri, price, currentMonth);
                 } else {
                     Toast.makeText(RegisterMaidsDataActivity.this, getString(R.string.toast_type_alldata), Toast.LENGTH_SHORT).show();
                 }
@@ -229,9 +232,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String user_id = prefs.getString("id", null);
-                deleteMaid(user_id);
+//                deleteMaid(maidId);
             }
         });
 
@@ -279,6 +280,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         contactWays_arrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         contactWaySpinner.setAdapter(contactWays_arrayAdapter);
 
+        GetAllMaids(user_id);
         GetAllCountries();
         GetAllNationalities();
         GetAllContactWays();
@@ -377,6 +379,129 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
 
 
     // APIs
+
+    private void GetAllMaids(String userId) {
+        showDialog();
+        nationalities_hashMap = new HashMap<>();
+        final ArrayList<String> maidsNameArray = new ArrayList<>();
+        maidsNameArray.add(getString(R.string.chooseMaid));
+        retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
+        Call<JsonObject> connection = KHADAMTY_API.getUserMaid(userId);
+        connection.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                String result = "";
+                dismissDialog();
+                result = response.body().toString();
+                if (!result.equals("")) {
+                    try {
+                        JSONObject mainJsonObj = new JSONObject(result);
+                        JSONArray adsJsonArray = mainJsonObj.getJSONArray("Response");
+                        if (adsJsonArray.length() != 0) {
+                            maidsSpinner.setVisibility(View.VISIBLE);
+                            for (int i = 0; i < adsJsonArray.length(); i++) {
+                                JSONObject adsObj = adsJsonArray.getJSONObject(i);
+
+                                String id = adsObj.getString("id");
+                                String name = adsObj.getString("name");
+                                String religion = adsObj.getString("religion");
+                                String age = adsObj.getString("age");
+                                String price = adsObj.getString("price");
+                                String image = adsObj.getString("image");
+                                String descrip = adsObj.getString("descrip");
+                                String userId = adsObj.getString("userId");
+                                String user = adsObj.getString("user");
+                                String phone1 = adsObj.getString("phone1");
+                                String phone2 = adsObj.getString("phone2");
+                                String nationality = adsObj.getString("nationality");
+
+                                maidsArray.add(new MaidsDataModel(id,
+                                        userId,
+                                        name,
+                                        religion,
+                                        age,
+                                        price,
+                                        image,
+                                        descrip,
+                                        user,
+                                        phone1,
+                                        phone2,
+                                        nationality));
+
+                                maidsNameArray.add(name);
+                            }
+                            ArrayAdapter<String> maidsArrayAdapter = new ArrayAdapter<String>(RegisterMaidsDataActivity.this, android.R.layout.simple_list_item_1, maidsNameArray);
+                            maidsSpinner.setAdapter(maidsArrayAdapter);
+                            maidsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                                    if (position > 0) {
+                                        MaidsDataModel model = new MaidsDataModel();
+
+                                        Picasso.with(RegisterMaidsDataActivity.this)
+                                                .load(model.getImage())
+                                                .transform(new CircleTransform())
+                                                .into(captureImg);
+
+                                        maidsName_et.setText(model.getName());
+
+                                        int nationIndex = 0;
+                                        for(String natioName : nationalities_hashMap.keySet()){
+                                            if(natioName.equals(model.getNationality())){
+                                                nationality_spinner.setSelection(nationIndex, true);
+                                            }
+                                            nationIndex++;
+                                        }
+
+                                        maidsAge_et.setText(model.getAge());
+                                        maidsReligion_et.setText(model.getReligion());
+                                        price_et.setText(model.getPrice());
+                                        description_et.setText(model.getDescrip());
+
+                                        int countryIndex = 0;
+                                        for(String natioName : country_hashMap.keySet()){
+                                            if(natioName.equals(model.getNationality())){
+                                                country_spinner.setSelection(countryIndex, true);
+                                            }
+                                            countryIndex++;
+                                        }
+
+                                        int cityIndex = 0;
+                                        for(String cityName : cities_hashMap.keySet()){
+                                            if(cityName.equals(model.getNationality())){
+                                                cityId_spinner.setSelection(cityIndex, true);
+                                            }
+                                            cityIndex++;
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+                                }
+                            });
+
+                        } else {
+                            Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_no_nationality), Toast.LENGTH_LONG).show();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(RegisterMaidsDataActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_server_error), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_res_msg), Toast.LENGTH_LONG).show();
+                dismissDialog();
+            }
+        });
+    }
+
     private void GetAllCountries() {
         showDialog();
         country_hashMap = new HashMap<String, String>();
@@ -592,12 +717,12 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                 if (!result.equals("")) {
                     try {
                         JSONObject obj = new JSONObject(result);
-                        JSONArray serJsonArray = obj.getJSONArray("Response");
+                        JSONArray serJsonArray = obj.getJSONArray("data");
                         if (serJsonArray.length() != 0) {
                             for (int i = 0; i < serJsonArray.length(); i++) {
                                 JSONObject serObj = serJsonArray.getJSONObject(i);
                                 String ser_id = serObj.getString("id");
-                                String ser_name = serObj.getString("name");
+                                String ser_name = serObj.getString("Name");
                                 if (ser_name.contains(",")) {
                                     String[] nameArray = ser_name.split(",");
                                     String ar = nameArray[1];
@@ -677,23 +802,10 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         RequestBody stateId_RB = RequestBody.create(MediaType.parse("multipart/form-data"), stateId);
         RequestBody religion_RB = RequestBody.create(MediaType.parse("multipart/form-data"), religion);
         RequestBody price_RB = RequestBody.create(MediaType.parse("multipart/form-data"), price);
+        RequestBody contactWay_RB = RequestBody.create(MediaType.parse("multipart/form-data"), postContactWays);
         RequestBody currentMonth_RB = RequestBody.create(MediaType.parse("multipart/form-data"), currentMonth);
 
-        JsonArray contactsWayArray = new JsonArray();
-        if (postContactWays.contains(",")) {
-            String[] wayIds = postContactWays.split(",");
-            for (String wayId : wayIds) {
-                JsonObject contactWaysObj = new JsonObject();
-                contactWaysObj.addProperty("id", wayId);
-                contactsWayArray.add(contactWaysObj);
-            }
-        } else {
-            if (!TextUtils.isEmpty(postContactWays)) {
-                JsonObject contactWaysObj = new JsonObject();
-                contactWaysObj.addProperty("id", postContactWays);
-                contactsWayArray.add(contactWaysObj);
-            }
-        }
+
 
         retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
         Call<ResponseBody> connection = KHADAMTY_API.postIndividualMaid(user_id,
@@ -705,7 +817,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                 religion_RB,
                 body,
                 price_RB,
-                contactsWayArray,
+                contactWay_RB,
                 currentMonth_RB);
 
         connection.enqueue(new Callback<ResponseBody>() {
@@ -761,7 +873,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         });
     }
 
-    private void editMaid(String user_id, String name, String descrip, String age, String nationalityId, String stateId,
+    private void editMaid(String maidId, String user_id, String name, String descrip, String age, String nationalityId, String stateId,
                           String religion, String imageUri, String price, String currentMonth) {
 
         showDialog();
@@ -778,27 +890,11 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         RequestBody stateId_RB = RequestBody.create(MediaType.parse("multipart/form-data"), stateId);
         RequestBody religion_RB = RequestBody.create(MediaType.parse("multipart/form-data"), religion);
         RequestBody price_RB = RequestBody.create(MediaType.parse("multipart/form-data"), price);
+        RequestBody contactWay_RB = RequestBody.create(MediaType.parse("multipart/form-data"), postContactWays);
         RequestBody currentMonth_RB = RequestBody.create(MediaType.parse("multipart/form-data"), currentMonth);
 
-
-        JsonArray contactsWayArray = new JsonArray();
-        if (postContactWays.contains(",")) {
-            String[] wayIds = postContactWays.split(",");
-            for (String wayId : wayIds) {
-                JsonObject contactWaysObj = new JsonObject();
-                contactWaysObj.addProperty("id", wayId);
-                contactsWayArray.add(contactWaysObj);
-            }
-        } else {
-            if (!TextUtils.isEmpty(postContactWays)) {
-                JsonObject contactWaysObj = new JsonObject();
-                contactWaysObj.addProperty("id", postContactWays);
-                contactsWayArray.add(contactWaysObj);
-            }
-        }
-
         retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
-        Call<ResponseBody> connection = KHADAMTY_API.editMaid(user_id,
+        Call<ResponseBody> connection = KHADAMTY_API.editMaid(maidId,
                 name_RB,
                 description_RB,
                 age_RB,
@@ -807,7 +903,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                 religion_RB,
                 body,
                 price_RB,
-                contactsWayArray,
+                contactWay_RB,
                 currentMonth_RB);
 
         connection.enqueue(new Callback<ResponseBody>() {
@@ -823,10 +919,10 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                             JSONObject adsObj = new JSONObject(response.body().string());
                             String Status = adsObj.getString("Status");
                             if (Status.equals("true")) {
-                                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.editMaidSuccess), Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.updatedSuccess), Toast.LENGTH_LONG).show();
                                 onBackPressed();
                             } else
-                                Toast.makeText(RegisterMaidsDataActivity.this, Status, Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.updatedMaidFail), Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(RegisterMaidsDataActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -862,11 +958,11 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteMaid(String user_id) {
+    private void deleteMaid(String maid_id) {
 
         showDialog();
         retrofit.KhadamtyApi KHADAMTY_API = RETROFIT.create(retrofit.KhadamtyApi.class);
-        Call<ResponseBody> connection = KHADAMTY_API.deleteMade(user_id);
+        Call<ResponseBody> connection = KHADAMTY_API.deleteMade(maid_id);
 
         connection.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -884,7 +980,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.deleteSuccess), Toast.LENGTH_LONG).show();
                                 onBackPressed();
                             } else
-                                Toast.makeText(RegisterMaidsDataActivity.this, Status, Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.deleteMaidFail), Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(RegisterMaidsDataActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -905,7 +1001,6 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
             }
 
             @Override
@@ -915,5 +1010,9 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                 dismissDialog();
             }
         });
+
+
     }
+
+
 }

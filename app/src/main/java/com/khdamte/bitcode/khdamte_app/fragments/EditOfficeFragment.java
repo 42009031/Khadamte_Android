@@ -76,7 +76,6 @@ public class EditOfficeFragment extends Fragment {
 
         lightFace = MainActivity.lightFace;
 
-        MyOfficeProfileActivity.setTitle(getResources().getString(R.string.update_office));
         languagepref = getActivity().getSharedPreferences("language", MODE_PRIVATE);
         langToLoad = languagepref.getString("languageToLoad", null);
         progressDialog = new SpotsDialog(getActivity(), R.style.Custom);

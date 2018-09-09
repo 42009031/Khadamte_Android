@@ -49,310 +49,325 @@
         android:layout_above="@+id/controllesLayout"
         android:layout_below="@+id/toolbar">
 
-        <LinearLayout
-            android:id="@+id/header_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/layout_bg"
-            android:orientation="vertical"
-            android:padding="7dp">
 
-            <!--image-->
-            <ImageView
-                android:id="@+id/captureImg"
-                android:layout_width="120dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/licenses" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
+           android:layout_marginTop="10dp"
+           android:orientation="vertical"
+          >
 
-            <TextView
-                android:id="@+id/captureImgTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:gravity="center"
-                android:text="@string/addImage" />
+           <Spinner
+               android:id="@+id/maidsSpinner"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:visibility="gone"
+               android:layout_marginBottom="10dp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="2dp"
-                android:background="@android:color/darker_gray" />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:padding="10dp"
+               android:background="@drawable/layout_bg">
 
-            <!--name-->
-            <TextView
-                android:id="@+id/maidsNameTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name" />
+               <!--image-->
+               <ImageView
+                   android:id="@+id/captureImg"
+                   android:layout_width="120dp"
+                   android:layout_height="100dp"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="5dp"
+                   android:src="@drawable/licenses" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp">
+               <TextView
+                   android:id="@+id/captureImgTxt"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="8dp"
+                   android:gravity="center"
+                   android:text="@string/addImage" />
 
-                <EditText
-                    android:id="@+id/maidsName_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:gravity="center"
-                    android:hint="@string/maidName"
-                    android:inputType="text"
-                    android:textSize="17sp" />
-            </FrameLayout>
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="2dp"
+                   android:background="@android:color/darker_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+               <!--name-->
+               <TextView
+                   android:id="@+id/maidsNameTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/name" />
 
-            <!--nationality-->
-            <TextView
-                android:id="@+id/maidsNationalityTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nationality" />
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="5dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp">
+                   <EditText
+                       android:id="@+id/maidsName_et"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:background="@null"
+                       android:gravity="center"
+                       android:hint="@string/maidName"
+                       android:inputType="text"
+                       android:textSize="17sp" />
+               </FrameLayout>
 
-                <Spinner
-                    android:id="@+id/nationality_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </FrameLayout>
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@android:color/darker_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+               <!--nationality-->
+               <TextView
+                   android:id="@+id/maidsNationalityTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/nationality" />
 
-            <!--age-->
-            <TextView
-                android:id="@+id/maidsAgeTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/age" />
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="4dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp">
+                   <Spinner
+                       android:id="@+id/nationality_spinner"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content" />
+               </FrameLayout>
 
-                <EditText
-                    android:id="@+id/maidsAge_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:gravity="center"
-                    android:hint="@string/maidsAge"
-                    android:inputType="number"
-                    android:textSize="17sp" />
-            </FrameLayout>
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@android:color/darker_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+               <!--age-->
+               <TextView
+                   android:id="@+id/maidsAgeTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/age" />
 
-            <!--religion-->
-            <TextView
-                android:id="@+id/maidsReligionTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/religion" />
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="4dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
+                   <EditText
+                       android:id="@+id/maidsAge_et"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:background="@null"
+                       android:gravity="center"
+                       android:hint="@string/maidsAge"
+                       android:inputType="number"
+                       android:textSize="17sp" />
+               </FrameLayout>
 
-                <EditText
-                    android:id="@+id/maidsReligion_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:gravity="center"
-                    android:hint="@string/maidsReligion"
-                    android:inputType="text"
-                    android:textSize="17sp" />
-            </FrameLayout>
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@android:color/darker_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+               <!--religion-->
+               <TextView
+                   android:id="@+id/maidsReligionTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/religion" />
 
-            <!--price-->
-            <TextView
-                android:id="@+id/maidsPriceTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/price" />
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="4dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp">
+                   <EditText
+                       android:id="@+id/maidsReligion_et"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:background="@null"
+                       android:gravity="center"
+                       android:hint="@string/maidsReligion"
+                       android:inputType="text"
+                       android:textSize="17sp" />
+               </FrameLayout>
 
-                <EditText
-                    android:id="@+id/price_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:gravity="center"
-                    android:hint="@string/maidsPrice"
-                    android:inputType="numberDecimal"
-                    android:textSize="17sp" />
-            </FrameLayout>
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@android:color/darker_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+               <!--price-->
+               <TextView
+                   android:id="@+id/maidsPriceTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/price" />
 
-            <!--desc-->
-            <TextView
-                android:id="@+id/maidsDescTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/description" />
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="4dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
+                   <EditText
+                       android:id="@+id/price_et"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:background="@null"
+                       android:gravity="center"
+                       android:hint="@string/maidsPrice"
+                       android:inputType="numberDecimal"
+                       android:textSize="17sp" />
+               </FrameLayout>
 
-                <EditText
-                    android:id="@+id/description_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:gravity="center"
-                    android:hint="@string/maidsDescription"
-                    android:inputType="text"
-                    android:textSize="17sp" />
-            </FrameLayout>
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@android:color/darker_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+               <!--desc-->
+               <TextView
+                   android:id="@+id/maidsDescTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/description" />
 
-            <!-- contact way -->
-            <TextView
-                android:id="@+id/contactWayTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contactWay"
-                android:textSize="13sp" />
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="4dp">
 
-            <Spinner
-                android:id="@+id/contactWaySpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                   <EditText
+                       android:id="@+id/description_et"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:background="@null"
+                       android:gravity="center"
+                       android:hint="@string/maidsDescription"
+                       android:inputType="text"
+                       android:textSize="17sp" />
+               </FrameLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
-                android:background="@android:color/darker_gray" />
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@android:color/darker_gray" />
 
-            <TextView
-                android:id="@+id/contactWaysTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center" />
+               <!-- contact way -->
+               <TextView
+                   android:id="@+id/contactWayTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/contactWay"
+                   android:textSize="13sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+               <Spinner
+                   android:id="@+id/contactWaySpinner"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
 
-            <!--country-->
-            <TextView
-                android:id="@+id/maidsCountryTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/country" />
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginLeft="20dp"
+                   android:layout_marginRight="20dp"
+                   android:layout_marginTop="5dp"
+                   android:background="@android:color/darker_gray" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp">
+               <TextView
+                   android:id="@+id/contactWaysTv"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginRight="10dp"
+                   android:gravity="center" />
 
-                <Spinner
-                    android:id="@+id/country_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </FrameLayout>
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@android:color/darker_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+               <!--country-->
+               <TextView
+                   android:id="@+id/maidsCountryTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/country" />
 
-            <!--city-->
-            <TextView
-                android:id="@+id/maidsCityTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/city" />
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="4dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp">
+                   <Spinner
+                       android:id="@+id/country_spinner"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content" />
+               </FrameLayout>
 
-                <Spinner
-                    android:id="@+id/cityId_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </FrameLayout>
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@android:color/darker_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+               <!--city-->
+               <TextView
+                   android:id="@+id/maidsCityTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/city" />
 
-        </LinearLayout>
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="4dp">
+
+                   <Spinner
+                       android:id="@+id/cityId_spinner"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content" />
+               </FrameLayout>
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="10dp"
+                   android:background="@android:color/darker_gray" />
+
+           </LinearLayout>
+       </LinearLayout>
+
 
     </ScrollView>
 
