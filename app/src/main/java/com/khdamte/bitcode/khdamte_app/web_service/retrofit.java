@@ -171,7 +171,20 @@ public class retrofit {
                                               @Part("ContactWayId") RequestBody ContactWayId,
                                               @Part("currentMonth") RequestBody currentMonth);
 
-        @DELETE("maid/DeleteMade/{maid_id}")
+        @POST("maid/EditMade/{maid_id}")
+        @Multipart
+        Call<ResponseBody> editMaidWithoutImage(@Path("maid_id") String maid_id,
+                                    @Part("name") RequestBody name,
+                                    @Part("descrip") RequestBody descrip,
+                                    @Part("age") RequestBody age,
+                                    @Part("nationalityId") RequestBody nationalityId,
+                                    @Part("stateId") RequestBody stateId,
+                                    @Part("religion") RequestBody religion,
+                                    @Part("price") RequestBody price,
+                                    @Part("ContactWayId") RequestBody ContactWayId,
+                                    @Part("currentMonth") RequestBody currentMonth);
+
+        @POST("maid/DeleteMade/{maid_id}")
         Call<ResponseBody> deleteMade(@Path("maid_id") String maid_id);
 
         @GET("maid/getusermaid/{user_id}")
