@@ -46,15 +46,12 @@ public class AboutAppActivity extends Activity implements View.OnClickListener{
         details_tv.setTypeface(MainActivity.lightFace, Typeface.BOLD);
         title_toolbar.setTypeface(MainActivity.lightFace, Typeface.BOLD);
 
-        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(back_btn);
 
         email_val_tv.setText("khdamte@gmail.com");
         phone_val_tv.setText("+96555588047");
 
         back_btn.setOnClickListener(this);
-
-
-
     }
 
     @Override

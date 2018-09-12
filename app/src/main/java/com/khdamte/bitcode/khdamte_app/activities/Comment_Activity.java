@@ -75,7 +75,7 @@ public class Comment_Activity extends Activity implements View.OnClickListener {
         title_toolbar.setTypeface(lightFace);
         add_comment_btn.setTypeface(lightFace);
 
-        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(back_btn);
 
         back_btn.setOnClickListener(this);
         add_comment_btn.setOnClickListener(this);

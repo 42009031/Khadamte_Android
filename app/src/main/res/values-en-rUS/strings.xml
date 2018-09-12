@@ -11,7 +11,7 @@
     <string name="phone_number2">Enter another phone number</string>
     <string name="phone_number3">Enter another phone number (op.)</string>
     <string name="phone_number4">Enter fourth number</string>
-    <string name="emial_address">Enter E-Mail address</string>
+    <string name="emial_address">Enter E-Mail / Phone Number</string>
     <string name="password_hint">Enter password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="register">Register Office</string>
@@ -71,7 +71,7 @@
     <string name="services">Services</string>
     <string name="maids">Persons</string>
     <string name="nationalities">Nationalities of Maids :</string>
-    <string name="about_details">Khdamte App designed to confine the offices"\n"to provide home workers (Maids)"\n"to serve the family</string>
+    <string name="about_details">KHADAMTE App designed to confine the offices"\n"to provide home workers (Maids)"\n"to serve the family</string>
     <string name="contact_title">Contact with Administration</string>
     <string name="phone">Phone :</string>
     <string name="email">E-mail :</string>
@@ -202,7 +202,7 @@
     <string name="maidsNation">Maid\'s nationality</string>
     <string name="otherServices">Other services</string>
 
-    <string name="verificationCodeError">Please type phone number and click to send button.</string>
+    <string name="verificationCodeError">Please verify phone number </string>
     <string name="invalidverificationCode">The verification code entered was invalid.</string>
     <string name="validverificationCode">Valid verification code entered .</string>
 
@@ -227,4 +227,5 @@
     <string name="updatedMaidFail">Failed when update maid</string>
 
     <string name="chooseMaid">Choose Maid</string>
+    <string name="emailReg">Enter E-mail address</string>
 </resources>

@@ -284,7 +284,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         updateBtn.setTypeface(MainActivity.lightFace);
         deleteBtn.setTypeface(MainActivity.lightFace);
 
-        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(back_btn);
 
         languagepref = getSharedPreferences("language", MODE_PRIVATE);
         langToLoad = languagepref.getString("languageToLoad", null);

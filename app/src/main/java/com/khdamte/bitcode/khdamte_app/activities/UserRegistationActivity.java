@@ -12,8 +12,10 @@ import android.os.Bundle;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -95,7 +97,6 @@ public class UserRegistationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_registation);
 
         init();
-
         email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -126,7 +127,7 @@ public class UserRegistationActivity extends AppCompatActivity {
                 String country_id = country_hashMap.get(countrySpinner.getSelectedItem().toString());
                 String selectedStateName = citySpinner.getSelectedItem().toString();
                 String stateId = "";
-                if (!TextUtils.isEmpty(selectedStateName)) {
+                if (!TextUtils.isEmpty(selectedStateName) && !selectedStateName.equals(getResources().getString(R.string.choose_city))) {
                     stateId = cities_hashMap.get(selectedStateName);
                 }
                 String address_str = address.getText().toString();
@@ -142,19 +143,18 @@ public class UserRegistationActivity extends AppCompatActivity {
                             !TextUtils.isEmpty(address_str)) {
                         if (password_str.equals(confirm_password_str)) {
 
-//                            if(isAvalidPhoneNumber){
-                            postUserPerson(userRole,
-                                    firstname_str,
-                                    lastname_str,
-                                    password_str,
-                                    phone_str,
-                                    userGender,
-                                    stateId,
-                                    address_str);
-//                            }else{
-//                                Toast.makeText(UserRegistationActivity.this, getString(R.string.verificationCodeError), Toast.LENGTH_LONG).show();
-//                            }
-
+                            if (isAvalidPhoneNumber) {
+                                postUserPerson(userRole,
+                                        firstname_str,
+                                        lastname_str,
+                                        password_str,
+                                        phone_str,
+                                        userGender,
+                                        stateId,
+                                        address_str);
+                            } else {
+                                Toast.makeText(UserRegistationActivity.this, getString(R.string.verificationCodeError), Toast.LENGTH_LONG).show();
+                            }
 
                         } else {
                             Toast.makeText(UserRegistationActivity.this, getResources().getString(R.string.toast_con_pass), Toast.LENGTH_LONG).show();
@@ -173,20 +173,24 @@ public class UserRegistationActivity extends AppCompatActivity {
                             !TextUtils.isEmpty(address_str)) {
                         if (password_str.equals(confirm_password_str)) {
 
-                            Intent ownerIntent = new Intent(UserRegistationActivity.this, OwnerOfficeRegistrationActivity.class);
-                            Bundle b = new Bundle();
-                            b.putParcelable("UserData", new UserRegistrationModel(userRole = userRole.equalsIgnoreCase("person") ? "user" : "owner",
-                                    firstname_str,
-                                    lastname_str,
-                                    email_str,
-                                    password_str,
-                                    phone_str,
-                                    userGender,
-                                    stateId,
-                                    country_id,
-                                    address_str));
-                            ownerIntent.putExtras(b);
-                            startActivity(ownerIntent);
+                            if (isAvalidPhoneNumber) {
+                                Intent ownerIntent = new Intent(UserRegistationActivity.this, OwnerOfficeRegistrationActivity.class);
+                                Bundle b = new Bundle();
+                                b.putParcelable("UserData", new UserRegistrationModel(userRole = userRole.equalsIgnoreCase("person") ? "user" : "owner",
+                                        firstname_str,
+                                        lastname_str,
+                                        email_str,
+                                        password_str,
+                                        phone_str,
+                                        userGender,
+                                        stateId,
+                                        country_id,
+                                        address_str));
+                                ownerIntent.putExtras(b);
+                                startActivity(ownerIntent);
+                            }else {
+                                Toast.makeText(UserRegistationActivity.this, getString(R.string.verificationCodeError), Toast.LENGTH_LONG).show();
+                            }
                         } else {
                             Toast.makeText(UserRegistationActivity.this, getResources().getString(R.string.toast_con_pass), Toast.LENGTH_LONG).show();
                         }
@@ -530,7 +534,7 @@ public class UserRegistationActivity extends AppCompatActivity {
         registration_btn.setTypeface(MainActivity.lightFace);
         verifyPhoneBtn.setTypeface(MainActivity.lightFace);
 
-        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(back_btn);
 
         ArrayList<String> countries_arrayList = new ArrayList<String>();
         countries_arrayList.add(getResources().getString(R.string.choose_country));
@@ -581,6 +585,8 @@ public class UserRegistationActivity extends AppCompatActivity {
                     // SMS quota exceeded
                     Log.d(TAG, "SMS Quota exceeded.");
                     Toast.makeText(UserRegistationActivity.this, getString(R.string.smsQota), Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(UserRegistationActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -603,6 +609,9 @@ public class UserRegistationActivity extends AppCompatActivity {
         input.setLayoutParams(lp);
         input.setHint(getString(R.string.verificationCodeBody));
         input.setTypeface(MainActivity.lightFace);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        input.setGravity(Gravity.CENTER);
+
         alertDialog.setView(input);
         alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
 

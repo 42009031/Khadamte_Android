@@ -110,7 +110,7 @@ public class IndividualMaidsDetailsActivity extends AppCompatActivity{
         owner_tv.setTypeface(MainActivity.lightFace);
         owner_val_tv.setTypeface(MainActivity.lightFace);
 
-        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(back_btn);
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override

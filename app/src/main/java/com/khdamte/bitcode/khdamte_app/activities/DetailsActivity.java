@@ -129,7 +129,7 @@ public class DetailsActivity extends Activity implements View.OnClickListener {
         otherSer_tv.setTypeface(lightFace);
         otherServ_title_tv.setTypeface(lightFace);
 
-        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(back_btn);
 
         progressDialog = new SpotsDialog(DetailsActivity.this, R.style.Custom);
 

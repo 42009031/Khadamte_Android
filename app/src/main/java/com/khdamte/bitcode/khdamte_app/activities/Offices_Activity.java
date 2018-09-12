@@ -98,7 +98,7 @@ public class Offices_Activity extends AppCompatActivity implements View.OnClickL
         backImgView = (ImageView) findViewById(R.id.back_btn);
         mainTitle = (TextView) findViewById(R.id.title_toolbar);
 
-        Helper.setSrc4BackImg(backImgView, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(backImgView);
 
         offices_btn.setOnClickListener(this);
         services_btn.setOnClickListener(this);

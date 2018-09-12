@@ -11,7 +11,7 @@
     <string name="phone_number2">Enter another phone number</string>
     <string name="phone_number3">Enter another phone number (op.)</string>
     <string name="phone_number4">Enter fourth number</string>
-    <string name="emial_address">Enter E-mail address</string>
+    <string name="emial_address">Enter E-mail / Phone Number</string>
     <string name="password_hint">Enter password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="register">Register Office</string>
@@ -203,7 +203,7 @@
     <string name="maidsNation">Add Maid\'s nationality</string>
     <string name="otherServices">Add other services</string>
 
-    <string name="verificationCodeError">Please type phone number and click to send button.</string>
+    <string name="verificationCodeError">Please verify phone number.</string>
     <string name="invalidverificationCode">The verification code entered was invalid.</string>
     <string name="validverificationCode">Valid verification code entered .</string>
     <string name="verificationCodeTitle">Verification Code</string>
@@ -227,6 +227,7 @@
     <string name="updatedMaidFail">Failed when update maid</string>
 
     <string name="chooseMaid">Choose Maid</string>
+    <string name="emailReg">Enter E-mail address</string>
 
 
 </resources>

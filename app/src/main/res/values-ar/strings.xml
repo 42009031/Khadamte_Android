@@ -11,7 +11,7 @@
     <string name="phone_number2">أدخل رقم جوال أخر</string>
     <string name="phone_number3">أدخل رقم جوال أخر (إختياري)</string>
     <string name="phone_number4">أدخل رقم التليفون الرابع</string>
-    <string name="emial_address">أدخل عنوان البريد الإلكترونى</string>
+    <string name="emial_address">أدخل البريد الإلكترونى / رقم الجوال</string>
     <string name="password_hint">أدخل رقم المرور</string>
     <string name="confirm_password">تاكيد رقم المرور</string>
     <string name="register">تسجيل مكتب</string>
@@ -229,4 +229,5 @@
     <string name="updatedMaidFail">حدث خطا اثناء تعديل الخادمة</string>
 
     <string name="chooseMaid">إختر خادمة</string>
+    <string name="emailReg">أدخل بريدك الإلكترونى</string>
 </resources>

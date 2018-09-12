@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Helper.setSrc4BackImg(back_img, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(back_img);
 
         setSupportActionBar(toolbar);
 

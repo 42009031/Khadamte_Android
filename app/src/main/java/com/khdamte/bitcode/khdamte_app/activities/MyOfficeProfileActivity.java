@@ -38,7 +38,7 @@ public class MyOfficeProfileActivity extends AppCompatActivity{
 
         title_tv.setTypeface(MainActivity.lightFace);
 
-        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(back_btn);
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override

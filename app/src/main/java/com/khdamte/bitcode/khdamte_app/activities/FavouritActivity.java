@@ -58,7 +58,7 @@ public class FavouritActivity extends AppCompatActivity implements View.OnClickL
         back_btn.setOnClickListener(this);
         title_tv.setTypeface(MainActivity.lightFace);
 
-        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
+        Helper.setSrc4BackImg(back_btn);
     }
 
     @Override

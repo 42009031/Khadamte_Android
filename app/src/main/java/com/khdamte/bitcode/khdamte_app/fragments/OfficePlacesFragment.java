@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,8 +86,10 @@ public class OfficePlacesFragment extends Fragment implements View.OnClickListen
 
         languagepref = getActivity().getSharedPreferences("language", MODE_PRIVATE);
         editor = languagepref.edit();
-        editor.putString("languageToLoad", language);
-        editor.apply();
+        if(TextUtils.isEmpty(languagepref.getString("languageToLoad", ""))){
+            editor.putString("languageToLoad", language);
+            editor.apply();
+        }
 
         ArrayList<String> countries_arrayList = new ArrayList<String>();
         countries_arrayList.add(getResources().getString(R.string.choose_country));
@@ -100,7 +103,7 @@ public class OfficePlacesFragment extends Fragment implements View.OnClickListen
         city_spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         city_sp.setAdapter(city_spinnerArrayAdapter);
 
-        langToLoad = languagepref.getString("languageToLoad", null);
+        langToLoad = languagepref.getString("languageToLoad", "");
         if (langToLoad.contains("العربية")) {
             lang_btn.setImageResource(R.drawable.eng_btn);
         } else {
