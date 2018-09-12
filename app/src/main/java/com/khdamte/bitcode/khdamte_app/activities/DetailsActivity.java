@@ -37,6 +37,7 @@ import com.khdamte.bitcode.khdamte_app.adapter.Nationalty_Maids_Adapter;
 import com.khdamte.bitcode.khdamte_app.adapter.PhoneAdapter;
 import com.khdamte.bitcode.khdamte_app.models.DBHelper;
 import com.khdamte.bitcode.khdamte_app.models.Flags_Model;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.Office_Model;
 import com.khdamte.bitcode.khdamte_app.models.PhoneModel;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
@@ -46,6 +47,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 import dmax.dialog.SpotsDialog;
@@ -126,6 +128,8 @@ public class DetailsActivity extends Activity implements View.OnClickListener {
         comment_tv.setTypeface(lightFace);
         otherSer_tv.setTypeface(lightFace);
         otherServ_title_tv.setTypeface(lightFace);
+
+        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
 
         progressDialog = new SpotsDialog(DetailsActivity.this, R.style.Custom);
 

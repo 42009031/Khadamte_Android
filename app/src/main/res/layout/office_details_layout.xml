@@ -12,7 +12,6 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/layout_bg"
-        android:layoutDirection="ltr"
         android:orientation="horizontal">
 
 
@@ -168,14 +167,13 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#cc0000"
-        android:layoutDirection="ltr">
+        >
 
-        <ImageView
-            android:id="@+id/back_btn"
+        <View
             android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            android:src="@drawable/back" />
+            android:layout_height="match_parent" />
+
+
 
         <TextView
             android:id="@+id/office_name_tv"
@@ -186,9 +184,12 @@
             android:textColor="#ffffff"
             android:textSize="19sp" />
 
-        <View
+        <ImageView
+            android:id="@+id/back_btn"
             android:layout_width="50dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/ic_forward" />
 
     </LinearLayout>
 
@@ -207,8 +208,8 @@
                 android:id="@+id/desc_title_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/desc_of_office"
                 android:textColor="#cc0000"
@@ -229,8 +230,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/desc_tv"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/nationalities"
                 android:textColor="#cc0000"
@@ -281,7 +282,6 @@
                 android:layout_below="@+id/otherSer_tv"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:layoutDirection="ltr"
                 android:orientation="horizontal">
 
                 <RatingBar

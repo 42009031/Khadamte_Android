@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.fragments.EditOfficeFragment;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
+
+import java.util.Locale;
 
 /**
  * Created by Amado on 4/6/2017.
@@ -34,6 +37,8 @@ public class MyOfficeProfileActivity extends AppCompatActivity{
         TextView title_tv = (TextView) findViewById(R.id.title_toolbar) ;
 
         title_tv.setTypeface(MainActivity.lightFace);
+
+        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override

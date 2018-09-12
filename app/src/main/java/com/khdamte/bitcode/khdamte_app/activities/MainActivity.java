@@ -10,10 +10,8 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +33,7 @@ import com.khdamte.bitcode.khdamte_app.adapter.Navigation_Adapter;
 import com.khdamte.bitcode.khdamte_app.fragments.OfficePlacesFragment;
 import com.khdamte.bitcode.khdamte_app.models.AdsModel;
 import com.khdamte.bitcode.khdamte_app.models.DBHelper;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.NavigationModel;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
 
@@ -70,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         title_toolbar.setText(title);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        Helper.setSrc4BackImg(back_img, Locale.getDefault().getDisplayLanguage());
 
         setSupportActionBar(toolbar);
 
@@ -217,8 +217,8 @@ public class MainActivity extends AppCompatActivity {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        drawer.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
+
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);

@@ -55,7 +55,6 @@
                 android:gravity="center"
                 android:lines="1"
                 android:padding="5dp"
-                android:text="club name"
                 android:textColor="#000"
                 android:textSize="17sp" />
 
@@ -67,8 +66,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="test" />
+                android:paddingRight="5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,7 +80,6 @@
                     android:id="@+id/price_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="500 DK"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:textColor="#980202"
@@ -95,7 +92,6 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Egyptian"
                     android:textColor="#000"
                     android:textSize="15sp" />
 

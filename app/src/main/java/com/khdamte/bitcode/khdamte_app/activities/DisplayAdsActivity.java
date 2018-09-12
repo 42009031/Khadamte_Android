@@ -22,11 +22,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.ui.TouchImageView;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
 import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Locale;
+
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,6 +73,8 @@ public class DisplayAdsActivity extends AppCompatActivity implements View.OnClic
 
         view_tv.setTypeface(MainActivity.lightFace);
         close_tv.setTypeface(MainActivity.lightFace);
+
+
 
         String ads_img = getIntent().getExtras().getString("ads_img");
         office_id = getIntent().getExtras().getString("office_id");

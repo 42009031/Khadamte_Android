@@ -33,6 +33,7 @@ import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
 import com.khdamte.bitcode.khdamte_app.fragments.IndividualMaidsFragment;
 import com.khdamte.bitcode.khdamte_app.fragments.Office_Fragment;
 import com.khdamte.bitcode.khdamte_app.fragments.ServicesFragment;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
 
 import org.json.JSONArray;
@@ -41,6 +42,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
+
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -94,6 +97,8 @@ public class Offices_Activity extends AppCompatActivity implements View.OnClickL
 
         backImgView = (ImageView) findViewById(R.id.back_btn);
         mainTitle = (TextView) findViewById(R.id.title_toolbar);
+
+        Helper.setSrc4BackImg(backImgView, Locale.getDefault().getDisplayLanguage());
 
         offices_btn.setOnClickListener(this);
         services_btn.setOnClickListener(this);

@@ -37,6 +37,7 @@ import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.adapter.FetchPath;
 import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
 
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.MaidsDataModel;
 import com.khdamte.bitcode.khdamte_app.ui.CircleTransform;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
@@ -51,6 +52,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
@@ -281,6 +283,8 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         addBtn.setTypeface(MainActivity.lightFace);
         updateBtn.setTypeface(MainActivity.lightFace);
         deleteBtn.setTypeface(MainActivity.lightFace);
+
+        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
 
         languagepref = getSharedPreferences("language", MODE_PRIVATE);
         langToLoad = languagepref.getString("languageToLoad", null);

@@ -13,9 +13,11 @@ import android.widget.Toast;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.adapter.FavouritAdapter;
 import com.khdamte.bitcode.khdamte_app.models.DBHelper;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.Office_Model;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FavouritActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -55,6 +57,8 @@ public class FavouritActivity extends AppCompatActivity implements View.OnClickL
 
         back_btn.setOnClickListener(this);
         title_tv.setTypeface(MainActivity.lightFace);
+
+        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
     }
 
     @Override

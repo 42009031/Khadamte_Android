@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/toolbar"
@@ -10,12 +10,9 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#cc0000">
 
-        <ImageView
-            android:id="@+id/back_btn"
+        <View
             android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            android:src="@drawable/back" />
+            android:layout_height="match_parent" />
 
         <TextView
             android:id="@+id/maids_name_tv"
@@ -26,9 +23,12 @@
             android:textColor="#ffffff"
             android:textSize="19sp" />
 
-        <View
+        <ImageView
+            android:id="@+id/back_btn"
             android:layout_width="50dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/ic_forward" />
 
     </LinearLayout>
 
@@ -47,106 +47,125 @@
         android:layout_below="@+id/maids_img"
         android:layout_marginTop="10dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#fff"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/desc_title_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/description"
-                android:textColor="#cc0000"
-                android:textSize="17sp" />
-
-            <TextView
-                android:id="@+id/desc_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/desc_title_tv"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="5dp"
-                android:text="adsadasdasdasdasd"
-                android:textSize="17sp" />
-
-            <View
-                android:id="@+id/desc_view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/desc_tv"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:background="#cccccc" />
-
+            <!--maid name-->
             <LinearLayout
-                android:id="@+id/price_layout"
+                android:id="@+id/maid_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/desc_view"
                 android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
 
                 <ImageView
-                    android:id="@+id/price_img"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
                     android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/ic_price"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_age"
                     android:tint="@android:color/holo_red_dark" />
 
                 <TextView
-                    android:id="@+id/price_tv"
+                    android:id="@+id/maidName_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/price"
+                    android:text="@string/name"
                     android:textColor="#000000"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/price_val_tv"
+                    android:id="@+id/maidName_val_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="right|center"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="150 DK"
+                    android:gravity="end|center"
                     android:textColor="#e65c00"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
             </LinearLayout>
 
             <View
-                android:id="@+id/price_View"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/price_layout"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="#cccccc" />
 
+            <!--nationality-->
+            <LinearLayout
+                android:id="@+id/nationality_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <ImageView
+                    android:id="@+id/nationalityView2"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="2dp"
+                    android:src="@drawable/nationality" />
+
+                <TextView
+                    android:id="@+id/nationality_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/nationality"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/nationality_val_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="end|center"
+                    android:textColor="#e65c00"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/nationality_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="#cccccc" />
+
+            <!--age-->
             <LinearLayout
                 android:id="@+id/age_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/price_View"
                 android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
 
                 <ImageView
                     android:id="@+id/ageView2"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
                     android:layout_gravity="center"
-                    android:layout_margin="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/ic_age"
                     android:tint="@android:color/holo_red_dark" />
 
@@ -165,10 +184,7 @@
                     android:id="@+id/age_val_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="right|center"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="15 years old"
+                    android:gravity="end|center"
                     android:textColor="#e65c00"
                     android:textSize="18sp" />
 
@@ -178,77 +194,28 @@
                 android:id="@+id/age_view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/age_layout"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="#cccccc" />
 
-            <LinearLayout
-                android:id="@+id/nationality_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/age_view"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/nationalityView2"
-                    android:layout_width="23dp"
-                    android:layout_height="23dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:src="@drawable/nationality"
-                     />
-
-                <TextView
-                    android:id="@+id/nationality_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="@string/nationality"
-                    android:textColor="#000000"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:id="@+id/nationality_val_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="right|center"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="Egyptian."
-                    android:textColor="#e65c00"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/nationality_view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/nationality_layout"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:background="#cccccc" />
-
+            <!--religion-->
             <LinearLayout
                 android:id="@+id/religion_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/nationality_view"
                 android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
 
                 <ImageView
                     android:id="@+id/religionView2"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
                     android:layout_gravity="center"
-                    android:layout_margin="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/ic_age"
                     android:tint="@android:color/holo_red_dark" />
 
@@ -267,10 +234,7 @@
                     android:id="@+id/religion_val_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="right|center"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="Muslim."
+                    android:gravity="end|center"
                     android:textColor="#e65c00"
                     android:textSize="18sp" />
 
@@ -280,25 +244,107 @@
                 android:id="@+id/religion_view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/religion_layout"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="#cccccc" />
 
+            <!--price-->
+            <LinearLayout
+                android:id="@+id/price_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <ImageView
+                    android:id="@+id/price_img"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_price"
+                    android:tint="@android:color/holo_red_dark" />
+
+                <TextView
+                    android:id="@+id/price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/price"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/price_val_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="end|center"
+                    android:textColor="#e65c00"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/price_View"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="#cccccc" />
+
+            <!--description-->
+            <TextView
+                android:id="@+id/desc_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/description"
+                android:textColor="#cc0000"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/desc_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:textSize="17sp" />
+
+            <View
+                android:id="@+id/desc_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="3dp"
+                android:background="#cccccc" />
+
+
+            <!--owner name-->
             <LinearLayout
                 android:id="@+id/owner_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/religion_view"
                 android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
 
                 <ImageView
                     android:id="@+id/ownerView"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
                     android:layout_gravity="center"
-                    android:layout_margin="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/ic_age"
                     android:tint="@android:color/holo_red_dark" />
 
@@ -317,10 +363,7 @@
                     android:id="@+id/owner_val_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="right|center"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="Ahmed Dawoud."
+                    android:gravity="end|center"
                     android:textColor="#e65c00"
                     android:textSize="18sp" />
 
@@ -330,19 +373,59 @@
                 android:id="@+id/owner_view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/owner_layout"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="#cccccc" />
 
 
+            <!-- contact way -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/contactWayTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/contactWay"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <RadioButton
+                    android:id="@+id/smsRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:checked="true"
+                    android:text="@string/person"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/phoneRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:layout_weight="1"
+                    android:text="@string/office"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
             <ListView
                 android:id="@+id/phones_lv"
-                tools:listitem="@layout/phones_office_row_layout"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_below="@+id/owner_view" />
-        </RelativeLayout>
+                tools:listitem="@layout/phones_office_row_layout" />
+        </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>

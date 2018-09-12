@@ -39,6 +39,7 @@ import com.khdamte.bitcode.khdamte_app.adapter.FetchPath;
 import com.khdamte.bitcode.khdamte_app.adapter.Flags_Adapter;
 import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
 import com.khdamte.bitcode.khdamte_app.models.Flags_Model;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.UserRegistrationModel;
 import com.khdamte.bitcode.khdamte_app.ui.CircleTransform;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
@@ -53,6 +54,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -231,6 +233,8 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
         otherServicesHint.setTypeface(MainActivity.lightFace);
         otherServicesTv.setTypeface(MainActivity.lightFace);
         registration_btn.setTypeface(MainActivity.lightFace);
+
+        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
 
         languagepref = getSharedPreferences("language", MODE_PRIVATE);
         langToLoad = languagepref.getString("languageToLoad", null);

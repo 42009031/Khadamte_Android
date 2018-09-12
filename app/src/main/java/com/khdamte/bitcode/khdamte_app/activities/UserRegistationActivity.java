@@ -41,6 +41,7 @@ import com.google.firebase.crash.FirebaseCrash;
 import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.UserRegistrationModel;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
 
@@ -50,6 +51,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import dmax.dialog.SpotsDialog;
@@ -527,6 +529,8 @@ public class UserRegistationActivity extends AppCompatActivity {
         address.setTypeface(MainActivity.lightFace);
         registration_btn.setTypeface(MainActivity.lightFace);
         verifyPhoneBtn.setTypeface(MainActivity.lightFace);
+
+        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
 
         ArrayList<String> countries_arrayList = new ArrayList<String>();
         countries_arrayList.add(getResources().getString(R.string.choose_country));

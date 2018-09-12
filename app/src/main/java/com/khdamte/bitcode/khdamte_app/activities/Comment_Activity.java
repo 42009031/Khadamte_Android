@@ -24,6 +24,7 @@ import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.adapter.CommentAdapter;
 import com.khdamte.bitcode.khdamte_app.models.CommentModels;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
 
 import org.json.JSONArray;
@@ -31,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
@@ -72,6 +74,8 @@ public class Comment_Activity extends Activity implements View.OnClickListener {
 
         title_toolbar.setTypeface(lightFace);
         add_comment_btn.setTypeface(lightFace);
+
+        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
 
         back_btn.setOnClickListener(this);
         add_comment_btn.setOnClickListener(this);

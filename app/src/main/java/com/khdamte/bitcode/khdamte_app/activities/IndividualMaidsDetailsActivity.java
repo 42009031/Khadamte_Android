@@ -27,6 +27,7 @@ import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.adapter.IndividualMaidsAdapter;
 import com.khdamte.bitcode.khdamte_app.adapter.PhoneAdapter;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.IndividualMaidsModel;
 import com.khdamte.bitcode.khdamte_app.models.PhoneModel;
 import com.khdamte.bitcode.khdamte_app.ui.CircleTransform;
@@ -41,6 +42,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
@@ -107,6 +109,8 @@ public class IndividualMaidsDetailsActivity extends AppCompatActivity{
         religion_val_tv.setTypeface(MainActivity.lightFace);
         owner_tv.setTypeface(MainActivity.lightFace);
         owner_val_tv.setTypeface(MainActivity.lightFace);
+
+        Helper.setSrc4BackImg(back_btn, Locale.getDefault().getDisplayLanguage());
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override

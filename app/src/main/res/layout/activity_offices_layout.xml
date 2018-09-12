@@ -14,11 +14,11 @@
         android:background="#cc0000">
 
         <ImageView
-            android:id="@+id/back_btn"
+            android:id="@+id/filter_btn"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:padding="16dp"
-            android:src="@drawable/back" />
+            android:padding="13dp"
+            android:src="@drawable/filter_icon" />
 
         <TextView
             android:id="@+id/title_toolbar"
@@ -31,11 +31,12 @@
             android:textSize="19sp" />
 
         <ImageView
-            android:id="@+id/filter_btn"
+            android:id="@+id/back_btn"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:padding="13dp"
-            android:src="@drawable/filter_icon" />
+            android:padding="8dp"
+            android:src="@drawable/ic_forward" />
+
 
     </LinearLayout>
 
