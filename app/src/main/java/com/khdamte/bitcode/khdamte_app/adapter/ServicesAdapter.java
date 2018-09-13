@@ -13,6 +13,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.activities.MainActivity;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.ServicesModel;
 import com.squareup.picasso.Picasso;
 
@@ -109,8 +110,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             phone1_imgView = (ImageView) itemView.findViewById(R.id.phone1_imgView);
             office_name_tv = (TextView) itemView.findViewById(R.id.serv_name_tv);
 
-            serv_mob1_tv.setTypeface(MainActivity.lightFace);
-            office_name_tv.setTypeface(MainActivity.lightFace);
+            serv_mob1_tv.setTypeface(Helper.getTypeFace());
+            office_name_tv.setTypeface(Helper.getTypeFace());
         }
     }
 

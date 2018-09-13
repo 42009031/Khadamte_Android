@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.activities.MainActivity;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.NavigationModel;
 
 import java.util.ArrayList;
@@ -25,13 +26,12 @@ public class Navigation_Adapter extends BaseAdapter{
 
     private Context context ;
     private ArrayList<NavigationModel> navigation_itemsArrayList ;
-    private Typeface lightFace ;
+
     private LayoutInflater layoutInflater;
 
     public Navigation_Adapter(Context context, ArrayList<NavigationModel> navigation_itemsArrayList){
         this.context = context ;
         this.navigation_itemsArrayList = navigation_itemsArrayList ;
-        lightFace = MainActivity.lightFace;
         layoutInflater = LayoutInflater.from(context);
     }
     @Override
@@ -58,7 +58,7 @@ public class Navigation_Adapter extends BaseAdapter{
             holder.image = (ImageView)convertView.findViewById(R.id.nav_imgView);
             holder.title = (TextView)convertView.findViewById(R.id.nav_title_textView);
 
-            holder.title.setTypeface(lightFace);
+            holder.title.setTypeface(Helper.getTypeFace());
 
 
             convertView.setTag(holder);
@@ -67,7 +67,7 @@ public class Navigation_Adapter extends BaseAdapter{
         }
         holder.image.setImageResource(navigation_itemsArrayList.get(position).getImg());
         holder.title.setText(navigation_itemsArrayList.get(position).getTitle());
-        holder.title.setTypeface(lightFace);
+        holder.title.setTypeface(Helper.getTypeFace());
         return convertView;
     }
     static class ViewHolder{

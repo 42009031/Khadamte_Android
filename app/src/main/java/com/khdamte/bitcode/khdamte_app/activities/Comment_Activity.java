@@ -32,14 +32,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.khdamte.bitcode.khdamte_app.activities.MainActivity.lightFace;
 import static com.khdamte.bitcode.khdamte_app.web_service.retrofit.KhadamtyApi.RETROFIT;
 
 /**
@@ -72,8 +70,8 @@ public class Comment_Activity extends Activity implements View.OnClickListener {
         comment_listView = (ListView) findViewById(R.id.comment_listView);
         add_comment_btn = (Button) findViewById(R.id.add_comment_btn);
 
-        title_toolbar.setTypeface(lightFace);
-        add_comment_btn.setTypeface(lightFace);
+        title_toolbar.setTypeface(Helper.getTypeFace());
+        add_comment_btn.setTypeface(Helper.getTypeFace());
 
         Helper.setSrc4BackImg(back_btn);
 
@@ -119,10 +117,10 @@ public class Comment_Activity extends Activity implements View.OnClickListener {
         final Button cancel_btn = (Button) dialog.findViewById(R.id.cancel_btn);
         final Button add_btn = (Button) dialog.findViewById(R.id.add_btn);
 
-        dialog_title_textView.setTypeface(lightFace);
-        editTextDialogUserInput.setTypeface(lightFace);
-        add_btn.setTypeface(lightFace);
-        cancel_btn.setTypeface(lightFace);
+        dialog_title_textView.setTypeface(Helper.getTypeFace());
+        editTextDialogUserInput.setTypeface(Helper.getTypeFace());
+        add_btn.setTypeface(Helper.getTypeFace());
+        cancel_btn.setTypeface(Helper.getTypeFace());
 
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override

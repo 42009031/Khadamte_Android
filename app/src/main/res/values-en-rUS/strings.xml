@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">khdamty</string>
+    <string name="app_name">Khadamte</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
@@ -20,7 +20,7 @@
     <string name="address_hint">Enter address</string>
     <string name="comp_lic">Copy of office licenses</string>
     <string name="comp_img">Copy of office image</string>
-    <string name="conf_msg2">Registration request send to admin success</string>
+    <string name="conf_msg2">Your office register success and it\'s pending until admin approve</string>
     <string name="login_btn">Login</string>
     <string name="lastname_hint">Enter lastname</string>
     <string name="forget_password">Forget password</string>
@@ -28,7 +28,6 @@
     <string name="next">Skip Ads</string>
     <string name="nextReg">Next</string>
     <string-array name="nav_after_login">
-        <item>Offices</item>
         <item>My Office</item>
         <item>Favourite</item>
         <item>About App</item>
@@ -37,7 +36,6 @@
     </string-array>
 
     <string-array name="nav_after_login_user">
-        <item>Offices</item>
         <item>Add Maid</item>
         <item>Favourite</item>
         <item>About App</item>
@@ -47,7 +45,6 @@
 
     <string-array name="nav_before_login">
         <item>Login</item>
-        <item>Offices</item>
         <item>Favourite</item>
         <item>About App</item>
         <item>Share App</item>
@@ -219,6 +216,7 @@
     <string name="insert">Add Maid</string>
     <string name="delete">Delete Maid</string>
 
+    <string name="name">Name :</string>
     <string name="myOffice">My Office</string>
 
     <string name="deleteSuccess">The maid deleted success</string>
@@ -228,4 +226,10 @@
 
     <string name="chooseMaid">Choose Maid</string>
     <string name="emailReg">Enter E-mail address</string>
+
+    <string name="phoneCheckBox">Call</string>
+    <string name="smsCheckBox">SMS</string>
+
+    <string name="yearsOld">Years old.</string>
+    <string name="userWarning">You have only two ads in this month If you want more please contact the administration.</string>
 </resources>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.activities.MainActivity;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.PhoneModel;
 
 import java.util.ArrayList;
@@ -26,14 +27,13 @@ public class PhoneAdapter extends BaseAdapter {
 
     private Context context ;
     private ArrayList<PhoneModel> phoneArrayList ;
-    private Typeface lightFace ;
     private LayoutInflater layoutInflater;
     private SharedPreferences languagepref;
 
     public PhoneAdapter(Context context, ArrayList<PhoneModel> phoneArrayList){
         this.context = context ;
         this.phoneArrayList = phoneArrayList ;
-        lightFace = MainActivity.lightFace;
+
         layoutInflater = LayoutInflater.from(context);
     }
     @Override
@@ -64,8 +64,8 @@ public class PhoneAdapter extends BaseAdapter {
             holder.name_tv = (TextView)convertView.findViewById(R.id.phone_name_tv);
             holder.number_tv = (TextView)convertView.findViewById(R.id.phone_number_tv);
 
-            holder.name_tv.setTypeface(lightFace);
-            holder.number_tv.setTypeface(lightFace, Typeface.BOLD);
+            holder.name_tv.setTypeface(Helper.getTypeFace());
+            holder.number_tv.setTypeface(Helper.getTypeFace(), Typeface.BOLD);
 
             languagepref = context.getSharedPreferences("language", MODE_PRIVATE);
             String langToLoad = languagepref.getString("languageToLoad", null);

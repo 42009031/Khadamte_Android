@@ -13,6 +13,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.activities.MainActivity;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.Office_Model;
 import com.squareup.picasso.Picasso;
 
@@ -55,8 +56,8 @@ public class Office_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             myViewHolder.office_name.setText(office_name);
             myViewHolder.office_desc.setText(office_desc);
 
-            myViewHolder.office_name.setTypeface(MainActivity.lightFace);
-            myViewHolder.office_desc.setTypeface(MainActivity.lightFace);
+            myViewHolder.office_name.setTypeface(Helper.getTypeFace());
+            myViewHolder.office_desc.setTypeface(Helper.getTypeFace());
 
             try {
                 int image = Integer.parseInt(office_image);
@@ -105,8 +106,8 @@ public class Office_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             office_desc = (TextView) itemView.findViewById(R.id.office_desc_tv);
             off_details_layout = (LinearLayout) itemView.findViewById(R.id.off_details_layout);
 
-            office_name.setTypeface(MainActivity.lightFace);
-            office_desc.setTypeface(MainActivity.lightFace);
+            office_name.setTypeface(Helper.getTypeFace());
+            office_desc.setTypeface(Helper.getTypeFace());
         }
     }
 

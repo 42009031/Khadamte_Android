@@ -65,7 +65,6 @@ public class DetailsActivity extends Activity implements View.OnClickListener {
     private RecyclerView maids_natio_rv;
     private RatingBar ratingBar;
     private Nationalty_Maids_Adapter adapter;
-    private Typeface lightFace;
     private ListView phone_lv;
     private PhoneAdapter phone_adapter;
     private ArrayList<PhoneModel> phone_arrayList;
@@ -82,7 +81,6 @@ public class DetailsActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.office_details_layout);
 
-        lightFace = MainActivity.lightFace;
         office_id = getIntent().getExtras().getString("office_id");
         SharedPreferences prefs = getSharedPreferences("USER_DATA", MODE_PRIVATE);
         user_id = prefs.getString("id", null);
@@ -113,21 +111,21 @@ public class DetailsActivity extends Activity implements View.OnClickListener {
         office_models = new ArrayList<>();
         dbHelper = new DBHelper(this);
 
-        office_name_tv.setTypeface(lightFace);
-        nation_maids_title_tv.setTypeface(lightFace);
-        address_tv.setTypeface(lightFace);
-        adrs_val_tv.setTypeface(lightFace);
-        email_tv.setTypeface(lightFace);
-        email_val_tv.setTypeface(lightFace);
-        office_desc_tv.setTypeface(lightFace);
-        rate_count_tv.setTypeface(lightFace);
-        desc_title_tv.setTypeface(lightFace);
-        call_tv.setTypeface(lightFace);
-        views_tv.setTypeface(lightFace);
-        like_tv.setTypeface(lightFace);
-        comment_tv.setTypeface(lightFace);
-        otherSer_tv.setTypeface(lightFace);
-        otherServ_title_tv.setTypeface(lightFace);
+        office_name_tv.setTypeface(Helper.getTypeFace());
+        nation_maids_title_tv.setTypeface(Helper.getTypeFace());
+        address_tv.setTypeface(Helper.getTypeFace());
+        adrs_val_tv.setTypeface(Helper.getTypeFace());
+        email_tv.setTypeface(Helper.getTypeFace());
+        email_val_tv.setTypeface(Helper.getTypeFace());
+        office_desc_tv.setTypeface(Helper.getTypeFace());
+        rate_count_tv.setTypeface(Helper.getTypeFace());
+        desc_title_tv.setTypeface(Helper.getTypeFace());
+        call_tv.setTypeface(Helper.getTypeFace());
+        views_tv.setTypeface(Helper.getTypeFace());
+        like_tv.setTypeface(Helper.getTypeFace());
+        comment_tv.setTypeface(Helper.getTypeFace());
+        otherSer_tv.setTypeface(Helper.getTypeFace());
+        otherServ_title_tv.setTypeface(Helper.getTypeFace());
 
         Helper.setSrc4BackImg(back_btn);
 
@@ -302,9 +300,9 @@ public class DetailsActivity extends Activity implements View.OnClickListener {
         final Button cancel_btn = (Button) dialog.findViewById(R.id.cancel_btn);
         final Button rate_btn = (Button) dialog.findViewById(R.id.rate_btn);
 
-        rate_title_bg.setTypeface(lightFace);
-        cancel_btn.setTypeface(lightFace);
-        rate_btn.setTypeface(lightFace);
+        rate_title_bg.setTypeface(Helper.getTypeFace());
+        cancel_btn.setTypeface(Helper.getTypeFace());
+        rate_btn.setTypeface(Helper.getTypeFace());
 
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override

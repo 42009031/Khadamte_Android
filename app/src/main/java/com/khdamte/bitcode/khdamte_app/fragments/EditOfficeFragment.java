@@ -27,6 +27,7 @@ import com.khdamte.bitcode.khdamte_app.activities.MyOfficeProfileActivity;
 import com.khdamte.bitcode.khdamte_app.adapter.Flags_Adapter;
 import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
 import com.khdamte.bitcode.khdamte_app.models.Flags_Model;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
 
 import org.json.JSONArray;
@@ -53,7 +54,6 @@ public class EditOfficeFragment extends Fragment {
             address, desc_editText;
     private Button update_btn;
     private Spinner nationality_spinner, country_spinner, city_spinner, otherServices_spinner;
-    private Typeface lightFace;
     private RecyclerView flag_RecyclerView;
     private Flags_Adapter myAdapter;
     private String officeId, selected_national;
@@ -73,8 +73,6 @@ public class EditOfficeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.edit_office_layout, container, false);
-
-        lightFace = MainActivity.lightFace;
 
         languagepref = getActivity().getSharedPreferences("language", MODE_PRIVATE);
         langToLoad = languagepref.getString("languageToLoad", null);
@@ -98,15 +96,15 @@ public class EditOfficeFragment extends Fragment {
         update_btn = (Button) rootView.findViewById(R.id.update_btn);
         flag_RecyclerView = (RecyclerView) rootView.findViewById(R.id.flags_listview);
 
-        company_name_et.setTypeface(lightFace);
-        email_editText.setTypeface(lightFace);
-        address.setTypeface(lightFace);
-        phone_number1.setTypeface(lightFace);
-        phone_number2.setTypeface(lightFace);
-        phone_number3.setTypeface(lightFace);
-        desc_editText.setTypeface(lightFace);
-        update_btn.setTypeface(lightFace);
-        other_services_tv.setTypeface(lightFace);
+        company_name_et.setTypeface(Helper.getTypeFace());
+        email_editText.setTypeface(Helper.getTypeFace());
+        address.setTypeface(Helper.getTypeFace());
+        phone_number1.setTypeface(Helper.getTypeFace());
+        phone_number2.setTypeface(Helper.getTypeFace());
+        phone_number3.setTypeface(Helper.getTypeFace());
+        desc_editText.setTypeface(Helper.getTypeFace());
+        update_btn.setTypeface(Helper.getTypeFace());
+        other_services_tv.setTypeface(Helper.getTypeFace());
 
         update_btn.setOnClickListener(new View.OnClickListener() {
             @Override

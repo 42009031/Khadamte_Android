@@ -35,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
 
 import com.khdamte.bitcode.khdamte_app.adapter.FetchPath;
+import com.khdamte.bitcode.khdamte_app.adapter.SharedPreferencesManager;
 import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
 
 import com.khdamte.bitcode.khdamte_app.models.Helper;
@@ -92,8 +93,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
     private ArrayList<MaidsDataModel> maidsArray = new ArrayList<>();
 
     private AlertDialog progressDialog;
-    private String langToLoad, postContactWayId = "";
-    private SharedPreferences languagepref;
+    private String  postContactWayId = "";
     private String captureImgUri;
     private String user_id;
     private MaidsDataModel maidDataModel = new MaidsDataModel();
@@ -264,30 +264,27 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
         deleteView = findViewById(R.id.deleteView);
         updateView = findViewById(R.id.updateView);
 
-        title_toolbar.setTypeface(MainActivity.lightFace, Typeface.BOLD);
-        captureImgTxt.setTypeface(MainActivity.lightFace);
-        maidsNameTv.setTypeface(MainActivity.lightFace);
-        maidsName_et.setTypeface(MainActivity.lightFace);
-        maidsDescTv.setTypeface(MainActivity.lightFace);
-        description_et.setTypeface(MainActivity.lightFace);
-        maidsAgeTv.setTypeface(MainActivity.lightFace);
-        maidsAge_et.setTypeface(MainActivity.lightFace);
-        maidsReligionTv.setTypeface(MainActivity.lightFace);
-        maidsReligion_et.setTypeface(MainActivity.lightFace);
-        maidsPriceTv.setTypeface(MainActivity.lightFace);
-        price_et.setTypeface(MainActivity.lightFace);
-        maidsNationalityTv.setTypeface(MainActivity.lightFace);
-        contactWayTv.setTypeface(MainActivity.lightFace);
-        maidsCountryTv.setTypeface(MainActivity.lightFace);
-        maidsCityTv.setTypeface(MainActivity.lightFace);
-        addBtn.setTypeface(MainActivity.lightFace);
-        updateBtn.setTypeface(MainActivity.lightFace);
-        deleteBtn.setTypeface(MainActivity.lightFace);
+        title_toolbar.setTypeface(Helper.getTypeFace(), Typeface.BOLD);
+        captureImgTxt.setTypeface(Helper.getTypeFace());
+        maidsNameTv.setTypeface(Helper.getTypeFace());
+        maidsName_et.setTypeface(Helper.getTypeFace());
+        maidsDescTv.setTypeface(Helper.getTypeFace());
+        description_et.setTypeface(Helper.getTypeFace());
+        maidsAgeTv.setTypeface(Helper.getTypeFace());
+        maidsAge_et.setTypeface(Helper.getTypeFace());
+        maidsReligionTv.setTypeface(Helper.getTypeFace());
+        maidsReligion_et.setTypeface(Helper.getTypeFace());
+        maidsPriceTv.setTypeface(Helper.getTypeFace());
+        price_et.setTypeface(Helper.getTypeFace());
+        maidsNationalityTv.setTypeface(Helper.getTypeFace());
+        contactWayTv.setTypeface(Helper.getTypeFace());
+        maidsCountryTv.setTypeface(Helper.getTypeFace());
+        maidsCityTv.setTypeface(Helper.getTypeFace());
+        addBtn.setTypeface(Helper.getTypeFace());
+        updateBtn.setTypeface(Helper.getTypeFace());
+        deleteBtn.setTypeface(Helper.getTypeFace());
 
         Helper.setSrc4BackImg(back_btn);
-
-        languagepref = getSharedPreferences("language", MODE_PRIVATE);
-        langToLoad = languagepref.getString("languageToLoad", null);
 
         final SharedPreferences prefs = getSharedPreferences("USER_DATA", MODE_PRIVATE);
         user_id = prefs.getString("id", null);
@@ -446,6 +443,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                                 String phone1 = adsObj.getString("phone1");
                                 String phone2 = adsObj.getString("phone2");
                                 String nationality = adsObj.getString("nationality");
+                                String ContactWayId = adsObj.getString("ContactWayId");
 
                                 maidsArray.add(new MaidsDataModel(id,
                                         userId,
@@ -458,7 +456,8 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                                         user,
                                         phone1,
                                         phone2,
-                                        nationality));
+                                        nationality,
+                                        ContactWayId));
 
                                 maidsNameArray.add(name);
                             }
@@ -532,7 +531,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                             });
 
                         } else {
-                            Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_no_nationality), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.), Toast.LENGTH_LONG).show();
                         }
 
                     } catch (JSONException e) {
@@ -576,7 +575,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                                     String[] country = country_name.split(",");
                                     String ar = country[1];
                                     String eng = country[0];
-                                    if (langToLoad.equals("العربية")) {
+                                    if (SharedPreferencesManager.getStringValue(Helper.LOCALE).equals(Helper.AR)) {
                                         country_hashMap.put(ar.trim(), country_id);
                                     } else {
                                         country_hashMap.put(eng.trim(), country_id);
@@ -650,7 +649,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                                 String[] city = city_name.split(",");
                                 String ar = city[1];
                                 String eng = city[0];
-                                if (langToLoad.equals("العربية")) {
+                                if (SharedPreferencesManager.getStringValue(Helper.LOCALE).equals(Helper.AR)) {
                                     cities_hashMap.put(ar.trim(), city_id);
                                 } else {
                                     cities_hashMap.put(eng.trim(), city_id);
@@ -712,7 +711,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                                     String[] nationality = nat_name.split(",");
                                     String ar = nationality[1];
                                     String eng = nationality[0];
-                                    if (langToLoad.equals("العربية")) {
+                                    if (SharedPreferencesManager.getStringValue(Helper.LOCALE).equals(Helper.AR)) {
                                         nationalities_hashMap.put(ar.trim(), nat_id);
                                     } else {
                                         nationalities_hashMap.put(eng.trim(), nat_id);
@@ -730,7 +729,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                             nationality_spinner.setAdapter(nation_ArrayAdapter);
 
                         } else {
-                            Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_no_nationality), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(RegisterMaidsDataActivity.this, getResources().getString(R.string.toast_no_nationality), Toast.LENGTH_LONG).show();
                         }
 
                     } catch (JSONException e) {
@@ -777,7 +776,7 @@ public class RegisterMaidsDataActivity extends AppCompatActivity {
                                     String[] nameArray = ser_name.split(",");
                                     String ar = nameArray[1];
                                     String eng = nameArray[0];
-                                    if (langToLoad.equals("العربية")) {
+                                    if (SharedPreferencesManager.getStringValue(Helper.LOCALE).equals(Helper.AR)) {
                                         ser_name = ar.trim();
                                     } else {
                                         ser_name = eng.trim();

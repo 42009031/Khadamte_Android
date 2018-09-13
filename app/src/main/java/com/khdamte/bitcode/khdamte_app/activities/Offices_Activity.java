@@ -48,7 +48,7 @@ import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import static com.khdamte.bitcode.khdamte_app.activities.MainActivity.lightFace;
+
 import static com.khdamte.bitcode.khdamte_app.web_service.retrofit.KhadamtyApi.RETROFIT;
 
 public class Offices_Activity extends AppCompatActivity implements View.OnClickListener {
@@ -98,8 +98,6 @@ public class Offices_Activity extends AppCompatActivity implements View.OnClickL
         backImgView = (ImageView) findViewById(R.id.back_btn);
         mainTitle = (TextView) findViewById(R.id.title_toolbar);
 
-        Helper.setSrc4BackImg(backImgView);
-
         offices_btn.setOnClickListener(this);
         services_btn.setOnClickListener(this);
         maids_btn.setOnClickListener(this);
@@ -107,15 +105,15 @@ public class Offices_Activity extends AppCompatActivity implements View.OnClickL
         search_fab.setOnClickListener(this);
         filter_btn.setOnClickListener(this);
 
-
-        offices_btn.setTypeface(lightFace);
-        services_btn.setTypeface(lightFace);
-        mainTitle.setTypeface(lightFace);
+        offices_btn.setTypeface(Helper.getTypeFace());
+        services_btn.setTypeface(Helper.getTypeFace());
+        maids_btn.setTypeface(Helper.getTypeFace());
+        mainTitle.setTypeface(Helper.getTypeFace());
 
         changeTitle(getResources().getString(R.string.maid_office));
+        Helper.setSrc4BackImg(backImgView);
 
         city_id = getIntent().getExtras().getString("city_id");
-
         maidsOfficeBtn("no", "no", false, false);
     }
 
@@ -259,11 +257,11 @@ public class Offices_Activity extends AppCompatActivity implements View.OnClickL
         final Button cancel_btn = (Button) dialog.findViewById(R.id.cancel_btn);
         final Button search_btn = (Button) dialog.findViewById(R.id.search_btn);
 
-        toolbar_title.setTypeface(lightFace);
-        office_name_et.setTypeface(lightFace);
-        search_btn.setTypeface(lightFace);
-        cancel_btn.setTypeface(lightFace);
-        or_tv.setTypeface(lightFace);
+        toolbar_title.setTypeface(Helper.getTypeFace());
+        office_name_et.setTypeface(Helper.getTypeFace());
+        search_btn.setTypeface(Helper.getTypeFace());
+        cancel_btn.setTypeface(Helper.getTypeFace());
+        or_tv.setTypeface(Helper.getTypeFace());
 
         final Fragment f = getSupportFragmentManager().findFragmentById(R.id.offices_frameLayout);
         if (f instanceof ServicesFragment) {
@@ -326,10 +324,10 @@ public class Offices_Activity extends AppCompatActivity implements View.OnClickL
         final Button alphab_btn = (Button) dialog.findViewById(R.id.alphab_btn);
         final Button review_btn = (Button) dialog.findViewById(R.id.review_btn);
 
-        toolbar_title.setTypeface(lightFace);
-        review_btn.setTypeface(lightFace);
-        alphab_btn.setTypeface(lightFace);
-        or_tv.setTypeface(lightFace);
+        toolbar_title.setTypeface(Helper.getTypeFace());
+        review_btn.setTypeface(Helper.getTypeFace());
+        alphab_btn.setTypeface(Helper.getTypeFace());
+        or_tv.setTypeface(Helper.getTypeFace());
 
         final Fragment f = getSupportFragmentManager().findFragmentById(R.id.offices_frameLayout);
         if (f instanceof ServicesFragment) {
@@ -403,6 +401,9 @@ public class Offices_Activity extends AppCompatActivity implements View.OnClickL
         bundle.putBoolean("sort_alpha", sort_alpha);
         fragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.offices_frameLayout, fragment).addToBackStack(null).commit();
+
+        filter_btn.setVisibility(View.VISIBLE);
+        search_fab.setVisibility(View.VISIBLE);
     }
 
     private void maidsOfficeBtn(String officeName, String maidsNation, boolean sort_review, boolean sort_alpha) {
@@ -425,6 +426,9 @@ public class Offices_Activity extends AppCompatActivity implements View.OnClickL
         bundle.putBoolean("sort_alpha", sort_alpha);
         ser_fragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.offices_frameLayout, ser_fragment).addToBackStack(null).commit();
+
+        filter_btn.setVisibility(View.VISIBLE);
+        search_fab.setVisibility(View.VISIBLE);
     }
 
     private void onMaidsBtnClick(String maidsName, String maidsNation, boolean sort_review, boolean sort_alpha) {
@@ -447,6 +451,9 @@ public class Offices_Activity extends AppCompatActivity implements View.OnClickL
         bundle.putBoolean("sort_alpha", sort_alpha);
         ser_fragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.offices_frameLayout, ser_fragment).addToBackStack(null).commit();
+
+        filter_btn.setVisibility(View.GONE);
+        search_fab.setVisibility(View.GONE);
     }
 
     private void showInterstitial() {

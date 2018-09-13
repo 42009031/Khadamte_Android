@@ -8,9 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -42,6 +45,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
+import com.khdamte.bitcode.khdamte_app.adapter.SharedPreferencesManager;
 import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
 import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.UserRegistrationModel;
@@ -77,11 +81,8 @@ public class UserRegistationActivity extends AppCompatActivity {
     private ImageView back_btn;
     private Button registration_btn, verifyPhoneBtn;
     private AlertDialog progressDialog;
-
     private HashMap<String, String> country_hashMap;
     private HashMap<String, String> cities_hashMap;
-    private String langToLoad;
-    private SharedPreferences languagepref;
 
     private String phoneVerificationId;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks verificationCallbacks;
@@ -123,7 +124,7 @@ public class UserRegistationActivity extends AppCompatActivity {
                 String confirm_password_str = confirm_password.getText().toString();
                 String email_str = email.getText().toString();
                 String countryKey = countryKeyEt.getText().toString();
-                String phone_str = countryKey + phone1.getText().toString();
+                String phone_str =  phone1.getText().toString();
                 String country_id = country_hashMap.get(countrySpinner.getSelectedItem().toString());
                 String selectedStateName = citySpinner.getSelectedItem().toString();
                 String stateId = "";
@@ -237,6 +238,8 @@ public class UserRegistationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(countryKeyEt.getText().toString()) &&
                         !TextUtils.isEmpty(phone1.getText().toString())) {
+
+                    showDialog();
                     String phoneNumber = countryKeyEt.getText().toString() + phone1.getText().toString();
                     setUpVerificatonCallbacks();
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -286,7 +289,7 @@ public class UserRegistationActivity extends AppCompatActivity {
                                     String[] country = country_name.split(",");
                                     String ar = country[1];
                                     String eng = country[0];
-                                    if (langToLoad.equals("العربية")) {
+                                    if (SharedPreferencesManager.getStringValue(Helper.LOCALE).equals(Helper.AR)) {
                                         country_hashMap.put(ar.trim(), country_id);
                                     } else {
                                         country_hashMap.put(eng.trim(), country_id);
@@ -360,7 +363,7 @@ public class UserRegistationActivity extends AppCompatActivity {
                                 String[] city = city_name.split(",");
                                 String ar = city[1];
                                 String eng = city[0];
-                                if (langToLoad.equals("العربية")) {
+                                if (SharedPreferencesManager.getStringValue(Helper.LOCALE).equals(Helper.AR)) {
                                     cities_hashMap.put(ar.trim(), city_id);
                                 } else {
                                     cities_hashMap.put(eng.trim(), city_id);
@@ -435,8 +438,31 @@ public class UserRegistationActivity extends AppCompatActivity {
                                 editor.putString("id", userId);
                                 editor.putString("userRole", "user");
                                 editor.apply();
-                                Toast.makeText(UserRegistationActivity.this, "Welcome " + fname + " " + lname, Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(UserRegistationActivity.this, MainActivity.class));
+
+                                if(Build.VERSION.SDK_INT >= 23) {
+                                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), getString(R.string.userWarning), 10000)
+                                            .setAction("OK", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    Toast.makeText(UserRegistationActivity.this, "Welcome " + fname + " " + lname, Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(UserRegistationActivity.this, MainActivity.class));
+                                                }
+                                            });
+                                    snackbar.show();
+                                    new CountDownTimer(7000, 1000) {
+
+                                        public void onTick(long millisUntilFinished) {
+                                        }
+                                        public void onFinish() {
+                                            startActivity(new Intent(UserRegistationActivity.this, MainActivity.class));
+                                        }
+                                    }.start();
+
+                                }else{
+                                    Toast.makeText(UserRegistationActivity.this, getString(R.string.userWarning), Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(UserRegistationActivity.this, MainActivity.class));
+                                }
+
                             } else {
                                 Toast.makeText(UserRegistationActivity.this, getResources().getString(R.string.toast_reg_failed), Toast.LENGTH_LONG).show();
                             }
@@ -502,37 +528,34 @@ public class UserRegistationActivity extends AppCompatActivity {
         registration_btn = (Button) findViewById(R.id.registration_btn);
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
-        languagepref = getSharedPreferences("language", MODE_PRIVATE);
-        langToLoad = languagepref.getString("languageToLoad", null);
-
         fbAuth = FirebaseAuth.getInstance();
 
-        title_toolbar.setTypeface(MainActivity.lightFace);
-        userRoleTitle.setTypeface(MainActivity.lightFace);
-        personRadioBtn.setTypeface(MainActivity.lightFace);
-        officeRadioBtn.setTypeface(MainActivity.lightFace);
-        firstNameHint.setTypeface(MainActivity.lightFace);
-        firstname.setTypeface(MainActivity.lightFace);
-        lastNameHint.setTypeface(MainActivity.lightFace);
-        lastname.setTypeface(MainActivity.lightFace);
-        passwordHint.setTypeface(MainActivity.lightFace);
-        password.setTypeface(MainActivity.lightFace);
-        confirmPasswordHint.setTypeface(MainActivity.lightFace);
-        confirm_password.setTypeface(MainActivity.lightFace);
-        emailHint.setTypeface(MainActivity.lightFace);
-        email.setTypeface(MainActivity.lightFace);
-        phoneHint.setTypeface(MainActivity.lightFace);
-        countryKeyEt.setTypeface(MainActivity.lightFace);
-        phone1.setTypeface(MainActivity.lightFace);
-        genderTitle.setTypeface(MainActivity.lightFace);
-        maleRadioBtn.setTypeface(MainActivity.lightFace);
-        femaleRadioBtn.setTypeface(MainActivity.lightFace);
-        countryHint.setTypeface(MainActivity.lightFace);
-        cityHint.setTypeface(MainActivity.lightFace);
-        addressHint.setTypeface(MainActivity.lightFace);
-        address.setTypeface(MainActivity.lightFace);
-        registration_btn.setTypeface(MainActivity.lightFace);
-        verifyPhoneBtn.setTypeface(MainActivity.lightFace);
+        title_toolbar.setTypeface(Helper.getTypeFace());
+        userRoleTitle.setTypeface(Helper.getTypeFace());
+        personRadioBtn.setTypeface(Helper.getTypeFace());
+        officeRadioBtn.setTypeface(Helper.getTypeFace());
+        firstNameHint.setTypeface(Helper.getTypeFace());
+        firstname.setTypeface(Helper.getTypeFace());
+        lastNameHint.setTypeface(Helper.getTypeFace());
+        lastname.setTypeface(Helper.getTypeFace());
+        passwordHint.setTypeface(Helper.getTypeFace());
+        password.setTypeface(Helper.getTypeFace());
+        confirmPasswordHint.setTypeface(Helper.getTypeFace());
+        confirm_password.setTypeface(Helper.getTypeFace());
+        emailHint.setTypeface(Helper.getTypeFace());
+        email.setTypeface(Helper.getTypeFace());
+        phoneHint.setTypeface(Helper.getTypeFace());
+        countryKeyEt.setTypeface(Helper.getTypeFace());
+        phone1.setTypeface(Helper.getTypeFace());
+        genderTitle.setTypeface(Helper.getTypeFace());
+        maleRadioBtn.setTypeface(Helper.getTypeFace());
+        femaleRadioBtn.setTypeface(Helper.getTypeFace());
+        countryHint.setTypeface(Helper.getTypeFace());
+        cityHint.setTypeface(Helper.getTypeFace());
+        addressHint.setTypeface(Helper.getTypeFace());
+        address.setTypeface(Helper.getTypeFace());
+        registration_btn.setTypeface(Helper.getTypeFace());
+        verifyPhoneBtn.setTypeface(Helper.getTypeFace());
 
         Helper.setSrc4BackImg(back_btn);
 
@@ -571,12 +594,14 @@ public class UserRegistationActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
+                dismissDialog();
                 DisplayDialog();
             }
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 isAvalidPhoneNumber = false;
+                dismissDialog();
                 if (e instanceof FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
                     Log.d(TAG, "Invalid credential: " + e.getLocalizedMessage());
@@ -594,7 +619,6 @@ public class UserRegistationActivity extends AppCompatActivity {
             public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {
                 phoneVerificationId = verificationId;
                 resendToken = token;
-
             }
         };
     }
@@ -608,7 +632,7 @@ public class UserRegistationActivity extends AppCompatActivity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
         input.setLayoutParams(lp);
         input.setHint(getString(R.string.verificationCodeBody));
-        input.setTypeface(MainActivity.lightFace);
+        input.setTypeface(Helper.getTypeFace());
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         input.setGravity(Gravity.CENTER);
 

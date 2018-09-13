@@ -2,41 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/loginbg"
+    android:layoutDirection="ltr"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:layoutDirection="ltr"
-    android:background="@drawable/loginbg">
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <ImageView
         android:id="@+id/logo_img"
         android:layout_width="165dp"
         android:layout_height="145dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:paddingLeft="20dp"
-        android:src="@drawable/mynewlogo"
-        android:layout_alignParentTop="true"
-       android:layout_centerHorizontal="true" />
+        android:src="@drawable/mynewlogo" />
 
     <LinearLayout
         android:id="@+id/confirm_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp">
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/confirm_msg_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="@string/conf_msg2"/>
+            android:text="@string/conf_msg2"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -44,13 +44,12 @@
         android:id="@+id/right_img"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/right"
-        android:layout_below="@+id/logo_img"
-        android:layout_marginBottom="30dp"
         android:layout_above="@id/confirm_layout"
-        android:layout_centerHorizontal="true" />
-
+        android:layout_below="@+id/logo_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/right" />
 
 
 </RelativeLayout>

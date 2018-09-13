@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.activities.MainActivity;
 import com.khdamte.bitcode.khdamte_app.models.CommentModels;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 
 import java.util.ArrayList;
 
@@ -56,9 +57,9 @@ public class CommentAdapter extends BaseAdapter {
             holder.comment_sender_textView = (TextView) convertView.findViewById(R.id.comment_sender_textView);
             holder.comment_date_textView = (TextView) convertView.findViewById(R.id.comment_date_textView);
 
-            holder.comment_content_tv.setTypeface(MainActivity.lightFace);
-            holder.comment_sender_textView.setTypeface(MainActivity.lightFace);
-            holder.comment_date_textView.setTypeface(MainActivity.lightFace);
+            holder.comment_content_tv.setTypeface(Helper.getTypeFace());
+            holder.comment_sender_textView.setTypeface(Helper.getTypeFace());
+            holder.comment_date_textView.setTypeface(Helper.getTypeFace());
 
             convertView.setTag(holder);
         } else {

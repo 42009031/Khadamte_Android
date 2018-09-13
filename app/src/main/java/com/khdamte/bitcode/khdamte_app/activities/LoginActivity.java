@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
 
 import org.json.JSONArray;
@@ -49,11 +50,11 @@ public class LoginActivity extends AppCompatActivity {
         register_new_user = (Button) findViewById(R.id.register_now_btn);
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
-        login_btn.setTypeface(MainActivity.lightFace, Typeface.BOLD);
-        forget_pass_btn.setTypeface(MainActivity.lightFace);
-        register_new_user.setTypeface(MainActivity.lightFace);
-        username_et.setTypeface(MainActivity.lightFace);
-        password_et.setTypeface(MainActivity.lightFace);
+        login_btn.setTypeface(Helper.getTypeFace(), Typeface.BOLD);
+        forget_pass_btn.setTypeface(Helper.getTypeFace());
+        register_new_user.setTypeface(Helper.getTypeFace());
+        username_et.setTypeface(Helper.getTypeFace());
+        password_et.setTypeface(Helper.getTypeFace());
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override

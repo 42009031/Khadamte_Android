@@ -27,31 +27,29 @@
             android:id="@+id/back_btn"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:padding="8dp"
+            android:padding="11dp"
             android:src="@drawable/ic_forward" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/maids_img"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/empty" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/maids_img"
-        android:layout_marginTop="10dp">
+        android:layout_below="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
             android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/maids_img"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/empty" />
 
             <!--maid name-->
             <LinearLayout
@@ -308,7 +306,6 @@
                 android:text="@string/description"
                 android:textColor="#cc0000"
                 android:textSize="17sp" />
-
             <TextView
                 android:id="@+id/desc_tv"
                 android:layout_width="match_parent"
@@ -317,7 +314,6 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="5dp"
                 android:textSize="17sp" />
-
             <View
                 android:id="@+id/desc_view"
                 android:layout_width="match_parent"
@@ -368,9 +364,7 @@
                     android:textSize="18sp" />
 
             </LinearLayout>
-
             <View
-                android:id="@+id/owner_view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="25dp"
@@ -383,6 +377,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -396,29 +392,34 @@
                     android:textColor="#000"
                     android:textSize="17sp" />
 
-                <RadioButton
-                    android:id="@+id/smsRadioBtn"
+                <CheckBox
+                    android:id="@+id/phoneCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:clickable="false"
-                    android:enabled="false"
-                    android:checked="true"
-                    android:text="@string/person"
+                    android:layout_weight="1"
+                    android:text="@string/smsCheckBox"
                     android:textSize="16sp" />
 
-                <RadioButton
-                    android:id="@+id/phoneRadioBtn"
+                <CheckBox
+                    android:id="@+id/smsCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:enabled="false"
                     android:layout_weight="1"
-                    android:text="@string/office"
+                    android:clickable="false"
+                    android:text="@string/phoneCheckBox"
                     android:textSize="16sp" />
 
 
             </LinearLayout>
+            <View
+                android:id="@+id/owner_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="#cccccc" />
 
             <ListView
                 android:id="@+id/phones_lv"

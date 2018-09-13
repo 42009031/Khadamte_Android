@@ -71,8 +71,8 @@ public class DisplayAdsActivity extends AppCompatActivity implements View.OnClic
         close_imgView.setOnClickListener(this);
         call_iv.setOnClickListener(this);
 
-        view_tv.setTypeface(MainActivity.lightFace);
-        close_tv.setTypeface(MainActivity.lightFace);
+        view_tv.setTypeface(Helper.getTypeFace());
+        close_tv.setTypeface(Helper.getTypeFace());
 
 
 

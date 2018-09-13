@@ -30,7 +30,7 @@
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="50dp"
-            android:padding="8dp"
+            android:padding="11dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_forward" />
 

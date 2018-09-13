@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.adapter.AdsAdapter;
 import com.khdamte.bitcode.khdamte_app.models.AdsModel;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 
 import java.util.ArrayList;
 
@@ -21,16 +22,16 @@ public class MainAdsActivity extends AppCompatActivity {
     private Button next;
     private ListView ads_lv;
     private AdsAdapter adsAdapter;
-    private int backCount ;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_ads);
-        backCount = 0;
         ads_lv = (ListView) findViewById(R.id.ads_lv);
         next = (Button) findViewById(R.id.next_btn);
-        next.setTypeface(MainActivity.lightFace, Typeface.BOLD);
+
+        next.setTypeface(Helper.getTypeFace(), Typeface.BOLD);
 
         ArrayList<AdsModel> adsModels = (ArrayList<AdsModel>) getIntent().getExtras().getSerializable("ads_list");
         adsAdapter = new AdsAdapter(this, adsModels);

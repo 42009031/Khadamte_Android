@@ -52,7 +52,6 @@ public class Office_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.main_offices_layout, container, false);
 
-
         progressDialog = new SpotsDialog(getActivity(), R.style.Custom);
 
         Offices_Activity.changeTitle(getResources().getString(R.string.maid_office));
@@ -287,7 +286,8 @@ public class Office_Fragment extends Fragment {
                     try {
                         JSONObject mainJsonObj = new JSONObject(result);
                         if (result.contains("The Office Appended until admin approve")) {
-                            Toast.makeText(getActivity(), getResources().getString(R.string.toast_append_office), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getActivity(), getResources().getString(R.string.toast_append_office), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_off_incity), Toast.LENGTH_LONG).show();
                         } else {
                             JSONArray offices_JsonArray = mainJsonObj.getJSONArray("Response");
                             if (offices_JsonArray.length() != 0) {
@@ -296,7 +296,7 @@ public class Office_Fragment extends Fragment {
                                     String office_id = office_Obj.getString("id");
                                     String office_image = office_Obj.getString("image");
                                     if (!office_image.equals("null")) {
-                                        office_image = "http://www.khdamte.co" + office_image;
+                                        office_image = "http://www.khadamte.com" + office_image;
                                     } else {
                                         int default_logos[] = {R.drawable.logo1, R.drawable.logo2, R.drawable.logo3, R.drawable.logo4, R.drawable.logo5};
                                         office_image = "" + default_logos[randInt(0, default_logos.length - 1)];
@@ -315,7 +315,6 @@ public class Office_Fragment extends Fragment {
                                     }
                                 }
 
-
                                 if (sort_alpha) {
                                     ArrayList<Office_Model> sortOffice_models = new ArrayList<Office_Model>();
                                     for (int i = 0; i < office_models.size(); i++) {
@@ -329,8 +328,8 @@ public class Office_Fragment extends Fragment {
                                     }
                                     Collections.sort(sortOffice_models, new Comparator<Office_Model>() {
                                         public int compare(Office_Model obj1, Office_Model obj2) {
-                                            String office_name1 = obj1.getOffice_name().toString();
-                                            String office_name2 = obj2.getOffice_name().toString();
+                                            String office_name1 = obj1.getOffice_name();
+                                            String office_name2 = obj2.getOffice_name();
                                             return office_name1.compareTo(office_name2);
                                         }
                                     });
@@ -376,9 +375,7 @@ public class Office_Fragment extends Fragment {
                                 Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_off_incity), Toast.LENGTH_LONG).show();
                             }
                         }
-                        if (office_models.size() == 0) {
-                            Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_off_incity), Toast.LENGTH_LONG).show();
-                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getActivity(), "Error " + e.getMessage(), Toast.LENGTH_LONG).show();

@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.activities.MainActivity;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 
 import java.util.ArrayList;
 
@@ -17,13 +18,11 @@ import java.util.ArrayList;
 public class SpinnerAdapter extends ArrayAdapter<String> {
 
     private ArrayList<String> arrayList = new ArrayList<String>();
-    private Typeface lightFace ;
     private Context context ;
 
     public SpinnerAdapter(Context context, int textViewResourceId, ArrayList<String> objects) {
         super(context, textViewResourceId, objects);
         arrayList = objects;
-        lightFace = MainActivity.lightFace;
         this.context = context ;
     }
 
@@ -31,7 +30,7 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         View view = super.getDropDownView(position, convertView, parent);
         TextView tv = (TextView) view;
-        tv.setTypeface(lightFace);
+        tv.setTypeface(Helper.getTypeFace());
         if (position == 0) {
             tv.setTextColor(Color.GRAY);
         } else {
@@ -59,7 +58,7 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
 
         View row = inflater.inflate(R.layout.spinner_item, parent, false);
         TextView label = (TextView) row.findViewById(R.id.spinner_textView);
-        label.setTypeface(lightFace);
+        label.setTypeface(Helper.getTypeFace());
         label.setText(arrayList.get(position));
         if (this.isEnabled(position)) {
             if(position != 0){

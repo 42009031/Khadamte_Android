@@ -20,7 +20,7 @@
     <string name="address_hint">أدخل العنوان</string>
     <string name="comp_lic">جلب صورة ترخيص المكتب</string>
     <string name="comp_img">جلب صورة المكتب</string>
-    <string name="conf_msg2">تم إرسال طلب التسجيل بنجاح</string>
+    <string name="conf_msg2">تم إرسال طلب تسجيل المكتب بنجاح وفى انتظار موافقة مسؤل النظام</string>
     <string name="desc_hint">أدخل وصف للمكتب</string>
     <string name="login_btn">دخول</string>
     <string name="lastname_hint">أدخل الاسم الأخير</string>
@@ -29,7 +29,6 @@
     <string name="nextReg">التالي</string>
     <string name="choose_address">إختر العنوان</string>
     <string-array name="nav_after_login">
-        <item>المكاتب</item>
         <item>مكتبى</item>
         <item>المفضلة</item>
         <item>عن التطبيق</item>
@@ -38,8 +37,7 @@
     </string-array>
 
     <string-array name="nav_after_login_user">
-        <item>المكاتب</item>
-        <item>أضف خادمة</item>
+        <item>خادمتي</item>
         <item>المفضلة</item>
         <item>عن التطبيق</item>
         <item>مشاركة التطبيق</item>
@@ -48,7 +46,6 @@
 
     <string-array name="nav_before_login">
         <item>تسجيل الدخول</item>
-        <item>المكاتب</item>
         <item>المفضلة</item>
         <item>عن التطبيق</item>
         <item>مشاركة التطبيق</item>
@@ -72,7 +69,7 @@
     <string name="services">خدمات</string>
     <string name="maids">أشخاص</string>
     <string name="nationalities">جنسيات الخادمات : </string>
-    <string name="about_details">خدامتى تطبيق صمم لحصر مكاتب"\n"تقديم عاملات المنزل"\n"لخدمة الأسرة</string>
+    <string name="about_details">خدامتى تطبيق صمم لحصر مكاتب الخدم"\n"وتقديم عاملات المنزل"\n"لخدمة الأسرة</string>
     <string name="contact_title">للتواصل مع الإدارة</string>
     <string name="phone">هاتف :</string>
     <string name="email">البريد الإلكترونى :</string>
@@ -170,7 +167,7 @@
     <string name="maidsRegisterTitle">تسجيل بيانات الخادمة</string>
 
     <string name="registerMaidSuccess">تم تسجيل بيانات الخادمة بنجاح</string>
-    <string name="registerMaidPermission">عفوا, لقد تخطيت العدد المسموح بة لتسجيل بيانات خادمتك فى الشهر برجاء مراجعة مسؤل النظام لتسجيل بيانات الخادمة </string>
+    <string name="registerMaidPermission">عفوا, لقد تخطيت العدد المسموح بة لتسجيل بيانات خادمتك فى الشهر برجاء مراجعة مسؤل النظام لتسجيل بيانات الخادمة. </string>
 
     <string name="description">الوصف :</string>
     <string name="contactWay">طرق التواصل :</string>
@@ -221,6 +218,7 @@
     <string name="insert">أضف خادمة</string>
     <string name="delete">حذف خادمة</string>
 
+    <string name="name">الاسم :</string>
     <string name="myOffice">مكتبي</string>
 
     <string name="deleteSuccess">تم حذف بيانات الخادمة بنجاح</string>
@@ -230,4 +228,11 @@
 
     <string name="chooseMaid">إختر خادمة</string>
     <string name="emailReg">أدخل بريدك الإلكترونى</string>
+
+    <string name="phoneCheckBox">إتصال</string>
+    <string name="smsCheckBox">رسالة</string>
+
+    <string name="yearsOld">عاماً.</string>
+    <string name="userWarning"> لديك إعلانين فقط في الشهر وفي حالة طلب اكثر من اعلان يرجى التواصل مع الادارة.</string>
+
 </resources>

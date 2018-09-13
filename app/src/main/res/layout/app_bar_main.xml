@@ -41,7 +41,7 @@
                     android:id="@+id/back_btn"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:padding="8dp"
+                    android:padding="11dp"
                     android:src="@drawable/ic_forward" />
 
             </LinearLayout>

@@ -64,22 +64,11 @@ public class IndividualMaidsFragment extends Fragment implements SwipeRefreshLay
 
         maids_lv.setLayoutManager(glm);
 
-
         maidsList = new ArrayList<>();
         adapter = new IndividualMaidsAdapter(getActivity(), maidsList);
         maids_lv.setAdapter(adapter);
         swipeRefresh.setOnRefreshListener(this);
-        maids_lv.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), maids_lv, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                    }
 
-                    @Override
-                    public void onLongItemClick(View view, int position) {
-
-                    }
-                })
-        );
 
         loadData();
 

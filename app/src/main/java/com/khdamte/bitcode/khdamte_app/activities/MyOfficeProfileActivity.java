@@ -36,7 +36,7 @@ public class MyOfficeProfileActivity extends AppCompatActivity{
         back_btn = (ImageView) findViewById(R.id.back_btn) ;
         TextView title_tv = (TextView) findViewById(R.id.title_toolbar) ;
 
-        title_tv.setTypeface(MainActivity.lightFace);
+        title_tv.setTypeface(Helper.getTypeFace());
 
         Helper.setSrc4BackImg(back_btn);
 

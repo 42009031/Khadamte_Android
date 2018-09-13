@@ -18,10 +18,11 @@ public class MaidsDataModel {
     private String phone1;
     private String phone2;
     private String nationality;
+    private String ContactWayId;
 
     public MaidsDataModel(){}
 
-    public MaidsDataModel(String maidId, String userId, String name, String religion, String age, String price, String image, String descrip, String user, String phone1, String phone2, String nationality) {
+    public MaidsDataModel(String maidId, String userId, String name, String religion, String age, String price, String image, String descrip, String user, String phone1, String phone2, String nationality, String ContactWayId) {
         this.maidId = maidId;
         this.userId = userId;
         this.name = name;
@@ -34,6 +35,15 @@ public class MaidsDataModel {
         this.phone1 = phone1;
         this.phone2 = phone2;
         this.nationality = nationality;
+        this.ContactWayId = ContactWayId;
+    }
+
+    public String getContactWayId() {
+        return ContactWayId;
+    }
+
+    public void setContactWayId(String contactWayId) {
+        ContactWayId = contactWayId;
     }
 
     public String getMaidId() {

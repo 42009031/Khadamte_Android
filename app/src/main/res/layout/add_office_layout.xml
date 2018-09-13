@@ -5,13 +5,13 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#bfbfbf">
+    android:background="#f0f1f1">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#973045"
+        android:background="#cc0000"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:popupTheme="@style/AppTheme.PopupOverlay">
@@ -39,7 +39,7 @@
                 android:id="@+id/back_btn"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:padding="8dp"
+                android:padding="11dp"
                 android:src="@drawable/ic_forward" />
 
 
@@ -60,6 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_marginTop="15dp"
             card_view:cardBackgroundColor="#fff"
             card_view:cardCornerRadius="5dp"

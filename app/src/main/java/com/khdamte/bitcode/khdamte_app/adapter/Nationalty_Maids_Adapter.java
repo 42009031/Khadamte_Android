@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.activities.MainActivity;
 import com.khdamte.bitcode.khdamte_app.models.Flags_Model;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,16 +53,13 @@ public class Nationalty_Maids_Adapter extends RecyclerView.Adapter<Nationalty_Ma
 
         private ImageView flag_img;
         private TextView country_text ;
-        private Typeface lightFace ;
 
         private ViewHolder(View v) {
             super(v);
 
-            lightFace = MainActivity.lightFace ;
             flag_img = (ImageView) v.findViewById(R.id.flag_imgview);
             country_text = (TextView) v.findViewById(R.id.country_tv);
-
-            country_text.setTypeface(lightFace);
+            country_text.setTypeface(Helper.getTypeFace());
         }
     }
 }

@@ -37,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.adapter.FetchPath;
 import com.khdamte.bitcode.khdamte_app.adapter.Flags_Adapter;
+import com.khdamte.bitcode.khdamte_app.adapter.SharedPreferencesManager;
 import com.khdamte.bitcode.khdamte_app.adapter.SpinnerAdapter;
 import com.khdamte.bitcode.khdamte_app.models.Flags_Model;
 import com.khdamte.bitcode.khdamte_app.models.Helper;
@@ -86,7 +87,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
     private ArrayList<Flags_Model> flags_models;
     private ArrayList<Flags_Model> nationality_list;
     private Set<String> nat_selected_hashSet;
-    private String postOtherSer = "", selected_national = "", langToLoad, captureImgUri = "";
+    private String postOtherSer = "", selected_national = "", captureImgUri = "";
 
     private SharedPreferences languagepref;
     private UserRegistrationModel userData;
@@ -217,27 +218,25 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
-        title_toolbar.setTypeface(MainActivity.lightFace);
-        officeLogoHint.setTypeface(MainActivity.lightFace);
-        officeNameHint.setTypeface(MainActivity.lightFace);
-        officeNameEt.setTypeface(MainActivity.lightFace);
-        descriptionHint.setTypeface(MainActivity.lightFace);
-        descriptionEt.setTypeface(MainActivity.lightFace);
-        phone1Hint.setTypeface(MainActivity.lightFace);
-        phone1Et.setTypeface(MainActivity.lightFace);
-        phone2Hint.setTypeface(MainActivity.lightFace);
-        phone2Et.setTypeface(MainActivity.lightFace);
-        phone3Hint.setTypeface(MainActivity.lightFace);
-        phone3Et.setTypeface(MainActivity.lightFace);
-        nationalityHint.setTypeface(MainActivity.lightFace);
-        otherServicesHint.setTypeface(MainActivity.lightFace);
-        otherServicesTv.setTypeface(MainActivity.lightFace);
-        registration_btn.setTypeface(MainActivity.lightFace);
+        title_toolbar.setTypeface(Helper.getTypeFace());
+        officeLogoHint.setTypeface(Helper.getTypeFace());
+        officeNameHint.setTypeface(Helper.getTypeFace());
+        officeNameEt.setTypeface(Helper.getTypeFace());
+        descriptionHint.setTypeface(Helper.getTypeFace());
+        descriptionEt.setTypeface(Helper.getTypeFace());
+        phone1Hint.setTypeface(Helper.getTypeFace());
+        phone1Et.setTypeface(Helper.getTypeFace());
+        phone2Hint.setTypeface(Helper.getTypeFace());
+        phone2Et.setTypeface(Helper.getTypeFace());
+        phone3Hint.setTypeface(Helper.getTypeFace());
+        phone3Et.setTypeface(Helper.getTypeFace());
+        nationalityHint.setTypeface(Helper.getTypeFace());
+        otherServicesHint.setTypeface(Helper.getTypeFace());
+        otherServicesTv.setTypeface(Helper.getTypeFace());
+        registration_btn.setTypeface(Helper.getTypeFace());
 
         Helper.setSrc4BackImg(back_btn);
 
-        languagepref = getSharedPreferences("language", MODE_PRIVATE);
-        langToLoad = languagepref.getString("languageToLoad", null);
         title_toolbar.setText(getResources().getString(R.string.add_office));
 
 
@@ -374,7 +373,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
                                     String[] nameArray = nat_name.split(",");
                                     String ar = nameArray[1];
                                     String eng = nameArray[0];
-                                    if (langToLoad.equals("العربية")) {
+                                    if (SharedPreferencesManager.getStringValue(Helper.LOCALE).equals(Helper.AR)) {
                                         nat_name = ar.trim();
                                     } else {
                                         nat_name = eng.trim();
@@ -469,7 +468,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
                                     String[] nameArray = ser_name.split(",");
                                     String ar = nameArray[1];
                                     String eng = nameArray[0];
-                                    if (langToLoad.equals("العربية")) {
+                                    if (SharedPreferencesManager.getStringValue(Helper.LOCALE).equals(Helper.AR)) {
                                         ser_name = ar.trim();
                                     } else {
                                         ser_name = eng.trim();
@@ -617,7 +616,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
                             String userId = adsObj.getString("id");
                             if (success) {
                                 if(TextUtils.isEmpty(captureImgUri)){
-                                    Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_off_reg), Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(OwnerOfficeRegistrationActivity.this, getResources().getString(R.string.toast_off_reg), Toast.LENGTH_LONG).show();
 
                                     Bundle b = new Bundle();
                                     b.putString("fName", userData.getfName());

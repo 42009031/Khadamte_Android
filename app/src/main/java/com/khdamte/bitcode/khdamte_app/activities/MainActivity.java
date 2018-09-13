@@ -1,25 +1,33 @@
 package com.khdamte.bitcode.khdamte_app.activities;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -56,7 +64,6 @@ import static com.khdamte.bitcode.khdamte_app.web_service.retrofit.KhadamtyApi.R
 public class MainActivity extends AppCompatActivity {
 
     private static TextView title_toolbar;
-    public static Typeface lightFace;
     private ListView nav_listView;
     private Navigation_Adapter nav_adapter;
     private ArrayList<NavigationModel> nav_items;
@@ -64,29 +71,21 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private ImageView back_img;
 
-
     public static void setTitle_toolbar(String title) {
         title_toolbar.setText(title);
     }
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String language = Locale.getDefault().getDisplayLanguage();
-        if (language.contains("العربية")) {
-            lightFace = Typeface.createFromAsset(getAssets(), "fonts/arabic_font.ttf");
-        } else {
-            lightFace = Typeface.createFromAsset(getAssets(), "fonts/comic.ttf");
-        }
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         title_toolbar = (TextView) toolbar.findViewById(R.id.title_toolbar);
         back_img = (ImageView) toolbar.findViewById(R.id.back_btn);
 
-        title_toolbar.setTypeface(lightFace, Typeface.BOLD);
+        title_toolbar.setTypeface(Helper.getTypeFace(), Typeface.BOLD);
         back_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,8 +96,6 @@ public class MainActivity extends AppCompatActivity {
         Helper.setSrc4BackImg(back_img);
 
         setSupportActionBar(toolbar);
-
-
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container_frame, new OfficePlacesFragment()).addToBackStack(null).commit();
@@ -115,8 +112,7 @@ public class MainActivity extends AppCompatActivity {
         if (user_id != null) {
             if(userRole.toLowerCase().equals("owner")){
                 final String[] nav_owner_title = getResources().getStringArray(R.array.nav_after_login);
-                final int[] nav_user_img = {R.drawable.nav_offices,
-                        R.drawable.nav_myoffices,
+                final int[] nav_user_img = {R.drawable.nav_myoffices,
                         R.drawable.nav_fav,
                         R.drawable.nav_about,
                         R.drawable.nav_share,
@@ -127,8 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
             }else{
                 final String[] nav_owner_title = getResources().getStringArray(R.array.nav_after_login_user);
-                final int[] nav_user_img = {R.drawable.nav_offices,
-                        R.drawable.nav_myoffices,
+                final int[] nav_user_img = {R.drawable.nav_myoffices,
                         R.drawable.nav_fav,
                         R.drawable.nav_about,
                         R.drawable.nav_share,
@@ -138,11 +133,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-//            String firebase_token = FirebaseInstanceId.getInstance().getToken();
         } else {
             final String[] nav_owner_title = getResources().getStringArray(R.array.nav_before_login);
             final int[] nav_user_img = {R.drawable.nav_login,
-                    R.drawable.nav_offices,
                     R.drawable.nav_fav,
                     R.drawable.nav_about,
                     R.drawable.nav_share};
@@ -160,33 +153,27 @@ public class MainActivity extends AppCompatActivity {
                 if (user_id != null) {
 // after login
                     if(userRole.toLowerCase().equals("owner")){
-                        if (position == 0) {
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentManager.beginTransaction().replace(R.id.container_frame, new OfficePlacesFragment()).addToBackStack(null).commit();
-                        } else if (position == 1) {
+                       if (position == 0) {
                             startActivity(new Intent(MainActivity.this, MyOfficeProfileActivity.class));
-                        } else if (position == 2) {
+                        } else if (position == 1) {
                             startActivity(new Intent(MainActivity.this, FavouritActivity.class));
-                        } else if (position == 3) {
+                        } else if (position == 2) {
                             startActivity(new Intent(MainActivity.this, AboutAppActivity.class));
-                        } else if (position == 4) {
+                        } else if (position == 3) {
                             ShareApp();
-                        } else if (position == 5) {
+                        } else if (position == 4) {
                             LogoutDialog();
                         }
                     }else{
-                        if (position == 0) {
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentManager.beginTransaction().replace(R.id.container_frame, new OfficePlacesFragment()).addToBackStack(null).commit();
-                        }  else if (position == 1) {
+                         if (position == 0) {
                             startActivity(new Intent(MainActivity.this, RegisterMaidsDataActivity.class));
-                        }  else if (position == 2) {
+                        }  else if (position == 1) {
                             startActivity(new Intent(MainActivity.this, FavouritActivity.class));
-                        } else if (position == 3) {
+                        } else if (position == 2) {
                             startActivity(new Intent(MainActivity.this, AboutAppActivity.class));
-                        } else if (position == 4) {
+                        } else if (position == 3) {
                             ShareApp();
-                        } else if (position == 5) {
+                        } else if (position == 4) {
                             LogoutDialog();
                         }
                     }
@@ -194,18 +181,15 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     if (position == 0) {
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    } else if (position == 1) {
-                        fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.container_frame, new OfficePlacesFragment()).addToBackStack(null).commit();
-                    } else if (position == 2) {
+                    }  else if (position == 1) {
                         if (user_id != null) {
                             startActivity(new Intent(MainActivity.this, FavouritActivity.class));
                         } else {
                             Toast.makeText(MainActivity.this, getResources().getString(R.string.toast_login_first), Toast.LENGTH_SHORT).show();
                         }
-                    } else if (position == 3) {
+                    } else if (position == 2) {
                         startActivity(new Intent(MainActivity.this, AboutAppActivity.class));
-                    } else if (position == 4) {
+                    } else if (position == 3) {
                         ShareApp();
                     }
                 }
@@ -265,17 +249,80 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public Typeface getLightFace() {
-        return lightFace;
-    }
-
-    public void setLightFace(Typeface lightFace) {
-        this.lightFace = lightFace;
-    }
-
     private void ShareApp() {
+
+        if (!checkPermission()) {
+            openActivity();
+        } else {
+            if (checkPermission()) {
+                requestPermissionAndContinue();
+            } else {
+                openActivity();
+            }
+        }
+    }
+
+    private boolean checkPermission() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissionAndContinue() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+                alertBuilder.setCancelable(true);
+                alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                , Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+                    }
+                });
+                AlertDialog alert = alertBuilder.create();
+                alert.show();
+                Log.e("", "permission denied, show dialog");
+            } else {
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            openActivity();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (permissions.length > 0 && grantResults.length > 0) {
+
+                boolean flag = true;
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    openActivity();
+                } else {
+                    finish();
+                }
+
+            } else {
+                finish();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    private void openActivity() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.nav_logo);
-        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/nav_logo.jpg";
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/nav_logo.png";
         OutputStream out = null;
         File file = new File(path);
         try {
@@ -293,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
         shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
         shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.about_details));
-        shareIntent.setType("image/jpg");
+        shareIntent.setType("image/png");
         startActivity(Intent.createChooser(shareIntent, "Share with"));
     }
 
@@ -324,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
                                 String ads_img = adsObj.getString("advertise");
                                 String office_name = adsObj.getString("name");
                                 String office_id = adsObj.getString("officeid");
-                                adsModels.add(new AdsModel("http://www.khdamte.co/" + ads_img, office_id, office_name));
+                                adsModels.add(new AdsModel("http://www.khadamte.com/" + ads_img, office_id, office_name));
                             }
                         }
                         Intent mainIntent = new Intent(MainActivity.this, MainAdsActivity.class);

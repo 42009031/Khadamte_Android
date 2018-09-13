@@ -29,6 +29,7 @@ import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.activities.MainActivity;
 import com.khdamte.bitcode.khdamte_app.activities.Offices_Activity;
 import com.khdamte.bitcode.khdamte_app.adapter.ServicesAdapter;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.ServicesModel;
 import com.khdamte.bitcode.khdamte_app.ui.RecyclerItemClickListener;
 import com.khdamte.bitcode.khdamte_app.web_service.retrofit;
@@ -400,11 +401,11 @@ private boolean sort_alpha ;
         phone1_btn.setText(phone1);
         phone2_btn.setText(phone2);
 
-        header_msg.setTypeface(MainActivity.lightFace);
-        body_msg.setTypeface(MainActivity.lightFace);
-        or_tv.setTypeface(MainActivity.lightFace);
-        phone1_btn.setTypeface(MainActivity.lightFace);
-        phone2_btn.setTypeface(MainActivity.lightFace);
+        header_msg.setTypeface(Helper.getTypeFace());
+        body_msg.setTypeface(Helper.getTypeFace());
+        or_tv.setTypeface(Helper.getTypeFace());
+        phone1_btn.setTypeface(Helper.getTypeFace());
+        phone2_btn.setTypeface(Helper.getTypeFace());
 
         phone1_btn.setOnClickListener(new View.OnClickListener() {
             @Override

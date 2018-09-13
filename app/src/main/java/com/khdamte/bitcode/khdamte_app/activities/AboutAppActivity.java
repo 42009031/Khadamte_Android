@@ -38,13 +38,13 @@ public class AboutAppActivity extends Activity implements View.OnClickListener{
         title_toolbar = (TextView) findViewById(R.id.title_toolbar);
 
 
-        email_val_tv.setTypeface(MainActivity.lightFace);
-        phone_val_tv.setTypeface(MainActivity.lightFace, Typeface.BOLD);
-        email_title_tv.setTypeface(MainActivity.lightFace);
-        phone_title_tv.setTypeface(MainActivity.lightFace);
-        contact_title.setTypeface(MainActivity.lightFace, Typeface.BOLD);
-        details_tv.setTypeface(MainActivity.lightFace, Typeface.BOLD);
-        title_toolbar.setTypeface(MainActivity.lightFace, Typeface.BOLD);
+        email_val_tv.setTypeface(Helper.getTypeFace());
+        phone_val_tv.setTypeface(Helper.getTypeFace(), Typeface.BOLD);
+        email_title_tv.setTypeface(Helper.getTypeFace());
+        phone_title_tv.setTypeface(Helper.getTypeFace());
+        contact_title.setTypeface(Helper.getTypeFace(), Typeface.BOLD);
+        details_tv.setTypeface(Helper.getTypeFace(), Typeface.BOLD);
+        title_toolbar.setTypeface(Helper.getTypeFace(), Typeface.BOLD);
 
         Helper.setSrc4BackImg(back_btn);
 

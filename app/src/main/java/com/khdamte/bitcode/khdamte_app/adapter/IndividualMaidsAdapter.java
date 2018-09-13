@@ -12,10 +12,10 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.khdamte.bitcode.khdamte_app.R;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.IndividualMaidsModel;
 import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
-import static com.khdamte.bitcode.khdamte_app.activities.MainActivity.lightFace;
 import java.util.ArrayList;
 
 public class IndividualMaidsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
@@ -108,10 +108,10 @@ public class IndividualMaidsAdapter  extends RecyclerView.Adapter<RecyclerView.V
             nationality = (TextView) itemView.findViewById(R.id.nationality_tv);
             indicator = (AVLoadingIndicatorView) itemView.findViewById(R.id.indicator);
 
-            name.setTypeface(lightFace);
-            desc.setTypeface(lightFace);
-            price.setTypeface(lightFace);
-            nationality.setTypeface(lightFace);
+            name.setTypeface(Helper.getTypeFace());
+            desc.setTypeface(Helper.getTypeFace());
+            price.setTypeface(Helper.getTypeFace());
+            nationality.setTypeface(Helper.getTypeFace());
         }
     }
 

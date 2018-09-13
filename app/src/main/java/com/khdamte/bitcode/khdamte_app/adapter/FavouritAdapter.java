@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.khdamte.bitcode.khdamte_app.R;
 import com.khdamte.bitcode.khdamte_app.activities.MainActivity;
+import com.khdamte.bitcode.khdamte_app.models.Helper;
 import com.khdamte.bitcode.khdamte_app.models.Office_Model;
 import com.khdamte.bitcode.khdamte_app.ui.RoundedCornersTransform;
 import com.squareup.picasso.Picasso;
@@ -25,13 +26,11 @@ public class FavouritAdapter extends BaseAdapter {
 
     private Context context ;
     private ArrayList<Office_Model> office_models ;
-    private Typeface lightFace ;
     private LayoutInflater layoutInflater;
 
     public FavouritAdapter(Context context, ArrayList<Office_Model> office_models){
         this.context = context ;
         this.office_models = office_models ;
-        lightFace = MainActivity.lightFace;
         layoutInflater = LayoutInflater.from(context);
     }
     @Override
@@ -60,8 +59,8 @@ public class FavouritAdapter extends BaseAdapter {
             holder.office_name = (TextView) convertView.findViewById(R.id.office_name_tv);
             holder.office_desc = (TextView) convertView.findViewById(R.id.office_desc_tv);
 
-            holder.office_name.setTypeface(lightFace);
-            holder.office_desc.setTypeface(lightFace);
+            holder.office_name.setTypeface(Helper.getTypeFace());
+            holder.office_desc.setTypeface(Helper.getTypeFace());
 
 
             convertView.setTag(holder);

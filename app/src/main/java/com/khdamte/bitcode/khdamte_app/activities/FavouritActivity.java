@@ -56,7 +56,7 @@ public class FavouritActivity extends AppCompatActivity implements View.OnClickL
         });
 
         back_btn.setOnClickListener(this);
-        title_tv.setTypeface(MainActivity.lightFace);
+        title_tv.setTypeface(Helper.getTypeFace());
 
         Helper.setSrc4BackImg(back_btn);
     }

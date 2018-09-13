@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginbg">
+    android:background="#f0f1f1">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,7 +37,7 @@
                 android:id="@+id/back_btn"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:padding="8dp"
+                android:padding="11dp"
                 android:src="@drawable/ic_forward" />
 
 
@@ -55,6 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
@@ -127,6 +129,7 @@
                         android:gravity="center"
                         android:hint="@string/maidName"
                         android:inputType="text"
+
                         android:textSize="17sp" />
                 </FrameLayout>
 
