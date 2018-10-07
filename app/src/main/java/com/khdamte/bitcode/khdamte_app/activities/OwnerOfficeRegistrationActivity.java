@@ -544,6 +544,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
         userObj.addProperty("pwd", userData.getPwd());
         userObj.addProperty("phone1", userData.getPhone());
         userObj.addProperty("email", userEmail);
+        userObj.addProperty("isApproved", false);
         userObj.addProperty("address", userData.getAddress());
         userObj.addProperty("userRole", userData.getRole());
         userObj.addProperty("StateMasterId", userData.getState());

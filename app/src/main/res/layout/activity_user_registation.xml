@@ -356,12 +356,12 @@
                         android:layout_width="5dp"
                         android:layout_height="match_parent" />
 
-                    <EditText
-                        android:id="@+id/countryKeyEt"
+                    <Spinner
+                        android:id="@+id/countryKeySpinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+965"
                         android:inputType="phone"
+                        android:layout_gravity="center"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
                         android:textSize="17sp"/>

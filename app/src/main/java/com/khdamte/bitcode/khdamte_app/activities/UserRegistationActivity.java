@@ -69,20 +69,21 @@ import static com.khdamte.bitcode.khdamte_app.web_service.retrofit.KhadamtyApi.R
 
 public class UserRegistationActivity extends AppCompatActivity {
 
-    private EditText firstname, lastname, password, confirm_password, email, countryKeyEt, phone1, address;
+    private EditText firstname, lastname, password, confirm_password, email, phone1, address;
     private TextView title_toolbar, userRoleTitle, firstNameHint, lastNameHint, emailHint, passwordHint, confirmPasswordHint,
             phoneHint, genderTitle, countryHint, cityHint, addressHint;
     private RadioGroup userRoleRadioGroup, genderRadioGroup;
     private View emailView, genderView;
     private LinearLayout genderLayout, emailLayout;
     private RadioButton personRadioBtn, officeRadioBtn, maleRadioBtn, femaleRadioBtn;
-    private Spinner countrySpinner, citySpinner;
+    private Spinner countrySpinner, citySpinner, countryKeySpinner;
 
     private ImageView back_btn;
     private Button registration_btn, verifyPhoneBtn;
     private AlertDialog progressDialog;
     private HashMap<String, String> country_hashMap;
     private HashMap<String, String> cities_hashMap;
+    private ArrayList<String> countrieKeys_arrayList;
 
     private String phoneVerificationId;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks verificationCallbacks;
@@ -123,8 +124,8 @@ public class UserRegistationActivity extends AppCompatActivity {
                 String password_str = password.getText().toString();
                 String confirm_password_str = confirm_password.getText().toString();
                 String email_str = email.getText().toString();
-                String countryKey = countryKeyEt.getText().toString();
-                String phone_str =  phone1.getText().toString();
+                String countryKey = countrieKeys_arrayList.get(countryKeySpinner.getSelectedItemPosition());
+                String phone_str = phone1.getText().toString();
                 String country_id = country_hashMap.get(countrySpinner.getSelectedItem().toString());
                 String selectedStateName = citySpinner.getSelectedItem().toString();
                 String stateId = "";
@@ -189,7 +190,7 @@ public class UserRegistationActivity extends AppCompatActivity {
                                         address_str));
                                 ownerIntent.putExtras(b);
                                 startActivity(ownerIntent);
-                            }else {
+                            } else {
                                 Toast.makeText(UserRegistationActivity.this, getString(R.string.verificationCodeError), Toast.LENGTH_LONG).show();
                             }
                         } else {
@@ -236,11 +237,11 @@ public class UserRegistationActivity extends AppCompatActivity {
         verifyPhoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(countryKeyEt.getText().toString()) &&
+                if (!TextUtils.isEmpty(countrieKeys_arrayList.get(countryKeySpinner.getSelectedItemPosition())) &&
                         !TextUtils.isEmpty(phone1.getText().toString())) {
 
                     showDialog();
-                    String phoneNumber = countryKeyEt.getText().toString() + phone1.getText().toString();
+                    String phoneNumber = countrieKeys_arrayList.get(countryKeySpinner.getSelectedItemPosition()) + phone1.getText().toString();
                     setUpVerificatonCallbacks();
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
                             phoneNumber,        // Phone number to verify
@@ -413,6 +414,7 @@ public class UserRegistationActivity extends AppCompatActivity {
         userObj.addProperty("pwd", pwd);
         userObj.addProperty("phone1", phone);
         userObj.addProperty("address", address);
+        userObj.addProperty("isApproved", true);
         userObj.addProperty("userRole", role = role.equalsIgnoreCase("person") ? "user" : "owner");
         userObj.addProperty("StateMasterId", stateId);
         userObj.addProperty("GenderId", gender = gender.equalsIgnoreCase("male") ? "1" : "2");
@@ -439,7 +441,7 @@ public class UserRegistationActivity extends AppCompatActivity {
                                 editor.putString("userRole", "user");
                                 editor.apply();
 
-                                if(Build.VERSION.SDK_INT >= 23) {
+                                if (Build.VERSION.SDK_INT >= 23) {
                                     Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), getString(R.string.userWarning), 10000)
                                             .setAction("OK", new View.OnClickListener() {
                                                 @Override
@@ -453,12 +455,13 @@ public class UserRegistationActivity extends AppCompatActivity {
 
                                         public void onTick(long millisUntilFinished) {
                                         }
+
                                         public void onFinish() {
                                             startActivity(new Intent(UserRegistationActivity.this, MainActivity.class));
                                         }
                                     }.start();
 
-                                }else{
+                                } else {
                                     Toast.makeText(UserRegistationActivity.this, getString(R.string.userWarning), Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(UserRegistationActivity.this, MainActivity.class));
                                 }
@@ -510,7 +513,7 @@ public class UserRegistationActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email_editText);
         emailView = findViewById(R.id.emailView);
         phoneHint = (TextView) findViewById(R.id.phoneHint);
-        countryKeyEt = (EditText) findViewById(R.id.countryKeyEt);
+        countryKeySpinner = (Spinner) findViewById(R.id.countryKeySpinner);
         phone1 = (EditText) findViewById(R.id.phone1_editText);
         verifyPhoneBtn = (Button) findViewById(R.id.verifyPhoneBtn);
         genderView = findViewById(R.id.genderView);
@@ -545,7 +548,6 @@ public class UserRegistationActivity extends AppCompatActivity {
         emailHint.setTypeface(Helper.getTypeFace());
         email.setTypeface(Helper.getTypeFace());
         phoneHint.setTypeface(Helper.getTypeFace());
-        countryKeyEt.setTypeface(Helper.getTypeFace());
         phone1.setTypeface(Helper.getTypeFace());
         genderTitle.setTypeface(Helper.getTypeFace());
         maleRadioBtn.setTypeface(Helper.getTypeFace());
@@ -570,6 +572,16 @@ public class UserRegistationActivity extends AppCompatActivity {
         final ArrayAdapter<String> city_spinnerArrayAdapter = new SpinnerAdapter(this, R.layout.spinner_item, cities_arrayList);
         city_spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         citySpinner.setAdapter(city_spinnerArrayAdapter);
+
+
+        countrieKeys_arrayList = new ArrayList<String>();
+        countrieKeys_arrayList.add("+965");
+        countrieKeys_arrayList.add("+971");
+        countrieKeys_arrayList.add("+966");
+        countrieKeys_arrayList.add("+20");
+        final ArrayAdapter<String> countryKeys_spinnerArrayAdapter = new SpinnerAdapter(this, R.layout.spinner_item, countrieKeys_arrayList);
+        countryKeys_spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        countryKeySpinner.setAdapter(countryKeys_spinnerArrayAdapter);
     }
 
     private void dismissDialog() {
@@ -610,7 +622,7 @@ public class UserRegistationActivity extends AppCompatActivity {
                     // SMS quota exceeded
                     Log.d(TAG, "SMS Quota exceeded.");
                     Toast.makeText(UserRegistationActivity.this, getString(R.string.smsQota), Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     Toast.makeText(UserRegistationActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
@@ -666,8 +678,8 @@ public class UserRegistationActivity extends AppCompatActivity {
                     Toast.makeText(UserRegistationActivity.this, getString(R.string.validverificationCode), Toast.LENGTH_LONG).show();
                     phone1.setEnabled(false);
                     phone1.setClickable(false);
-                    countryKeyEt.setEnabled(false);
-                    countryKeyEt.setClickable(false);
+                    countryKeySpinner.setEnabled(false);
+                    countryKeySpinner.setClickable(false);
                     isAvalidPhoneNumber = true;
                 } else {
                     isAvalidPhoneNumber = false;
