@@ -538,6 +538,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
                             String address, String officeDesc, String userEmail, String country_id, String nationalities, String otherServices) {
         showDialog();
 
+        // user data
         JsonObject userObj = new JsonObject();
         userObj.addProperty("fname", userData.getfName());
         userObj.addProperty("lname", userData.getlName());
@@ -548,7 +549,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
         userObj.addProperty("address", userData.getAddress());
         userObj.addProperty("userRole", userData.getRole());
         userObj.addProperty("StateMasterId", userData.getState());
-
+        // office data
         JsonObject officeObj = new JsonObject();
         officeObj.addProperty("name", officeName);
         officeObj.addProperty("mob1", officeMob1);
