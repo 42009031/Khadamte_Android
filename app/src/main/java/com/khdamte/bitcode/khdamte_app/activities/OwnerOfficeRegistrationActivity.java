@@ -556,6 +556,7 @@ public class OwnerOfficeRegistrationActivity extends AppCompatActivity {
         officeObj.addProperty("mob3", officeMob3);
         officeObj.addProperty("cityid", city_id);
         officeObj.addProperty("address", address);
+        officeObj.addProperty("isApproved", false);
         officeObj.addProperty("description", officeDesc);
         officeObj.addProperty("email", userEmail);
         officeObj.addProperty("countryid", country_id);
