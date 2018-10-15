@@ -578,7 +578,7 @@ public class UserRegistationActivity extends AppCompatActivity {
         countrieKeys_arrayList.add("+965");
         countrieKeys_arrayList.add("+971");
         countrieKeys_arrayList.add("+966");
-        countrieKeys_arrayList.add("+20");
+        countrieKeys_arrayList.add("+2");
         final ArrayAdapter<String> countryKeys_spinnerArrayAdapter = new SpinnerAdapter(this, R.layout.spinner_item, countrieKeys_arrayList);
         countryKeys_spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         countryKeySpinner.setAdapter(countryKeys_spinnerArrayAdapter);
